@@ -2,3 +2,8 @@ int main()
 {
 	;
 }
+
+class Player
+{
+
+};
