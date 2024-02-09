@@ -12,5 +12,6 @@ int main()
 
 class Player
 {
-
+private:
+	int hp;
 };
