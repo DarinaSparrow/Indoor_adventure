@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Indoor adventure/Indoor adventure.vcxproj
+/Indoor adventure/Indoor adventure.vcxproj.filters
