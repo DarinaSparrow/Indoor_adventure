@@ -1,37 +1,8 @@
-#include <iostream>
+#include "Game.h"
+#include "Player.h"
+#include "Map.h"
 
-using namespace std;
-
-// main func
 int main()
 {
-	cout << "HELLO WORLD!!!";
-	cout << "Error";
 	return 0;
-}
-
-class Player
-{
-private:
-	int hp;
-	int position;
-};
-
-
-class Game
-{
-public:
-	Game();
-	~Game();
-
-private:
-
-};
-
-Game::Game()
-{
-}
-
-Game::~Game()
-{
 }
