@@ -15,35 +15,33 @@ void Player::set_step_y(double y)
 
 void Player::move_up(double step)
 {
-	if (sprite_player.getPosition().y > borders.y) {
-		step_y = -step;
-	}
+	if (anim_player.get_current_animation_name() != "run_up" and step_x == 0) anim_player.switch_animation("run_up");
+	else if (anim_player.get_current_animation_name() != "run_right" and step_x > 0) anim_player.switch_animation("run_right");
+	else if (anim_player.get_current_animation_name() != "run_left" and step_x < 0) anim_player.switch_animation("run_left");
+	step_y = -step;
 }
 
 
 void Player::move_down(double step)
 {
-	if (sprite_player.getPosition().y < borders.max_y) {
-		step_y = step;
-	}
+	if (anim_player.get_current_animation_name() != "run_down" and step_x == 0) anim_player.switch_animation("run_down");
+	else if (anim_player.get_current_animation_name() != "run_right" and step_x > 0) anim_player.switch_animation("run_right");
+	else if (anim_player.get_current_animation_name() != "run_left" and step_x < 0) anim_player.switch_animation("run_left");
+	step_y = step;
 }
 
 
 void Player::move_left(double step)
 {
-	if (sprite_player.getPosition().x > borders.x) {
-		if (anim_player.get_current_animation_name() != "run_left") anim_player.switch_animation("run_left");
-		step_x = -step;
-	}
+	if (anim_player.get_current_animation_name() != "run_left") anim_player.switch_animation("run_left");
+	step_x = -step;
 }
 
 
 void Player::move_right(double step)
 {
-	if (sprite_player.getPosition().x < borders.max_x) {
-		if (anim_player.get_current_animation_name() != "run_right") anim_player.switch_animation("run_right"); 
-		step_x = step;
-	}
+	if (anim_player.get_current_animation_name() != "run_right") anim_player.switch_animation("run_right");
+	step_x = step;
 }
 
 
@@ -51,8 +49,7 @@ void Player::update(Time const& delta_time)
 {
 	if (!dead) anim_player.update(delta_time);
 
-	if (step_x == 0 and step_y == 0) anim_player.switch_animation("player_static");
-
+	if (step_x == 0 and step_y == 0) anim_player.switch_animation("static");
 
 	time_update += delta_time;
 
@@ -90,20 +87,151 @@ void Player::set_borders_player(double x, double y, double max_x, double max_y)
 	borders.max_y = max_y;
 }
 
-
-void Player::set_dead(bool player_dead)
+Sprite& Player::get_player()
 {
-	dead = player_dead;
+	return sprite_player;
 }
 
 
-bool Player::get_dead() const
+void Player_static::set_dead(bool fl)
+{
+	dead = fl;
+}
+
+bool Player_static::get_dead() const
 {
 	return dead;
 }
 
-
-Sprite& Player::get_player()
+void Player_static::set_visible(bool fl)
 {
-	return sprite_player;
+	visible = fl;
+}
+
+bool Player_static::get_visible()
+{
+	return visible;
+}
+
+void Player_static::set_slide(bool fl)
+{
+	slide = fl;
+}
+
+bool Player_static::get_slide()
+{
+	return slide;
+}
+
+tuple<bool, bool, bool> Player_static::get_params()
+{
+	return tuple<bool, bool, bool>(dead, visible, slide);
+}
+
+
+void Player_vector::set_dead(bool fl)
+{
+	dead = fl;
+}
+
+bool Player_vector::get_dead() const
+{
+	return dead;
+}
+
+void Player_vector::set_visible(bool fl)
+{
+	visible = fl;
+}
+
+bool Player_vector::get_visible()
+{
+	return visible;
+}
+
+void Player_vector::set_slide(bool fl)
+{
+	slide = fl;
+}
+
+bool Player_vector::get_slide()
+{
+	return slide;
+}
+
+tuple<bool, bool, bool> Player_vector::get_params()
+{
+	return tuple<bool, bool, bool>(dead, visible, slide);
+}
+
+
+void Player_invisible::set_dead(bool fl)
+{
+	dead = fl;
+}
+
+bool Player_invisible::get_dead() const
+{
+	return dead;
+}
+
+void Player_invisible::set_visible(bool fl)
+{
+	visible = fl;
+}
+
+bool Player_invisible::get_visible()
+{
+	return visible;
+}
+
+void Player_invisible::set_slide(bool fl)
+{
+	slide = fl;
+}
+
+bool Player_invisible::get_slide()
+{
+	return slide;
+}
+
+tuple<bool, bool, bool> Player_invisible::get_params()
+{
+	return tuple<bool, bool, bool>(dead, visible, slide);
+}
+
+
+void Player_danger_zone::set_dead(bool fl)
+{
+	dead = fl;
+}
+
+bool Player_danger_zone::get_dead() const
+{
+	return dead;
+}
+
+void Player_danger_zone::set_visible(bool fl)
+{
+	visible = fl;
+}
+
+bool Player_danger_zone::get_visible()
+{
+	return visible;
+}
+
+void Player_danger_zone::set_slide(bool fl)
+{
+	slide = fl;
+}
+
+bool Player_danger_zone::get_slide()
+{
+	return slide;
+}
+
+tuple<bool, bool, bool> Player_danger_zone::get_params()
+{
+	return tuple<bool, bool, bool>(dead, visible, slide);
 }

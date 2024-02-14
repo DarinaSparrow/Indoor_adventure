@@ -21,6 +21,11 @@ void Game::update(Time const& delta_time)
 
 }
 
+RectangleShape& Game::get_maps()
+{
+	return maps;
+}
+
 
 void Game::draw()
 {
