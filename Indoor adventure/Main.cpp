@@ -1,16 +1,10 @@
-#include <iostream>
+#include "Engine.h"
 
-using namespace std;
 
-// main func
 int main()
 {
-	cout << "HELLO WORLD!!!";
+    Engine my_game;
+    my_game.run();
 
-	return 0;
+    return 0;
 }
-
-class Player
-{
-
-};
