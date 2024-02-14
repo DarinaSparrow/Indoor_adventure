@@ -1,52 +1,74 @@
 #pragma once
-#include "Engine.h"
 
+#include "header.h"
+#include "Map.h"
+#include <vector>
+#include <ctime>
+#include <algorithm>
+#include <random>
 
-// Класс карты одной из игровых зон
-// Реализация минимальна
-class Map
-{
-private:
-	RectangleShape playground;
-
-	RenderWindow& my_window;
-
-	// Границы игровой зоны
-	// Возможно не нужно использовать или можно лучше просчитать и запомнить
-	struct Borders
-	{
-		double x;
-		double y;
-		double max_x;
-		double max_y;
-	};
-
-	Borders borders{ 0 };
-
-	bool type_of_move;
-	bool visible;
-
-public:
-	Map(double x, double y, double width, double height, RenderWindow& window);
-
-	void set_map(double x, double y, double width, double height);
-	RectangleShape& get_map();
-
-	virtual void draw() = 0;
-	virtual void generate_bonus() = 0;
-};
-
-
-// Класс всей игровой области
-// Просто идея струтурирования данных, возможно даже массив был бы лучше
-// Это пока всего лишь идея
 class Maps
 {
 private:
-	vector<Map> maps;
+
+	vector <Map*> maps;
 
 public:
-	void generate_maps();
 
+	Maps()
+	{
+		maps.push_back(new InvisibleMap);
+		maps.push_back(new MapWithMobs);
+		maps.push_back(new MapWithStaticMotion);
+		maps.push_back(new MapWithVectorMotion);
+
+		GenerateСoordinatesOfMaps();
+		GenerateComplicationsOfMaps();
+		// генерация бонусов на карте
+	}
+
+	void GenerateСoordinatesOfMaps()
+	{
+		srand(time(NULL));
+
+		random_shuffle(maps.begin(), maps.end());
+
+		maps[0]->SetCoordinates((win_width - win_height) / 2, 0, win_width / 2, win_height / 2);
+		maps[1]->SetCoordinates(win_width / 2, 0, (win_width + win_height) / 2, win_height / 2);
+		maps[2]->SetCoordinates((win_width - win_height) / 2, win_height / 2, win_width / 2, win_height);
+		maps[3]->SetCoordinates(win_width / 2, win_height / 2, (win_width + win_height) / 2, win_height);
+	}
+
+	void GenerateComplicationsOfMaps()
+	{
+		vector <Map*> ::iterator iter;
+
+		for (iter = maps.begin(); iter != maps.end(); iter++) (*iter)->GenerateComplications();
+	}
+
+	/*void Draw(RenderWindow& window)
+	{
+		vector <Map*> ::iterator iter;
+
+		for (iter = maps.begin(); iter != maps.end(); iter++) (*iter)->Draw(window);
+	}*/
+
+	void Draw(unique_ptr<RenderWindow>& window)
+	{
+		vector <Map*> ::iterator iter;
+
+		for (iter = maps.begin(); iter != maps.end(); iter++)
+		{
+			auto draw_map = (*iter)->get_map();
+			window->draw(draw_map);
+		}
+	}
+
+	~Maps()
+	{
+		vector <Map*> ::iterator iter;
+
+		for (iter = maps.begin(); iter != maps.end(); iter++)  delete* iter;
+	}
 };
 

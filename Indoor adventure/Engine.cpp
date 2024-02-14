@@ -62,6 +62,7 @@ void Engine::draw()
 	window->clear();
 	window->draw(background);
 	window->draw(game);
+	playgrounds.Draw(window);
 	auto draw_player = player->get_player();
 	window->draw(draw_player);
 	auto draw_aim = my_gun.get_aim();

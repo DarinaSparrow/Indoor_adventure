@@ -19,7 +19,7 @@ private:
 
 	Borders borders_of_generate;
 	Sprite sprite_coin;
-	Animator anim_coin = Animator(sprite_coin);
+	//Animator anim_coin = Animator(sprite_coin);
 
 	Time time_update;
 	bool catch_it = false;

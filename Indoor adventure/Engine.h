@@ -30,6 +30,8 @@ private:
 
 	Gun my_gun = Gun(*window,player->get_player());
 
+	Maps playgrounds;
+
 	void input();
 	void update(Time const& delta_time);
 	void draw();
