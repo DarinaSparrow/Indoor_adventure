@@ -13,10 +13,10 @@ class Engine
 private:
 	AssertManager manager;
 
-	unique_ptr<RenderWindow> window = make_unique<RenderWindow>(VideoMode(S_W, S_H),
+	unique_ptr<RenderWindow> window = make_unique<RenderWindow>(VideoMode(win_width, win_height),
 		"Indoor Adventure", Style::Default);
 
-	RectangleShape background = RectangleShape(Vector2f(S_W, S_H));
+	RectangleShape background = RectangleShape(Vector2f(win_width, win_height));
 
 	vector<string> name = { "таймер", "жизни", "очки", "название карты" };
 	Color text_color = Color::Red;

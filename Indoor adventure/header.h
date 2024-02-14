@@ -4,11 +4,11 @@
 #include <iostream>
 #include <Windows.h>
 #include <string>
-
+#include <sstream>
 
 using namespace sf;
 using namespace std;
 
 
-const int S_W = 1920;
-const int S_H = 1080;
+const int win_width = 1920;
+const int win_height = 1080;

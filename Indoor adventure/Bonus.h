@@ -24,7 +24,7 @@ private:
 	Time time_update;
 	bool catch_it = false;
 public:
-	Bonus(RenderWindow& window, Vector2f my_pos = Vector2f(S_W / 2, 650), double time = 0.3,
+	Bonus(RenderWindow& window, Vector2f my_pos = Vector2f(win_width / 2, 650), double time = 0.3,
 		Vector2i sprite_size = Vector2i(192, 256));
 
 	void set_catch_it(bool status);

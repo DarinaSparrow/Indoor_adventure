@@ -30,7 +30,7 @@ protected:
 	bool slide;
 
 public:
-	Player(RectangleShape& borders_zone, Vector2f my_pos = Vector2f(S_W / 2, 650), double time = 0.3,
+	Player(RectangleShape& borders_zone, Vector2f my_pos = Vector2f(win_width / 2, 650), double time = 0.3,
 		Vector2i sprite_size = Vector2i(50, 80))
 	{
 		sprite_player.setPosition(my_pos.x, my_pos.y);
@@ -99,7 +99,7 @@ public:
 class Player_static: public Player
 {
 public:
-	Player_static(RectangleShape& borders_zone, Vector2f my_pos = Vector2f(S_W / 2, 650), double time = 0.3,
+	Player_static(RectangleShape& borders_zone, Vector2f my_pos = Vector2f(win_width / 2, 650), double time = 0.3,
 		Vector2i sprite_size = Vector2i(50, 80)) : Player(borders_zone, my_pos, time, sprite_size)
 	{
 		dead = false;
@@ -123,7 +123,7 @@ public:
 class Player_vector : public Player
 {
 public:
-	Player_vector(RectangleShape& borders_zone, Vector2f my_pos = Vector2f(S_W / 2, 650), double time = 0.3,
+	Player_vector(RectangleShape& borders_zone, Vector2f my_pos = Vector2f(win_width / 2, 650), double time = 0.3,
 		Vector2i sprite_size = Vector2i(50, 80)) : Player(borders_zone, my_pos, time, sprite_size)
 	{
 		dead = false;
@@ -147,7 +147,7 @@ public:
 class Player_invisible : public Player
 {
 public:
-	Player_invisible(RectangleShape& borders_zone, Vector2f my_pos = Vector2f(S_W / 2, 650), double time = 0.3,
+	Player_invisible(RectangleShape& borders_zone, Vector2f my_pos = Vector2f(win_width / 2, 650), double time = 0.3,
 		Vector2i sprite_size = Vector2i(50, 80)) : Player(borders_zone, my_pos, time, sprite_size)
 	{
 		dead = false;
@@ -171,7 +171,7 @@ public:
 class Player_danger_zone : public Player
 {
 public:
-	Player_danger_zone(RectangleShape& borders_zone, Vector2f my_pos = Vector2f(S_W / 2, 650), double time = 0.3,
+	Player_danger_zone(RectangleShape& borders_zone, Vector2f my_pos = Vector2f(win_width / 2, 650), double time = 0.3,
 		Vector2i sprite_size = Vector2i(50, 80)) : Player(borders_zone, my_pos, time, sprite_size)
 	{
 		dead = false;
