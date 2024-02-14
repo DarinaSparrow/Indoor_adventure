@@ -5,8 +5,9 @@
 #include "Player.h"
 #include "Game.h"
 #include "Maps.h"
+#include "Gun.h"
 
-//  ласс представл€ющий из себ€ основной движок игры
+
 class Engine
 {
 private:
@@ -23,9 +24,11 @@ private:
 	Game my_game = Game(*window, 12, 30, name, text_color, board_color, 3);
 
 	// јнимаци€ игрока
-	Player player = Player(*window);
+	Player* player = new Player_static(my_game.get_maps());
 	Time player_time;
 	Sprite player_sprite;
+
+	Gun my_gun = Gun(*window,player->get_player());
 
 	void input();
 	void update(Time const& delta_time);
@@ -33,6 +36,11 @@ private:
 
 public:
 	Engine();
+
+	~Engine() {
+		delete player;
+	}
+
 	void run();
 };
 

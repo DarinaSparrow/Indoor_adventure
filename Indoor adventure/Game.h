@@ -44,5 +44,7 @@ public:
 
 	void update(Time const& delta_time);
 
+	RectangleShape& get_maps();
+
 	void draw();
 };
