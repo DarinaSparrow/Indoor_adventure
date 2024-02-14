@@ -37,8 +37,8 @@ void Engine::input()
 		}
 
 		if (event_play.type == Event::MouseMoved) {
-			my_gun.set_x(Mouse::getPosition().x);
-			my_gun.set_y(Mouse::getPosition().y);
+				my_gun.set_x(Mouse::getPosition(*window).x);
+				my_gun.set_y(Mouse::getPosition(*window).y);
 		}
 	}
 }

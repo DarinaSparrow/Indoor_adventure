@@ -2,7 +2,7 @@
 
 void Gun::update(Time const& delta_time)
 {
-    aim.setPosition(Vector2f(Mouse::getPosition().x, Mouse::getPosition().y));
+    aim.setPosition(Vector2f(pos_x - width_bul, pos_y - height_bul));
 }
 
 Sprite& Gun::get_aim()
