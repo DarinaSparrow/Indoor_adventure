@@ -7,7 +7,8 @@ void Engine::input()
 	
 	while (window->pollEvent(event_play)) {
 		if (event_play.key.code == Keyboard::Escape) {
-			window->close();
+			//window->close();
+			game.decrease_lives();
 		}
 
 		if (event_play.type == event_play.Closed) {
@@ -46,6 +47,7 @@ void Engine::input()
 
 void Engine::update(Time const& delta_time)
 {
+	game.update(delta_time);
 	player->update(delta_time);
 	my_gun.update(delta_time);
 	player_time += delta_time;
@@ -59,7 +61,7 @@ void Engine::draw()
 {
 	window->clear();
 	window->draw(background);
-	my_game.draw();
+	window->draw(game);
 	auto draw_player = player->get_player();
 	window->draw(draw_player);
 	auto draw_aim = my_gun.get_aim();

@@ -1,8 +1,7 @@
 #include "Game.h"
 
 
-Game::Game(RenderWindow& window, int size_font, int step, vector<string>& name, Color text_color, Color border_color, int border_size)
-	:labels_step(step), font_size(size_font), my_window(window), text_color(text_color), border_color(border_color), border_size(border_size)
+Game::Game()
 {
 	int pos = static_cast<int>(double(win_width - win_height) / 2.0);
 
@@ -10,36 +9,42 @@ Game::Game(RenderWindow& window, int size_font, int step, vector<string>& name, 
 	maps.setPosition(Vector2f(pos, 0));
 	maps.setFillColor(Color::Black);
 
-	//auto it = name.begin();
+	background_sprite.setTexture(AssertManager::get_texture("Resourses/background_image.png"));
 
-	//setInitText(timer, )
+	timer = 300; // 5 минут
+	lives = 3; // жизни игрока
+
+	game_font.loadFromFile("Resourses/weekend.ttf");
+	timer_text.setFont(game_font);
+	timer_text.setCharacterSize(win_height / 20);
+	timer_text.setFillColor(Color::White);
+	timer_string << timer;
+
+	timer_text.setString(L"Время: " + timer_string.str() + " ");
+	timer_text.setPosition(win_width - timer_text.getGlobalBounds().width, 0);
+
+	lives_sprite.setTexture(AssertManager::get_texture("Resourses/lives.png"));
+	lives_sprite.scale(0.05f, 0.05f);
+	lives_sprite.setPosition(Vector2f(win_width - lives_sprite.getGlobalBounds().width, timer_text.getGlobalBounds().height));
 }
 
 
 void Game::update(Time const& delta_time)
 {
+	timer -= delta_time.asSeconds();
 
+	timer_string.str("");
+	timer_string << timer;
+	timer_text.setString(L"Время: " + timer_string.str() + " ");
 }
 
-RectangleShape& Game::get_maps()
-{
+RectangleShape& Game::get_maps() {
 	return maps;
 }
 
-
-void Game::draw()
+void Game::decrease_lives() 
 {
-	my_window.draw(maps);
-}
-
-
-void Game::setInitText(Text& text, const String& str, float xpos, float ypos) const
-{
-	text.setFont(AssertManager::get_font("Resourses/Kenney Blocks.ttf"));
-	text.setFillColor(text_color);
-	text.setString(str);
-	text.setCharacterSize(font_size);
-	text.setOutlineThickness(border_size);
-	text.setOutlineColor(border_color);
-	text.setPosition(xpos, ypos);
+	lives_sprite.setTextureRect(IntRect(0, 0, lives_sprite.getLocalBounds().width / lives * (lives - 1), lives_sprite.getLocalBounds().height));
+	lives_sprite.setPosition(Vector2f(win_width - lives_sprite.getGlobalBounds().width, timer_text.getGlobalBounds().height));
+	lives -= 1;
 }

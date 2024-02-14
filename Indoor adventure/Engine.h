@@ -21,10 +21,10 @@ private:
 	vector<string> name = { "таймер", "жизни", "очки", "название карты" };
 	Color text_color = Color::Red;
 	Color board_color = Color::Black;
-	Game my_game = Game(*window, 12, 30, name, text_color, board_color, 3);
+	Game game;
 
 	// Анимация игрока
-	Player* player = new Player_static(my_game.get_maps());
+	Player* player = new Player_static(game.get_maps());
 	Time player_time;
 	Sprite player_sprite;
 
