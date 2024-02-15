@@ -3,19 +3,19 @@
 
 void Engine::input()
 {
-	if (!player->get_dead()) {
-		Event event_play;
-		my_gun.update_bullet_pos(player->get_player());
+	Event event_play;
+	my_gun.update_bullet_pos(player->get_player());
 
-		while (window->pollEvent(event_play)) {
-			if (event_play.key.code == Keyboard::Escape) {
-				window->close();
-			}
+	while (window->pollEvent(event_play)) {
+		if (event_play.key.code == Keyboard::Escape) {
+			window->close();
+		}
 
-			if (event_play.type == event_play.Closed) {
-				window->close();
-			}
+		if (event_play.type == event_play.Closed) {
+			window->close();
+		}
 
+		if (!player->get_dead()) {
 			if (event_play.type == Event::KeyPressed) {
 				if (!player->get_slide()) {
 					switch (event_play.key.code)
@@ -61,12 +61,13 @@ void Engine::input()
 				}
 			}
 		}
-	}
-	else {
-		player->set_step_x();
-		player->set_step_y();
+		else {
+			player->set_step_x();
+			player->set_step_y();
+		}
 	}
 }
+
 
 
 void Engine::update(Time const& delta_time)
@@ -78,9 +79,9 @@ void Engine::update(Time const& delta_time)
 
 	game.update(delta_time);
 	playgrounds.CheckTheTransitionBetweenMaps(player);
+	playgrounds.ChechCollisionWithPlayer(my_gun, *player, game);
 	playgrounds.ChechCollisionWithMobs(my_gun);
 	playgrounds.ChechCollisionWithWalls(*player, game);
-	playgrounds.ChechCollisionWithPlayer(*player, game);
 	player->update(delta_time);
 	my_gun.update(delta_time);
 	player_time += delta_time;

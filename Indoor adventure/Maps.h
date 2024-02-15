@@ -52,7 +52,7 @@ public:
 
 	void ChechCollisionWithWalls(Player& player, Game& rules);
 
-	void ChechCollisionWithPlayer(Player& player, Game& rules);
+	void ChechCollisionWithPlayer(Gun& obj,Player& player, Game& rules);
 
 
 

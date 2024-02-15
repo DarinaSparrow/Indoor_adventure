@@ -36,7 +36,7 @@ public:
 
 	virtual void ChechCollisionWithWalls(Player& player, Game& rules) = 0;
 
-	virtual void ChechCollisionWithPlayer(Player& player, Game& rules) = 0;
+	virtual void ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) = 0;
 
 
 	virtual void Draw(unique_ptr<RenderWindow>& window) = 0;
@@ -67,7 +67,7 @@ public:
 
 	void ChechCollisionWithWalls(Player& player, Game& rules) override;
 
-	void ChechCollisionWithPlayer(Player& player, Game& rules) override;
+	void ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) override;
 
 	~InvisibleMap() { ; }
 };
@@ -108,7 +108,7 @@ public:
 
 	void ChechCollisionWithWalls(Player& player, Game& rules) override;
 
-	void ChechCollisionWithPlayer(Player& player, Game& rules) override;
+	void ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) override;
 
 
 	~MapWithMobs()
@@ -154,7 +154,7 @@ public:
 
 	void ChechCollisionWithWalls(Player& player, Game& rules) override;
 
-	void ChechCollisionWithPlayer(Player& player, Game& rules) override;
+	void ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) override;
 
 
 	~MapWithStaticMotion()
@@ -187,7 +187,7 @@ public:
 
 	void ChechCollisionWithWalls(Player& player, Game& rules) override;
 
-	void ChechCollisionWithPlayer(Player& player, Game& rules) override;
+	void ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) override;
 
 
 	~MapWithVectorMotion() { ; }

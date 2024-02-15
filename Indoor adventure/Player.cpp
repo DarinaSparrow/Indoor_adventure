@@ -58,6 +58,13 @@ void Player::update(Time const& delta_time)
 	if (step_x == 0 and step_y == 0) anim_player.switch_animation("static");
 
 	time_update += delta_time;
+	time_damage += delta_time;
+	if (time_damage > microseconds(1000000)) {
+		time_damage = microseconds(0);
+		if (sprite_player.getColor() == Color::Red) {
+			sprite_player.setColor(Color::White);
+		}
+	}
 
 	if (time_update > microseconds(3))
 	{

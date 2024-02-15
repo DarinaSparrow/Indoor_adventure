@@ -27,6 +27,7 @@ private:
 
 	Borders borders{ 0 };
 	Time time_update;
+	Time time_damage;
 
 protected:
 	bool dead;

@@ -96,10 +96,10 @@ void Maps::ChechCollisionWithWalls(Player& player, Game& rules)
 	}
 }
 
-void Maps::ChechCollisionWithPlayer(Player& player, Game& rules)
+void Maps::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules)
 {
 	for (int i = 0; i < maps.size(); i++) {
-		maps[i]->ChechCollisionWithPlayer(player, rules);
+		maps[i]->ChechCollisionWithPlayer(obj, player, rules);
 	}
 
 }

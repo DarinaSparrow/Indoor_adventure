@@ -61,7 +61,7 @@ void InvisibleMap::ChechCollisionWithWalls(Player& player, Game& rules)
 
 }
 
-void InvisibleMap::ChechCollisionWithPlayer(Player& player, Game& rules)
+void InvisibleMap::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules)
 {
 }
 
@@ -144,18 +144,25 @@ void MapWithMobs::ChechCollisionWithWalls(Player& player, Game& rules)
 {
 }
 
-void MapWithMobs::ChechCollisionWithPlayer(Player& player, Game& rules)
+void MapWithMobs::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules)
 {
 	for (int i = 0; i < count_of_enemies; i++) {
-		if (player.get_player().getGlobalBounds().intersects(enemies[i]->mob.getGlobalBounds())) {
+		if (enemies[i]->mob.getGlobalBounds().contains(Vector2f(obj.get_bul().getPosition().x + obj.get_bul().getGlobalBounds().width / 2.0,
+			obj.get_bul().getPosition().y + obj.get_bul().getGlobalBounds().height / 2.0))) {
 			enemies[i]->mob.setPosition(Vector2f(-enemies[i]->mob.getPosition().x, -enemies[i]->mob.getPosition().y));
 			rules.decrease_lives();
-		}
-		if (enemies[i]->mob.getGlobalBounds().intersects(player.get_player().getGlobalBounds())) {
-			enemies[i]->mob.setPosition(Vector2f(-enemies[i]->mob.getPosition().x, -enemies[i]->mob.getPosition().y));
-			rules.decrease_lives();
+			player.get_player().setColor(Color::Red);
 		}
 	}
+
+	//for (int i = 0; i < count_of_enemies; i++) {
+	//	if (enemies[i]->mob.getGlobalBounds().contains(Vector2f(player.get_player().getGlobalBounds().left + player.get_player().getGlobalBounds().width / 2, 
+	//		player.get_player().getGlobalBounds().top + player.get_player().getGlobalBounds().height / 2))) {
+	//		enemies[i]->mob.setPosition(Vector2f(-enemies[i]->mob.getPosition().x, -enemies[i]->mob.getPosition().y));
+	//		rules.decrease_lives();
+	//		player.get_player().setColor(Color::Red);
+	//	}
+	//}
 }
 
 void MapWithStaticMotion::GenerateComplications()
@@ -227,7 +234,7 @@ void MapWithStaticMotion::ChechCollisionWithWalls(Player& player, Game& rules)
 {
 }
 
-void MapWithStaticMotion::ChechCollisionWithPlayer(Player& player, Game& rules)
+void MapWithStaticMotion::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules)
 {
 }
 
@@ -265,6 +272,6 @@ void MapWithVectorMotion::ChechCollisionWithWalls(Player& player, Game& rules)
 	}
 }
 
-void MapWithVectorMotion::ChechCollisionWithPlayer(Player& player, Game& rules)
+void MapWithVectorMotion::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules)
 {
 }
