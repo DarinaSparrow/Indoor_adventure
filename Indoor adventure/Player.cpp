@@ -97,6 +97,11 @@ RectangleShape& Player::get_bords()
 	return border;
 }
 
+GameSound& Player::get_sound()
+{
+	return game_sound;
+}
+
 
 void Player_static::set_dead(bool fl)
 {

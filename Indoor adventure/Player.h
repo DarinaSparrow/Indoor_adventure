@@ -97,6 +97,7 @@ public:
 	void set_borders_player(double x, double y, double max_x, double max_y);
 	Sprite& get_player();
 	RectangleShape& get_bords();
+	GameSound& get_sound();
 };
 
 
