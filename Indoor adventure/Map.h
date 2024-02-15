@@ -2,6 +2,7 @@
 
 #include "header.h"
 #include "Player.h"
+#include "Bonus.h"
 #include "Gun.h"
 #include "Game.h"
 #include <ctime>
@@ -27,15 +28,13 @@ public:
 	string GetNameOfTheMap();
 
 	virtual void GenerateComplications() = 0;
-	virtual void GenerateBonus() = 0;
+	virtual void GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated) = 0;
 
 	bool ÑheckPersonLocationOnMap(double current_x, double current_y);
 	virtual void RedefinePlayer(Player*& player, Vector2f steps) = 0;
 
 	virtual void CheckCollsisionWithMobs(Gun& obj) = 0;
-
 	virtual void ChechCollisionWithWalls(Player& player, Game& rules) = 0;
-
 	virtual void ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) = 0;
 
 	virtual void ChechCollisionWithObstacles(Player& player) = 0;
@@ -59,16 +58,14 @@ public:
 	}
 
 	void GenerateComplications() override;
-	void GenerateBonus() override;
+	void GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated) override;
 
 	void RedefinePlayer(Player*& player, Vector2f steps) override;
 
 	void Draw(unique_ptr<RenderWindow>& window) override;
 
 	void CheckCollsisionWithMobs(Gun& obj) override;
-
 	void ChechCollisionWithWalls(Player& player, Game& rules) override;
-
 	void ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) override;
 
 	void ChechCollisionWithObstacles(Player& player) override;
@@ -102,16 +99,14 @@ public:
 	}
 
 	void GenerateComplications() override;
-	void GenerateBonus() override;
+	void GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated) override;
 
 	void RedefinePlayer(Player*& player, Vector2f steps) override;
 
 	void Draw(unique_ptr<RenderWindow>& window) override;
 
 	void CheckCollsisionWithMobs(Gun& obj) override;
-
 	void ChechCollisionWithWalls(Player& player, Game& rules) override;
-
 	void ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) override;
 
 	void ChechCollisionWithObstacles(Player& player) override;
@@ -150,16 +145,14 @@ public:
 	}
 
 	void GenerateComplications() override;
-	void GenerateBonus() override;
+	void GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated) override;
 
 	void RedefinePlayer(Player*& player, Vector2f steps) override;
 
 	void Draw(unique_ptr<RenderWindow>& window) override;
 
 	void CheckCollsisionWithMobs(Gun& obj) override;
-
 	void ChechCollisionWithWalls(Player& player, Game& rules) override;
-
 	void ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) override;
 
 	void ChechCollisionWithObstacles(Player& player) override;
@@ -184,16 +177,14 @@ public:
 	}
 
 	void GenerateComplications() override;
-	void GenerateBonus() override;
+	void GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated) override;
 
 	void RedefinePlayer(Player*& player, Vector2f steps) override;
 
 	void Draw(unique_ptr<RenderWindow>& window) override;
 
 	void CheckCollsisionWithMobs(Gun& obj) override;
-
 	void ChechCollisionWithWalls(Player& player, Game& rules) override;
-
 	void ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) override;
 
 	void ChechCollisionWithObstacles(Player& player) override;

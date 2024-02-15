@@ -25,14 +25,13 @@ private:
 	GameSound mus_and_sound;
 
 	Player* player = new Player_static(game.get_maps(), Vector2f(win_width / 2, 650), mus_and_sound, "static", Vector2f(0,0));
-	Time player_time;	
 
 	Gun my_gun = Gun(*window,player->get_player(), game.get_maps());
 
 	Maps playgrounds;
 
 	End end;
-	//Bonus bonus;
+	Bonus bonuses;
 
 	void input();
 	void update(Time const& delta_time);

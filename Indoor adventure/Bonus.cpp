@@ -1,25 +1,28 @@
 #include "Bonus.h"
 
+int Bonus::GetTotal()
+{
+	return total;
+}
 
-//Bonus::Bonus(RenderWindow& window, Vector2f my_pos, double time, Vector2i sprite_size)
-//{
-//
-//}
-//
-//
-//void Bonus::set_catch_it(bool status)
-//{
-//	caught = status;
-//}
-//
-//
-//bool Bonus::get_catch_it() const
-//{
-//	return catch_it;
-//}
-//
-//
-//Sprite& Bonus::get_coin()
-//{
-//	return sprite_coin;
-//}
+double Bonus::GetCoordinateX(int i)
+{
+	return coins[i].sprite_coin.getPosition().x;
+}
+double Bonus::GetCoordinateY(int i)
+{
+	return coins[i].sprite_coin.getPosition().y;
+}
+
+void Bonus::SetSpriteCoordinates(int i, double x, double y)
+{
+	coins[i].sprite_coin.setPosition(x, y);
+}
+
+void Bonus::Draw(unique_ptr<RenderWindow>& window)
+{
+	for (int i = 0; i < total; i++)
+	{
+		window->draw(coins[i].sprite_coin);
+	}
+}

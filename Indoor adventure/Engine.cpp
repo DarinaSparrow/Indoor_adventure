@@ -85,10 +85,6 @@ void Engine::update(Time const& delta_time)
 	player->update(delta_time);
 	playgrounds.ChechCollisionWithObstacles(*player);
 	my_gun.update(delta_time);
-	player_time += delta_time;
-	if (player_time > microseconds(3)) {
-		player_time = milliseconds(0);
-	}
 }
 
 
@@ -97,6 +93,7 @@ void Engine::draw()
 	window->clear();
 	window->draw(game);
 	playgrounds.Draw(window);
+	bonuses.Draw(window);
 	my_gun.draw(*window);
 	if (player->get_visible()) {
 		auto draw_player = player->get_player();
@@ -121,6 +118,7 @@ void Engine::run()
 {
 	Clock clock;
 	playgrounds.InstallTheInitialMap(player);
+	playgrounds.GenerateBonuses(bonuses);
 	while (window->isOpen()) {
 		Time dt = clock.restart();
 
