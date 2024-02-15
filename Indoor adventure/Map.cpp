@@ -41,7 +41,7 @@ void InvisibleMap::GenerateBonus() // генерация бонусов
 
 void InvisibleMap::RedefinePlayer(Player*& player)
 {
-	Player* new_player = new Player_invisible(player->get_bords(), player->get_player().getPosition());
+	Player* new_player = new Player_invisible(player->get_bords(), player->get_player().getPosition(), player->get_sound());
 	delete player;
 	player = new_player;
 }
@@ -74,13 +74,13 @@ void MapWithMobs::GenerateComplications()
 			x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size_x - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
 			y = (double)rand() / (double)RAND_MAX * ((borders.y2 - size_y - 5) - (borders.y1 + 5)) + (borders.y1 + 5);
 
-			int j = 0;
+			/*int j = 0;
 			fixation = true;
 			while ((j < i) && (fixation))
 			{
 				if ((enemies[j]->x1 > (x - size_x - 150)) && (enemies[j]->x1 < (x + size_x + 150)) && (enemies[j]->y1 > (y - size_y - 150)) && (enemies[j]->y1 < (y + size_y + 150))) fixation = false;
 				else j++;
-			}
+			}*/
 
 		} while (!fixation);
 
@@ -102,7 +102,7 @@ void MapWithMobs::GenerateBonus() // генерация бонусов
 
 void MapWithMobs::RedefinePlayer(Player*& player)
 {
-	Player* new_player = new Player_danger_zone(player->get_bords(), player->get_player().getPosition());
+	Player* new_player = new Player_danger_zone(player->get_bords(), player->get_player().getPosition(), player->get_sound());
 	delete player;
 	player = new_player;
 }
@@ -135,13 +135,13 @@ void MapWithStaticMotion::GenerateComplications()
 			x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
 			y = (double)rand() / (double)RAND_MAX * ((borders.y2 - size - 5) - (borders.y1 + 5)) + (borders.y1 + 5);
 
-			int j = 0;
+			/*int j = 0;
 			fixation = true;
 			while ((j < i) && (fixation))
 			{
 				if ((obstacles[j]->x1 > (x - size - 150)) && (obstacles[j]->x1 < (x + size + 150)) && (obstacles[j]->y1 > (y - size - 150)) && (obstacles[j]->y1 < (y + size + 150))) fixation = false;
 				else j++;
-			}
+			}*/
 
 		} while (!fixation);
 
@@ -163,7 +163,7 @@ void MapWithStaticMotion::GenerateBonus() // генерация бонусов
 
 void MapWithStaticMotion::RedefinePlayer(Player*& player)
 {
-	Player* new_player = new Player_static(player->get_bords(), player->get_player().getPosition());
+	Player* new_player = new Player_static(player->get_bords(), player->get_player().getPosition(), player->get_sound());
 	delete player;
 	player = new_player;
 }
@@ -183,7 +183,7 @@ void MapWithVectorMotion::GenerateBonus() // генерация бонусов
 
 void MapWithVectorMotion::RedefinePlayer(Player*& player)
 {
-	Player* new_player = new Player_vector(player->get_bords(), player->get_player().getPosition());
+	Player* new_player = new Player_vector(player->get_bords(), player->get_player().getPosition(), player->get_sound());
 	delete player;
 	player = new_player;
 }
