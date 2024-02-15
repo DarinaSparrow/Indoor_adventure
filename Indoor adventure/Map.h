@@ -1,20 +1,14 @@
 #pragma once
 
 #include "header.h"
+#include "HostileMobs.h"
 #include <ctime>
-
-class HostileMobs
-{
-private:
-
-protected:
-
-};
 
 class Map
 {
 protected:
 
+	string name;
 	RectangleShape playground;
 	Texture playground_texture;
 	struct Coordinates { double x1, x2, y1, y2; };
@@ -24,27 +18,14 @@ public:
 
 	Map() { ; }
 
-	void SetCoordinates(double x1, double y1, double x2, double y2)
-	{
-		playground.setPosition(x1, y1);
-		playground.setSize(Vector2f(x2 - x1, y2 - y1));
+	void SetCoordinates(double x1, double y1, double x2, double y2);
 
-		borders.x1 = x1;
-		borders.x2 = x2;
-		borders.y1 = y1;
-		borders.y2 = y2;
-	}
+	string GetNameOfTheMap();
 
 	virtual void GenerateComplications() = 0; // генерация усложнений на конкретной карте
-
 	virtual void GenerateBonus() = 0; // генерация бонусов на конкретной карте
 
-	virtual void Draw(RenderWindow& window) = 0;
-
-	RectangleShape& get_map()
-	{
-		return playground;
-	}
+	virtual RectangleShape& Draw() = 0; // отрисовка
 
 	~Map() { ; }
 };
@@ -55,21 +36,16 @@ public:
 
 	InvisibleMap()
 	{
+		name = "Карта-невидимка";
+
 		playground_texture.loadFromFile("Resourses/Playground 1.png");
 		playground.setTexture(&playground_texture);
 	}
 
-	void GenerateComplications() { ; }
+	void GenerateComplications() override;
+	void GenerateBonus() override; // генерация бонусов
 
-	void GenerateBonus() // генерация бонусов на карте
-	{
-		;
-	}
-
-	void Draw(RenderWindow& window)
-	{
-		window.draw(playground);
-	}
+	RectangleShape& Draw() override;
 
 	~InvisibleMap() { ; }
 };
@@ -85,32 +61,16 @@ public:
 
 	MapWithMobs()
 	{
+		name = "Карта с мобами";
+
 		playground_texture.loadFromFile("Resourses/Playground 2.png");
 		playground.setTexture(&playground_texture);
 	}
 
-	void GenerateComplications()
-	{
-		srand(time(NULL));
+	void GenerateComplications() override; // генерация мобов
+	void GenerateBonus() override; // генерация бонусов
 
-		count_of_enemies = rand() % (5 - 3 + 1) + 3;
-
-		enemies = new HostileMobs * [count_of_enemies];
-		for (int i = 0; i < count_of_enemies; i++) enemies[i] = new HostileMobs;
-
-		// генерация начального расположения
-	}
-
-	void GenerateBonus() // генерация бонусов на карте
-	{
-		;
-	}
-
-	void Draw(RenderWindow& window)
-	{
-		window.draw(playground);
-		// отрисовка мобов
-	}
+	RectangleShape& Draw() override; // отрисовка
 
 	~MapWithMobs()
 	{
@@ -136,61 +96,18 @@ public:
 
 	MapWithStaticMotion()
 	{
+		name = "Карта статического движения";
+
 		playground_texture.loadFromFile("Resourses/Playground 3.png");
 		playground.setTexture(&playground_texture);
 
 		obstacles_texture.loadFromFile("Resourses/Box.png");
 	}
 
-	void GenerateComplications()
-	{
-		double x, y;
-		bool fixation;
+	void GenerateComplications() override; // генерация препятствий
+	void GenerateBonus() override; // генерация бонусов
 
-		srand(time(NULL));
-
-		count_of_obstacles = rand() % (7 - 5 + 1) + 5;
-
-		obstacles = new Barriers * [count_of_obstacles];
-		for (int i = 0; i < count_of_obstacles; i++)
-		{
-			obstacles[i] = new Barriers;
-
-			fixation = true;
-			do
-			{
-				x = (double)rand() / (double)RAND_MAX * ((borders.x2 - 150) - borders.x1) + borders.x1;
-				y = (double)rand() / (double)RAND_MAX * ((borders.y2 - 150) - borders.y1) + borders.y1;
-
-				for (int j = 0; j < i; j++)
-				{
-					;
-					// проверка на фиксацию
-				}
-
-			} while (!fixation);
-
-			obstacles[i]->barrier.setPosition(x, y);
-			obstacles[i]->barrier.setSize(Vector2f(150, 150));
-			obstacles[i]->barrier.setTexture(&obstacles_texture);
-
-			obstacles[i]->x1 = x;
-			obstacles[i]->x2 = x + 150;
-			obstacles[i]->y1 = y;
-			obstacles[i]->y2 = y + 150;
-		}
-	}
-
-	void GenerateBonus() // генерация бонусов на карте
-	{
-		;
-	}
-
-	void Draw(RenderWindow& window)
-	{
-		window.draw(playground);
-		for (int i = 0; i < count_of_obstacles; i++) window.draw(obstacles[i]->barrier);
-	}
+	RectangleShape& Draw() override; // отрисовка
 
 	~MapWithStaticMotion()
 	{
@@ -205,24 +122,16 @@ public:
 
 	MapWithVectorMotion()
 	{
+		name = "Карта векторного движения";
+
 		playground_texture.loadFromFile("Resourses/Playground 4.png");
 		playground.setTexture(&playground_texture);
 	}
 
-	void GenerateComplications() // генерация усложнений на карте
-	{
-		;
-	}
+	void GenerateComplications() override; // генерация препятствий
+	void GenerateBonus() override; // генерация бонусов
 
-	void GenerateBonus() // генерация бонусов на карте
-	{
-		;
-	}
-
-	void Draw(RenderWindow& window)
-	{
-		window.draw(playground);
-	}
+	RectangleShape& Draw() override; // отрисовка
 
 	~MapWithVectorMotion() { ; }
 };
