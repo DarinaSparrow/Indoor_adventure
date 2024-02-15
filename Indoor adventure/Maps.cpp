@@ -46,7 +46,7 @@ void Maps :: InstallTheInitialMap(Player* player) // ïåðåäåëàòü ïîñëå ãåíåðàöèè 
 	}
 }
 
-void Maps :: CheckTheTransitionBetweenMaps(Player*& player)
+void Maps::CheckTheTransitionBetweenMaps(Player*& player)
 {
 	if (!current_map->ÑheckPersonLocationOnMap(player->get_player().getPosition().x + 40, player->get_player().getPosition().y + 90))
 	{
