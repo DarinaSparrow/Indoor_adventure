@@ -3,6 +3,7 @@
 #include "header.h"
 #include "Player.h"
 #include "Gun.h"
+#include "Game.h"
 #include <ctime>
 
 class Map
@@ -31,7 +32,11 @@ public:
 	bool ÑheckPersonLocationOnMap(double current_x, double current_y);
 	virtual void RedefinePlayer(Player*& player, Vector2f steps) = 0;
 
-	virtual void CheckCollsisions(Gun& obj) = 0;
+	virtual void CheckCollsisionWithMobs(Gun& obj) = 0;
+
+	virtual void ChechCollisionWithWalls(Player& player, Game& rules) = 0;
+
+	virtual void ChechCollisionWithPlayer(Player& player, Game& rules) = 0;
 
 
 	virtual void Draw(unique_ptr<RenderWindow>& window) = 0;
@@ -58,7 +63,11 @@ public:
 
 	void Draw(unique_ptr<RenderWindow>& window) override;
 
-	void CheckCollsisions(Gun& obj) override;
+	void CheckCollsisionWithMobs(Gun& obj) override;
+
+	void ChechCollisionWithWalls(Player& player, Game& rules) override;
+
+	void ChechCollisionWithPlayer(Player& player, Game& rules) override;
 
 	~InvisibleMap() { ; }
 };
@@ -95,7 +104,12 @@ public:
 
 	void Draw(unique_ptr<RenderWindow>& window) override;
 
-	void CheckCollsisions(Gun& obj) override;
+	void CheckCollsisionWithMobs(Gun& obj) override;
+
+	void ChechCollisionWithWalls(Player& player, Game& rules) override;
+
+	void ChechCollisionWithPlayer(Player& player, Game& rules) override;
+
 
 	~MapWithMobs()
 	{
@@ -136,7 +150,12 @@ public:
 
 	void Draw(unique_ptr<RenderWindow>& window) override;
 
-	void CheckCollsisions(Gun& obj) override;
+	void CheckCollsisionWithMobs(Gun& obj) override;
+
+	void ChechCollisionWithWalls(Player& player, Game& rules) override;
+
+	void ChechCollisionWithPlayer(Player& player, Game& rules) override;
+
 
 	~MapWithStaticMotion()
 	{
@@ -164,7 +183,12 @@ public:
 
 	void Draw(unique_ptr<RenderWindow>& window) override;
 
-	void CheckCollsisions(Gun& obj) override;
+	void CheckCollsisionWithMobs(Gun& obj) override;
+
+	void ChechCollisionWithWalls(Player& player, Game& rules) override;
+
+	void ChechCollisionWithPlayer(Player& player, Game& rules) override;
+
 
 	~MapWithVectorMotion() { ; }
 };

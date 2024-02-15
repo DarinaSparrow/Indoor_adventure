@@ -3,62 +3,68 @@
 
 void Engine::input()
 {
-	Event event_play;
-	my_gun.update_bullet_pos(player->get_player());
+	if (!player->get_dead()) {
+		Event event_play;
+		my_gun.update_bullet_pos(player->get_player());
 
-	while (window->pollEvent(event_play)) {
-		if (event_play.key.code == Keyboard::Escape) {
-			window->close();
-		}
+		while (window->pollEvent(event_play)) {
+			if (event_play.key.code == Keyboard::Escape) {
+				window->close();
+			}
 
-		if (event_play.type == event_play.Closed) {
-			window->close();
-		}
+			if (event_play.type == event_play.Closed) {
+				window->close();
+			}
 
-		if (event_play.type == Event::KeyPressed) {
-			if (!player->get_slide()) {
+			if (event_play.type == Event::KeyPressed) {
+				if (!player->get_slide()) {
+					switch (event_play.key.code)
+					{
+					case Keyboard::Up: { player->move_up(); break; }
+					case Keyboard::Down: { player->move_down(); break; }
+					case Keyboard::Left: { player->move_left(); break; }
+					case Keyboard::Right: { player->move_right(); break; }
+					default: break;
+					}
+				}
+				else {
+					switch (event_play.key.code)
+					{
+					case Keyboard::Up: { player->set_step_x(); player->move_up(); break; }
+					case Keyboard::Down: { player->set_step_x(); player->move_down(); break; }
+					case Keyboard::Left: { player->set_step_y(); player->move_left(); break; }
+					case Keyboard::Right: { player->set_step_y();  player->move_right(); break; }
+					default: break;
+					}
+				}
+			}
+
+			if (event_play.type == Event::KeyReleased and !player->get_slide()) {
 				switch (event_play.key.code)
 				{
-				case Keyboard::Up: { player->move_up(); break; }
-				case Keyboard::Down: { player->move_down(); break; }
-				case Keyboard::Left: { player->move_left(); break; }
-				case Keyboard::Right: { player->move_right(); break; }
+				case Keyboard::Up: { player->set_step_y(); break; }
+				case Keyboard::Down: { player->set_step_y(); break; }
+				case Keyboard::Left: { player->set_step_x(); break; }
+				case Keyboard::Right: { player->set_step_x(); break; }
 				default: break;
 				}
 			}
-			else {
-				switch (event_play.key.code)
-				{
-				case Keyboard::Up: { player->set_step_x(); player->move_up(); break; }
-				case Keyboard::Down: { player->set_step_x(); player->move_down(); break; }
-				case Keyboard::Left: { player->set_step_y(); player->move_left(); break; }
-				case Keyboard::Right: { player->set_step_y();  player->move_right(); break; }
-				default: break;
+
+			if (event_play.type == Event::MouseMoved) {
+				my_gun.update_mouse_pos(Mouse::getPosition(*window));
+			}
+
+			if (event_play.type == Event::MouseButtonPressed) {
+				if (event_play.key.code == Mouse::Left) {
+					if (!my_gun.check_shoot())
+						my_gun.shoot();
 				}
 			}
 		}
-
-		if (event_play.type == Event::KeyReleased and !player->get_slide()) {
-			switch (event_play.key.code)
-			{
-			case Keyboard::Up: { player->set_step_y(); break; }
-			case Keyboard::Down: { player->set_step_y(); break; }
-			case Keyboard::Left: { player->set_step_x(); break; }
-			case Keyboard::Right: { player->set_step_x(); break; }
-			default: break;
-			}
-		}
-
-		if (event_play.type == Event::MouseMoved) {
-			my_gun.update_mouse_pos(Mouse::getPosition(*window));
-		}
-
-		if (event_play.type == Event::MouseButtonPressed) {
-			if (event_play.key.code == Mouse::Left) {
-				if (!my_gun.check_shoot())
-					my_gun.shoot();
-			}
-		}
+	}
+	else {
+		player->set_step_x();
+		player->set_step_y();
 	}
 }
 
@@ -68,9 +74,13 @@ void Engine::update(Time const& delta_time)
 	if (playgrounds.GetNameOfCurrentMap() != game.get_playground_name())
 		game.update_playground(playgrounds.GetNameOfCurrentMap());
 
+	player->set_dead(game.get_end_game());
+
 	game.update(delta_time);
 	playgrounds.CheckTheTransitionBetweenMaps(player);
 	playgrounds.ChechCollisionWithMobs(my_gun);
+	playgrounds.ChechCollisionWithWalls(*player, game);
+	playgrounds.ChechCollisionWithPlayer(*player, game);
 	player->update(delta_time);
 	my_gun.update(delta_time);
 	player_time += delta_time;

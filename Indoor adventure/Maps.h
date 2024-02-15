@@ -50,6 +50,12 @@ public:
 
 	void ChechCollisionWithMobs(Gun& obj);
 
+	void ChechCollisionWithWalls(Player& player, Game& rules);
+
+	void ChechCollisionWithPlayer(Player& player, Game& rules);
+
+
+
 	void Draw(unique_ptr<RenderWindow>& window);
 
 	~Maps()

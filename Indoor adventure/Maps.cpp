@@ -68,7 +68,7 @@ void Maps::CheckTheTransitionBetweenMaps(Player*& player)
 			{
 				if (maps[i]->ÑheckPersonLocationOnMap(player->get_player().getPosition().x + 40, player->get_player().getPosition().y + 90))
 				{
-					if (current_map->GetNameOfTheMap() == "Vector motion map") {
+					if (current_map->GetNameOfTheMap() == "Vector") {
 						current_map = maps[i];
 						current_map->RedefinePlayer(player, Vector2f(0,0));
 					}
@@ -85,8 +85,23 @@ void Maps::CheckTheTransitionBetweenMaps(Player*& player)
 void Maps::ChechCollisionWithMobs(Gun& obj)
 {
 	for (int i = 0; i < maps.size(); i++) {
-		maps[i]->CheckCollsisions(obj);
+		maps[i]->CheckCollsisionWithMobs(obj);
 	}
+}
+
+void Maps::ChechCollisionWithWalls(Player& player, Game& rules)
+{
+	for (int i = 0; i < maps.size(); i++) {
+		maps[i]->ChechCollisionWithWalls(player, rules);
+	}
+}
+
+void Maps::ChechCollisionWithPlayer(Player& player, Game& rules)
+{
+	for (int i = 0; i < maps.size(); i++) {
+		maps[i]->ChechCollisionWithPlayer(player, rules);
+	}
+
 }
 
 void Maps :: Draw(unique_ptr<RenderWindow>& window)

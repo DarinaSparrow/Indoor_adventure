@@ -51,9 +51,18 @@ void InvisibleMap::Draw(unique_ptr<RenderWindow>& window)
 	window->draw(playground);
 }
 
-void InvisibleMap::CheckCollsisions(Gun& obj)
+void InvisibleMap::CheckCollsisionWithMobs(Gun& obj)
 {
 
+}
+
+void InvisibleMap::ChechCollisionWithWalls(Player& player, Game& rules)
+{
+
+}
+
+void InvisibleMap::ChechCollisionWithPlayer(Player& player, Game& rules)
+{
 }
 
 void MapWithMobs::GenerateComplications()
@@ -97,6 +106,8 @@ void MapWithMobs::GenerateComplications()
 		enemies[i]->x2 = x + size_x;
 		enemies[i]->y1 = y;
 		enemies[i]->y2 = y + size_y;
+
+		//enemies[i]->mob.setScale(Vector2f(1.0, 1.0));
 	}
 }
 
@@ -118,13 +129,31 @@ void MapWithMobs::Draw(unique_ptr<RenderWindow>& window)
 	for (int i = 0; i < count_of_enemies; i++) window->draw(enemies[i]->mob);
 }
 
-void MapWithMobs::CheckCollsisions(Gun& obj)
+void MapWithMobs::CheckCollsisionWithMobs(Gun& obj)
 {
 	for (int i = 0; i < count_of_enemies; i++) {
 		if (enemies[i]->mob.getGlobalBounds().contains(Vector2f(obj.get_bul().getPosition().x + obj.get_bul().getGlobalBounds().width / 2.0, 
 			obj.get_bul().getPosition().y + obj.get_bul().getGlobalBounds().height / 2.0))) {
 			enemies[i]->mob.setPosition(Vector2f(-enemies[i]->mob.getPosition().x, -enemies[i]->mob.getPosition().y));
 			obj.refresh_bul();
+		}
+	}
+}
+
+void MapWithMobs::ChechCollisionWithWalls(Player& player, Game& rules)
+{
+}
+
+void MapWithMobs::ChechCollisionWithPlayer(Player& player, Game& rules)
+{
+	for (int i = 0; i < count_of_enemies; i++) {
+		if (player.get_player().getGlobalBounds().intersects(enemies[i]->mob.getGlobalBounds())) {
+			enemies[i]->mob.setPosition(Vector2f(-enemies[i]->mob.getPosition().x, -enemies[i]->mob.getPosition().y));
+			rules.decrease_lives();
+		}
+		if (enemies[i]->mob.getGlobalBounds().intersects(player.get_player().getGlobalBounds())) {
+			enemies[i]->mob.setPosition(Vector2f(-enemies[i]->mob.getPosition().x, -enemies[i]->mob.getPosition().y));
+			rules.decrease_lives();
 		}
 	}
 }
@@ -190,7 +219,15 @@ void MapWithStaticMotion::Draw(unique_ptr<RenderWindow>& window)
 	for (int i = 0; i < count_of_obstacles; i++) window->draw(obstacles[i]->barrier);
 }
 
-void MapWithStaticMotion::CheckCollsisions(Gun& obj)
+void MapWithStaticMotion::CheckCollsisionWithMobs(Gun& obj)
+{
+}
+
+void MapWithStaticMotion::ChechCollisionWithWalls(Player& player, Game& rules)
+{
+}
+
+void MapWithStaticMotion::ChechCollisionWithPlayer(Player& player, Game& rules)
 {
 }
 
@@ -213,6 +250,21 @@ void MapWithVectorMotion::Draw(unique_ptr<RenderWindow>& window)
 	window->draw(playground);
 }
 
-void MapWithVectorMotion::CheckCollsisions(Gun& obj)
+void MapWithVectorMotion::CheckCollsisionWithMobs(Gun& obj)
+{
+}
+
+void MapWithVectorMotion::ChechCollisionWithWalls(Player& player, Game& rules)
+{
+	if (playground.getGlobalBounds().contains(player.get_player().getGlobalBounds().getPosition()))
+	{
+		if (player.get_player().getGlobalBounds().top == player.get_bords().getGlobalBounds().top) rules.kill();
+		if (player.get_player().getGlobalBounds().left == player.get_bords().getGlobalBounds().left) rules.kill();
+		if (player.get_player().getGlobalBounds().top + player.get_player().getGlobalBounds().height == player.get_bords().getGlobalBounds().top + player.get_bords().getGlobalBounds().height) rules.kill();
+		if (player.get_player().getGlobalBounds().left + player.get_player().getGlobalBounds().width == player.get_bords().getGlobalBounds().left + player.get_bords().getGlobalBounds().width) rules.kill();
+	}
+}
+
+void MapWithVectorMotion::ChechCollisionWithPlayer(Player& player, Game& rules)
 {
 }
