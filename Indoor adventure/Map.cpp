@@ -200,19 +200,13 @@ void MapWithMobs::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules
 		if (enemies[i]->mob.getGlobalBounds().contains(Vector2f(obj.get_bul().getPosition().x + obj.get_bul().getGlobalBounds().width / 2.0,
 			obj.get_bul().getPosition().y + obj.get_bul().getGlobalBounds().height / 2.0))) {
 			enemies[i]->mob.setPosition(Vector2f(-enemies[i]->mob.getPosition().x, -enemies[i]->mob.getPosition().y));
-			rules.decrease_lives();
-			player.get_player().setColor(Color::Red);
+			if (player.get_player().getGlobalBounds().contains(Vector2f(obj.get_bul().getPosition().x, obj.get_bul().getPosition().y))) {
+				rules.decrease_lives();
+				player.get_player().setColor(Color::Red);
+			}
+			obj.refresh_bul();
 		}
 	}
-
-	//for (int i = 0; i < count_of_enemies; i++) {
-	//	if (enemies[i]->mob.getGlobalBounds().contains(Vector2f(player.get_player().getGlobalBounds().left + player.get_player().getGlobalBounds().width / 2, 
-	//		player.get_player().getGlobalBounds().top + player.get_player().getGlobalBounds().height / 2))) {
-	//		enemies[i]->mob.setPosition(Vector2f(-enemies[i]->mob.getPosition().x, -enemies[i]->mob.getPosition().y));
-	//		rules.decrease_lives();
-	//		player.get_player().setColor(Color::Red);
-	//	}
-	//}
 }
 
 void MapWithMobs::ChechCollisionWithObstacles(Player& player)
