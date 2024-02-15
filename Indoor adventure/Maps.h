@@ -2,10 +2,15 @@
 
 #include "header.h"
 #include "Map.h"
+#include "Player.h"
 #include <vector>
 #include <ctime>
 #include <algorithm>
 #include <random>
+
+//Вынести из конструктора генерации и переопределение
+//Точка для проверки нахождения на карте
+//Менеджер ресурсов для текстур
 
 class Maps
 {
@@ -24,19 +29,23 @@ public:
 		maps.push_back(new MapWithVectorMotion);
 
 		GenerateСoordinatesOfMaps();
+		GenerateLimitsOfMaps();
 		GenerateComplicationsOfMaps();
+		// генерация персонажа
 		// генерация бонусов на картах
-
-		current_map = maps[0]; // изменить
 	}
 
 	string GetNameOfCurrentMap();
 
 	void GenerateСoordinatesOfMaps();
+	void GenerateLimitsOfMaps();
 	void GenerateComplicationsOfMaps();
+	// генерация персонажа
 	// генерация бонусов на картах
 
-	// проверка на переход между картами
+	void InstallTheInitialMap(Player* player);
+
+	void CheckTheTransitionBetweenMaps(Player*& player);
 
 	void Draw(unique_ptr<RenderWindow>& window);
 

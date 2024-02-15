@@ -1,6 +1,7 @@
 #pragma once
 
 #include "header.h"
+#include "Player.h"
 #include "HostileMobs.h"
 #include <ctime>
 
@@ -13,19 +14,24 @@ protected:
 	Texture playground_texture;
 	struct Coordinates { double x1, x2, y1, y2; };
 	Coordinates borders;
+	bool limits;
 
 public:
 
 	Map() { ; }
 
 	void SetCoordinates(double x1, double y1, double x2, double y2);
+	void SetLimits(bool limits);
 
 	string GetNameOfTheMap();
 
-	virtual void GenerateComplications() = 0; // генерация усложнений на конкретной карте
-	virtual void GenerateBonus() = 0; // генерация бонусов на конкретной карте
+	virtual void GenerateComplications() = 0;
+	virtual void GenerateBonus() = 0;
 
-	virtual RectangleShape& Draw() = 0; // отрисовка
+	bool СheckPersonLocationOnMap(double current_x, double current_y);
+	virtual void RedefinePlayer(Player*& player) = 0;
+		
+	virtual void Draw(unique_ptr<RenderWindow>& window) = 0;
 
 	~Map() { ; }
 };
@@ -45,7 +51,9 @@ public:
 	void GenerateComplications() override;
 	void GenerateBonus() override; // генерация бонусов
 
-	RectangleShape& Draw() override;
+	void RedefinePlayer(Player*& player) override;
+
+	void Draw(unique_ptr<RenderWindow>& window) override;
 
 	~InvisibleMap() { ; }
 };
@@ -107,7 +115,9 @@ public:
 	void GenerateComplications() override; // генерация препятствий
 	void GenerateBonus() override; // генерация бонусов
 
-	RectangleShape& Draw() override; // отрисовка
+	void RedefinePlayer(Player*& player) override;
+
+	void Draw(unique_ptr<RenderWindow>& window) override; // отрисовка
 
 	~MapWithStaticMotion()
 	{
@@ -131,7 +141,9 @@ public:
 	void GenerateComplications() override; // генерация препятствий
 	void GenerateBonus() override; // генерация бонусов
 
-	RectangleShape& Draw() override; // отрисовка
+	void RedefinePlayer(Player*& player) override;
+
+	void Draw(unique_ptr<RenderWindow>& window) override; // отрисовка
 
 	~MapWithVectorMotion() { ; }
 };

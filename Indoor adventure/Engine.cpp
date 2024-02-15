@@ -58,6 +58,7 @@ void Engine::update(Time const& delta_time)
 
 	game.update(delta_time);
 	player->update(delta_time);
+	playgrounds.CheckTheTransitionBetweenMaps(player);
 	my_gun.update(delta_time);
 	player_time += delta_time;
 	if (player_time > microseconds(3)) {
@@ -92,6 +93,7 @@ Engine::Engine()
 void Engine::run()
 {
 	Clock clock;
+	playgrounds.InstallTheInitialMap(player);
 	while (window->isOpen()) {
 		Time dt = clock.restart();
 
