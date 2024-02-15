@@ -56,10 +56,34 @@ void Maps::CheckTheTransitionBetweenMaps(Player*& player)
 			{
 				if (maps[i]->ÑheckPersonLocationOnMap(player->get_player().getPosition().x + 40, player->get_player().getPosition().y + 90))
 				{
-					current_map = maps[i];
-					current_map->RedefinePlayer(player);
+					if (current_map->GetNameOfTheMap() == "Vector motion map") {
+						current_map = maps[i];
+						current_map->RedefinePlayer(player, Vector2f(0,0));
+					}
+					else {
+						current_map = maps[i];
+						current_map->RedefinePlayer(player, player->get_steps());
+					}
 				}
 			}
+		}
+	}
+	else {
+		if (current_map->GetNameOfTheMap() == "Vector motion map") {
+			Player_vector* tmp = new Player_vector(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), player->get_steps());
+			if (player->get_params() != tmp->get_params()) 	current_map->RedefinePlayer(player, player->get_steps());
+		}
+		else if (current_map->GetNameOfTheMap() == "Invisible map") {
+			Player_invisible* tmp = new Player_invisible(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), player->get_steps());
+			if (player->get_params() != tmp->get_params()) 	current_map->RedefinePlayer(player, player->get_steps());
+		}
+		else if (current_map->GetNameOfTheMap() == "Map with hostile mobs") {
+			Player_danger_zone* tmp = new Player_danger_zone(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), player->get_steps());
+			if (player->get_params() != tmp->get_params()) 	current_map->RedefinePlayer(player, player->get_steps());
+		}
+		else if (current_map->GetNameOfTheMap() == "Static motion map") {
+			Player_static* tmp = new Player_static(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), player->get_steps());
+			if (player->get_params() != tmp->get_params()) 	current_map->RedefinePlayer(player, player->get_steps());
 		}
 	}
 }

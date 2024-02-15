@@ -16,23 +16,35 @@ void Engine::input()
 		}
 
 		if (event_play.type == Event::KeyPressed) {
-			switch (event_play.key.code)
-			{
-			case Keyboard::Up: {player->move_up(); break; }
-			case Keyboard::Down: {player->move_down(); break; }
-			case Keyboard::Left: {player->move_left(); break;}
-			case Keyboard::Right: {player->move_right(); break; }
-			default: break;
+			if (!player->get_slide()) {
+				switch (event_play.key.code)
+				{
+				case Keyboard::Up: { player->move_up(); break; }
+				case Keyboard::Down: { player->move_down(); break; }
+				case Keyboard::Left: { player->move_left(); break; }
+				case Keyboard::Right: { player->move_right(); break; }
+				default: break;
+				}
+			}
+			else {
+				switch (event_play.key.code)
+				{
+				case Keyboard::Up: { player->set_step_x(); player->move_up(); break; }
+				case Keyboard::Down: { player->set_step_x(); player->move_down(); break; }
+				case Keyboard::Left: { player->set_step_y(); player->move_left(); break; }
+				case Keyboard::Right: { player->set_step_y();  player->move_right(); break; }
+				default: break;
+				}
 			}
 		}
 
-		if (event_play.type == Event::KeyReleased) {
+		if (event_play.type == Event::KeyReleased and !player->get_slide()) {
 			switch (event_play.key.code)
 			{
-			case Keyboard::Up: {player->set_step_y(); break; }
-			case Keyboard::Down: {player->set_step_y(); break; }
-			case Keyboard::Left: {player->set_step_x(); break; }
-			case Keyboard::Right: {player->set_step_x(); break; }
+			case Keyboard::Up: { player->set_step_y(); break; }
+			case Keyboard::Down: { player->set_step_y(); break; }
+			case Keyboard::Left: { player->set_step_x(); break; }
+			case Keyboard::Right: { player->set_step_x(); break; }
 			default: break;
 			}
 		}
@@ -73,8 +85,10 @@ void Engine::draw()
 	window->draw(game);
 	playgrounds.Draw(window);
 	my_gun.draw(*window);
-	auto draw_player = player->get_player();
-	window->draw(draw_player);
+	if (player->get_visible()) {
+		auto draw_player = player->get_player();
+		window->draw(draw_player);
+	}
 	if (game.get_end_game())
 		window->draw(end);
 	window->display();

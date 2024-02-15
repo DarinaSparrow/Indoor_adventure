@@ -39,9 +39,9 @@ void InvisibleMap::GenerateBonus() // генерация бонусов
 	;
 }
 
-void InvisibleMap::RedefinePlayer(Player*& player)
+void InvisibleMap::RedefinePlayer(Player*& player, Vector2f steps)
 {
-	Player* new_player = new Player_invisible(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), player->get_steps());
+	Player* new_player = new Player_invisible(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), steps);
 	delete player;
 	player = new_player;
 }
@@ -100,9 +100,9 @@ void MapWithMobs::GenerateBonus() // генерация бонусов
 	;
 }
 
-void MapWithMobs::RedefinePlayer(Player*& player)
+void MapWithMobs::RedefinePlayer(Player*& player, Vector2f steps)
 {
-	Player* new_player = new Player_danger_zone(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), player->get_steps());
+	Player* new_player = new Player_danger_zone(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), steps);
 	delete player;
 	player = new_player;
 }
@@ -161,9 +161,9 @@ void MapWithStaticMotion::GenerateBonus() // генерация бонусов
 	;
 }
 
-void MapWithStaticMotion::RedefinePlayer(Player*& player)
+void MapWithStaticMotion::RedefinePlayer(Player*& player, Vector2f steps)
 {
-	Player* new_player = new Player_static(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), player->get_steps());
+	Player* new_player = new Player_static(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), steps);
 	delete player;
 	player = new_player;
 }
@@ -181,9 +181,9 @@ void MapWithVectorMotion::GenerateBonus() // генерация бонусов
 	;
 }
 
-void MapWithVectorMotion::RedefinePlayer(Player*& player)
+void MapWithVectorMotion::RedefinePlayer(Player*& player, Vector2f steps)
 {
-	Player* new_player = new Player_vector(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), player->get_steps());
+	Player* new_player = new Player_vector(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), steps);
 	delete player;
 	player = new_player;
 }

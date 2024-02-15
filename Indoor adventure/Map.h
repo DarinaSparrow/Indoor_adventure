@@ -28,7 +28,7 @@ public:
 	virtual void GenerateBonus() = 0;
 
 	bool ÑheckPersonLocationOnMap(double current_x, double current_y);
-	virtual void RedefinePlayer(Player*& player) = 0;
+	virtual void RedefinePlayer(Player*& player, Vector2f steps) = 0;
 
 	virtual void Draw(unique_ptr<RenderWindow>& window) = 0;
 
@@ -50,7 +50,7 @@ public:
 	void GenerateComplications() override;
 	void GenerateBonus() override;
 
-	void RedefinePlayer(Player*& player) override;
+	void RedefinePlayer(Player*& player, Vector2f steps) override;
 
 	void Draw(unique_ptr<RenderWindow>& window) override;
 
@@ -85,7 +85,7 @@ public:
 	void GenerateComplications() override;
 	void GenerateBonus() override;
 
-	void RedefinePlayer(Player*& player) override;
+	void RedefinePlayer(Player*& player, Vector2f steps) override;
 
 	void Draw(unique_ptr<RenderWindow>& window) override;
 
@@ -124,7 +124,7 @@ public:
 	void GenerateComplications() override;
 	void GenerateBonus() override;
 
-	void RedefinePlayer(Player*& player) override;
+	void RedefinePlayer(Player*& player, Vector2f steps) override;
 
 	void Draw(unique_ptr<RenderWindow>& window) override;
 
@@ -150,7 +150,7 @@ public:
 	void GenerateComplications() override;
 	void GenerateBonus() override;
 
-	void RedefinePlayer(Player*& player) override;
+	void RedefinePlayer(Player*& player, Vector2f steps) override;
 
 	void Draw(unique_ptr<RenderWindow>& window) override;
 
