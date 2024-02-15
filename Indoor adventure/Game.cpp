@@ -9,7 +9,7 @@ Game::Game()
 	maps.setPosition(Vector2f(pos, 0));
 	maps.setFillColor(Color::Black);
 
-	background_sprite.setTexture(AssertManager::get_texture("Resourses/background_image.png"));
+	background_sprite.setTexture(AssetManager::get_texture("Resourses/background_image.png"));
 
 	timer = 300; // 5 минут
 	lives = 3; // жизни игрока
@@ -28,7 +28,7 @@ Game::Game()
 	timer_text.setString(L"Время: " + timer_string.str() + " ");
 	timer_text.setPosition(win_width - timer_text.getGlobalBounds().width, 0);
 
-	lives_sprite.setTexture(AssertManager::get_texture("Resourses/lives.png"));
+	lives_sprite.setTexture(AssetManager::get_texture("Resourses/lives.png"));
 	lives_sprite.scale(0.05f, 0.05f);
 	lives_sprite.setPosition(Vector2f(win_width - lives_sprite.getGlobalBounds().width, timer_text.getGlobalBounds().height));
 }

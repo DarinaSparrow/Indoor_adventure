@@ -1,6 +1,6 @@
 #pragma once
 #include "header.h"
-#include "AssertManager.h"
+#include "AssetManager.h"
 
 
 class Gun
@@ -26,8 +26,8 @@ public:
 		pos_x = Mouse::getPosition(window).x;
 		pos_y = Mouse::getPosition(window).y;
 
-		aim.setTexture(AssertManager::get_texture("Resourses/crosshair.png"));
-		bullet.setTexture(AssertManager::get_texture("Resourses/bullet.png"));
+		aim.setTexture(AssetManager::get_texture("Resourses/crosshair.png"));
+		bullet.setTexture(AssetManager::get_texture("Resourses/bullet.png"));
 
 		aim.setTextureRect(IntRect(0, 0, aim.getGlobalBounds().width, aim.getGlobalBounds().height));
 		bullet.setTextureRect(IntRect(0, 0, bullet.getGlobalBounds().width, bullet.getGlobalBounds().height));

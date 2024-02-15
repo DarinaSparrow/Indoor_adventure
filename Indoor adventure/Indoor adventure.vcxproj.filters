@@ -21,7 +21,7 @@
     <ClCompile Include="Animator.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="AssertManager.cpp">
+    <ClCompile Include="AssetManager.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Bonus.cpp">
@@ -53,7 +53,7 @@
     <ClInclude Include="Animator.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="AssertManager.h">
+    <ClInclude Include="AssetManager.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Bonus.h">

@@ -1,6 +1,6 @@
 #pragma once
 #include "header.h"
-#include "AssertManager.h"
+#include "AssetManager.h"
 #include "Animator.h"
 #include "Player.h"
 #include "Game.h"
@@ -11,7 +11,7 @@
 class Engine
 {
 private:
-	AssertManager manager;
+	AssetManager manager;
 
 	unique_ptr<RenderWindow> window = make_unique<RenderWindow>(VideoMode(win_width, win_height),
 		"Indoor Adventure", Style::Default);

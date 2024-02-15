@@ -18,7 +18,7 @@ Animator::Animation& Animator::create_animation(string const& name, string const
 void Animator::switch_animation(Animator::Animation* animation)
 {
 	if (animation != nullptr) {
-		m_sprite.setTexture(AssertManager::get_texture(animation->m_texture_name));
+		m_sprite.setTexture(AssetManager::get_texture(animation->m_texture_name));
 	}
 
 	m_current_animation = animation;

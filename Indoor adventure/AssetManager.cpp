@@ -1,16 +1,16 @@
-#include "AssertManager.h"
+#include "AssetManager.h"
 
 
-AssertManager* AssertManager::sInstance = nullptr;
+AssetManager* AssetManager::sInstance = nullptr;
 
 
-AssertManager::AssertManager()
+AssetManager::AssetManager()
 {
 	if (sInstance == nullptr) 	sInstance = this;
 }
 
 
-Texture& AssertManager::get_texture(string const& filename)
+Texture& AssetManager::get_texture(string const& filename)
 {
 	auto& tex_map = sInstance->m_textures;
 	auto pairFound = tex_map.find(filename);
@@ -26,7 +26,7 @@ Texture& AssertManager::get_texture(string const& filename)
 }
 
 
-SoundBuffer& AssertManager::get_sound_buffer(string const& filename)
+SoundBuffer& AssetManager::get_sound_buffer(string const& filename)
 {
 	auto& sound_buf_map = sInstance->m_sound_buffers;
 	auto pairFound = sound_buf_map.find(filename);
@@ -42,7 +42,7 @@ SoundBuffer& AssertManager::get_sound_buffer(string const& filename)
 }
 
 
-Font& AssertManager::get_font(string const& filename)
+Font& AssetManager::get_font(string const& filename)
 {
 	auto& font_map = sInstance->m_fonts;
 	auto pairFound = font_map.find(filename);
