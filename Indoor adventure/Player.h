@@ -22,8 +22,8 @@ private:
 	Sprite sprite_player;
 	Animator anim_player = Animator(sprite_player);
 
-	double step_x = 0.0;
-	double step_y = 0.0;
+	double step_x;
+	double step_y;
 
 	Borders borders{ 0 };
 	Time time_update;
@@ -34,7 +34,8 @@ protected:
 	bool slide;
 
 public:
-	Player(RectangleShape& borders_zone, Vector2f my_pos, GameSound& my_game_sound) : border(borders_zone), game_sound(my_game_sound)
+	Player(RectangleShape& borders_zone, Vector2f my_pos, GameSound& my_game_sound, string anim = "static", Vector2f steps = Vector2f(0,0)) 
+		: border(borders_zone), game_sound(my_game_sound), step_x(steps.x), step_y(steps.y)
 	{
 		sprite_player.setPosition(my_pos.x, my_pos.y);
 		
@@ -71,6 +72,8 @@ public:
 		slide = false;
 
 		sprite_player.scale(Vector2f(1.5, 1.5));
+
+		anim_player.switch_animation(anim);
 	}
 
 	virtual void set_dead(bool fl) = 0;
@@ -87,6 +90,9 @@ public:
 	void set_step_x(double x = 0.0);
 	void set_step_y(double y = 0.0);
 
+	Vector2f get_steps();
+
+
 	void move_up(double step = 5.0);
 	void move_down(double step = 5.0);
 	void move_left(double step = 5.0);
@@ -95,16 +101,19 @@ public:
 	void update(Time const& delta_time);
 
 	void set_borders_player(double x, double y, double max_x, double max_y);
+
 	Sprite& get_player();
 	RectangleShape& get_bords();
 	GameSound& get_sound();
+	string get_cur_anim();
 };
 
 
 class Player_static: public Player
 {
 public:
-	Player_static(RectangleShape& borders_zone, Vector2f my_pos, GameSound& my_game_sound) : Player(borders_zone, my_pos, my_game_sound)
+	Player_static(RectangleShape& borders_zone, Vector2f my_pos, GameSound& my_game_sound, string anim, Vector2f steps) 
+		:Player(borders_zone, my_pos, my_game_sound, anim, steps)
 	{
 		dead = false;
 		visible = true;
@@ -127,7 +136,8 @@ public:
 class Player_vector : public Player
 {
 public:
-	Player_vector(RectangleShape& borders_zone, Vector2f my_pos, GameSound& my_game_sound) : Player(borders_zone, my_pos, my_game_sound)
+	Player_vector(RectangleShape& borders_zone, Vector2f my_pos, GameSound& my_game_sound, string anim, Vector2f steps)
+		:Player(borders_zone, my_pos, my_game_sound, anim, steps)
 	{
 		dead = false;
 		visible = true;
@@ -150,7 +160,8 @@ public:
 class Player_invisible : public Player
 {
 public:
-	Player_invisible(RectangleShape& borders_zone, Vector2f my_pos, GameSound& my_game_sound) : Player(borders_zone, my_pos, my_game_sound)
+	Player_invisible(RectangleShape& borders_zone, Vector2f my_pos, GameSound& my_game_sound, string anim, Vector2f steps)
+		:Player(borders_zone, my_pos, my_game_sound, anim, steps)
 	{
 		dead = false;
 		visible = false;
@@ -173,7 +184,8 @@ public:
 class Player_danger_zone : public Player
 {
 public:
-	Player_danger_zone(RectangleShape& borders_zone, Vector2f my_pos, GameSound& my_game_sound) : Player(borders_zone, my_pos, my_game_sound)
+	Player_danger_zone(RectangleShape& borders_zone, Vector2f my_pos, GameSound& my_game_sound, string anim, Vector2f steps)
+		:Player(borders_zone, my_pos, my_game_sound, anim, steps)
 	{
 		dead = false;
 		visible = true;

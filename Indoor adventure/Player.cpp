@@ -30,6 +30,12 @@ void Player::move_down(double step)
 	step_y = step;
 }
 
+Vector2f Player::get_steps()
+{
+	return Vector2f(step_x, step_y);
+}
+
+
 
 void Player::move_left(double step)
 {
@@ -87,6 +93,7 @@ void Player::set_borders_player(double x, double y, double max_x, double max_y)
 	borders.max_y = max_y;
 }
 
+
 Sprite& Player::get_player()
 {
 	return sprite_player;
@@ -100,6 +107,11 @@ RectangleShape& Player::get_bords()
 GameSound& Player::get_sound()
 {
 	return game_sound;
+}
+
+string Player::get_cur_anim()
+{
+	return anim_player.get_current_animation_name();
 }
 
 

@@ -2,6 +2,7 @@
 
 #include "header.h"
 #include "Player.h"
+#include "Animator.h"
 #include <ctime>
 
 class Map
