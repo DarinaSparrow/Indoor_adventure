@@ -13,13 +13,18 @@ Game::Game()
 
 	timer = 300; // 5 минут
 	lives = 3; // жизни игрока
-
+	
 	game_font.loadFromFile("Resourses/weekend.ttf");
+
+	playground_text.setFont(game_font);
+	playground_text.setCharacterSize(win_height / 20);
+	playground_text.setFillColor(Color::White);
+	playground_text.setString(L"Карта");
+
 	timer_text.setFont(game_font);
 	timer_text.setCharacterSize(win_height / 20);
 	timer_text.setFillColor(Color::White);
 	timer_string << timer;
-
 	timer_text.setString(L"Время: " + timer_string.str() + " ");
 	timer_text.setPosition(win_width - timer_text.getGlobalBounds().width, 0);
 
@@ -47,4 +52,18 @@ void Game::decrease_lives()
 	lives_sprite.setTextureRect(IntRect(0, 0, lives_sprite.getLocalBounds().width / lives * (lives - 1), lives_sprite.getLocalBounds().height));
 	lives_sprite.setPosition(Vector2f(win_width - lives_sprite.getGlobalBounds().width, timer_text.getGlobalBounds().height));
 	lives -= 1;
+}
+
+
+void Game::kill()
+{
+	lives = 0;
+	
+	lives_sprite.setTextureRect(IntRect(0, 0, 0, 0));
+	lives_sprite.setPosition(Vector2f(win_width - lives_sprite.getGlobalBounds().width, timer_text.getGlobalBounds().height));
+}
+
+void Game::update_playground(const string& playground_name)
+{
+	playground_text.setString(playground_name);
 }

@@ -21,6 +21,8 @@ private:
 	Text timer_text;
 	ostringstream timer_string;
 
+	Text playground_text;
+
 	float timer;
 	int lives;
 
@@ -30,6 +32,9 @@ public:
 
 	void decrease_lives();
 
+	void kill();
+	void update_playground(const string& playground);
+
 	void update(Time const& delta_time);
 
 	virtual void draw(RenderTarget& target, RenderStates states) const
@@ -38,5 +43,6 @@ public:
 		target.draw(timer_text);
 		target.draw(lives_sprite);
 		target.draw(maps);
+		target.draw(playground_text);
 	}
 };
