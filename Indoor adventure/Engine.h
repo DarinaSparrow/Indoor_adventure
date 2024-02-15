@@ -31,7 +31,7 @@ private:
 	Maps playgrounds;
 
 	End end;
-	//Bonus bonus;
+	Bonus bonuses;
 
 	void input();
 	void update(Time const& delta_time);

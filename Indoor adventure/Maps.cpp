@@ -32,6 +32,27 @@ void Maps :: GenerateComplicationsOfMaps()
 	for (iter = maps.begin(); iter != maps.end(); iter++) (*iter)->GenerateComplications();
 }
 
+void Maps::GenerateBonuses(Bonus& bonuses)
+{
+	int invisible_map, map_with_mobs, map_with_static_motion, map_with_vector_motion, first_no_generated;
+
+	map_with_mobs = rand() % (15 - 10 + 1) + 5;
+	map_with_static_motion = rand() % (15 - 10 + 1) + 5;
+	map_with_vector_motion = rand() % (15 - 10 + 1) + 5;
+	invisible_map = bonuses.GetTotal() - map_with_mobs - map_with_static_motion - map_with_vector_motion;
+	first_no_generated = 0;
+
+	for (int i = 0; i < maps.size(); i++)
+	{
+		if (maps[i]->GetNameOfTheMap() == "Invisible") maps[i]->GenerateBonus(bonuses, invisible_map, first_no_generated);
+		else if (maps[i]->GetNameOfTheMap() == "Mobs") maps[i]->GenerateBonus(bonuses, map_with_mobs, first_no_generated);
+		else if (maps[i]->GetNameOfTheMap() == "Static") maps[i]->GenerateBonus(bonuses, map_with_static_motion, first_no_generated);
+		else maps[i]->GenerateBonus(bonuses, map_with_vector_motion, first_no_generated);
+	}
+
+	cout << first_no_generated;
+}
+
 void Maps :: InstallTheInitialMap(Player*& player) // переделать после генерации персонажа
 {
 	if (player->get_player().getPosition().x + 37 < win_width / 2)

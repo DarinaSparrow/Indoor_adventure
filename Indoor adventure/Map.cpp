@@ -34,9 +34,32 @@ bool Map::СheckPersonLocationOnMap(double current_x, double current_y)
 
 void InvisibleMap::GenerateComplications() { ; }
 
-void InvisibleMap::GenerateBonus() // генерация бонусов
+void InvisibleMap::GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated)
 {
-	;
+	double x, y, size;
+	bool fixation;
+
+	size = 50;
+
+	for (int i = first_no_generated; i < first_no_generated + count_of_bonuses; i++)
+	{
+		do
+		{
+			x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
+			y = (double)rand() / (double)RAND_MAX * ((borders.y2 - size - 5) - (borders.y1 + 5)) + (borders.y1 + 5);
+
+			int j = first_no_generated;
+			fixation = true;
+			while ((j < i) && (fixation))
+			{
+				if ((bonuses.GetCoordinateX(j) > (x - size - 5)) && (bonuses.GetCoordinateX(j) < (x + size + 5)) && (bonuses.GetCoordinateY(j) > (y - size - 5)) && (bonuses.GetCoordinateY(j) < (y + size + 5))) fixation = false;
+				else j++;
+			}
+
+		} while (!fixation);
+
+		bonuses.SetSpriteCoordinates(i, x, y);
+	}
 }
 
 void InvisibleMap::RedefinePlayer(Player*& player, Vector2f steps)
@@ -51,19 +74,11 @@ void InvisibleMap::Draw(unique_ptr<RenderWindow>& window)
 	window->draw(playground);
 }
 
-void InvisibleMap::CheckCollsisionWithMobs(Gun& obj)
-{
+void InvisibleMap::CheckCollsisionWithMobs(Gun& obj) { ; }
 
-}
+void InvisibleMap::ChechCollisionWithWalls(Player& player, Game& rules) { ; }
 
-void InvisibleMap::ChechCollisionWithWalls(Player& player, Game& rules)
-{
-
-}
-
-void InvisibleMap::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules)
-{
-}
+void InvisibleMap::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) { ; }
 
 void MapWithMobs::GenerateComplications()
 {
@@ -111,9 +126,34 @@ void MapWithMobs::GenerateComplications()
 	}
 }
 
-void MapWithMobs::GenerateBonus() // генерация бонусов
+void MapWithMobs::GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated)
 {
-	;
+	double x, y, size;
+	bool fixation;
+
+	size = 50;
+
+	for (int i = first_no_generated; i < first_no_generated + count_of_bonuses; i++)
+	{
+		do
+		{
+			x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
+			y = (double)rand() / (double)RAND_MAX * ((borders.y2 - size - 5) - (borders.y1 + 5)) + (borders.y1 + 5);
+
+			int j = first_no_generated;
+			fixation = true;
+			while ((j < i) && (fixation))
+			{
+				if ((bonuses.GetCoordinateX(j) > (x - size - 5)) && (bonuses.GetCoordinateX(j) < (x + size + 5)) && (bonuses.GetCoordinateY(j) > (y - size - 5)) && (bonuses.GetCoordinateY(j) < (y + size + 5))) fixation = false;
+				else j++;
+			}
+
+		} while (!fixation);
+
+		bonuses.SetSpriteCoordinates(i, x, y);
+	}
+
+	first_no_generated += count_of_bonuses;
 }
 
 void MapWithMobs::RedefinePlayer(Player*& player, Vector2f steps)
@@ -140,9 +180,7 @@ void MapWithMobs::CheckCollsisionWithMobs(Gun& obj)
 	}
 }
 
-void MapWithMobs::ChechCollisionWithWalls(Player& player, Game& rules)
-{
-}
+void MapWithMobs::ChechCollisionWithWalls(Player& player, Game& rules) { ; }
 
 void MapWithMobs::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules)
 {
@@ -208,9 +246,34 @@ void MapWithStaticMotion::GenerateComplications()
 	}
 }
 
-void MapWithStaticMotion::GenerateBonus() // генерация бонусов
+void MapWithStaticMotion::GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated)
 {
-	;
+	double x, y, size;
+	bool fixation;
+
+	size = 50;
+
+	for (int i = first_no_generated; i < first_no_generated + count_of_bonuses; i++)
+	{
+		do
+		{
+			x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
+			y = (double)rand() / (double)RAND_MAX * ((borders.y2 - size - 5) - (borders.y1 + 5)) + (borders.y1 + 5);
+
+			int j = first_no_generated;
+			fixation = true;
+			while ((j < i) && (fixation))
+			{
+				if ((bonuses.GetCoordinateX(j) > (x - size - 5)) && (bonuses.GetCoordinateX(j) < (x + size + 5)) && (bonuses.GetCoordinateY(j) > (y - size - 5)) && (bonuses.GetCoordinateY(j) < (y + size + 5))) fixation = false;
+				else j++;
+			}
+
+		} while (!fixation);
+
+		bonuses.SetSpriteCoordinates(i, x, y);
+	}
+
+	first_no_generated += count_of_bonuses;
 }
 
 void MapWithStaticMotion::RedefinePlayer(Player*& player, Vector2f steps)
@@ -226,23 +289,42 @@ void MapWithStaticMotion::Draw(unique_ptr<RenderWindow>& window)
 	for (int i = 0; i < count_of_obstacles; i++) window->draw(obstacles[i]->barrier);
 }
 
-void MapWithStaticMotion::CheckCollsisionWithMobs(Gun& obj)
-{
-}
+void MapWithStaticMotion::CheckCollsisionWithMobs(Gun& obj) { ; }
 
-void MapWithStaticMotion::ChechCollisionWithWalls(Player& player, Game& rules)
-{
-}
+void MapWithStaticMotion::ChechCollisionWithWalls(Player& player, Game& rules) { ; }
 
-void MapWithStaticMotion::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules)
-{
-}
+void MapWithStaticMotion::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) { ; }
 
 void MapWithVectorMotion::GenerateComplications() { ; }
 
-void MapWithVectorMotion::GenerateBonus() // генерация бонусов
+void MapWithVectorMotion::GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated)
 {
-	;
+	double x, y, size;
+	bool fixation;
+
+	size = 50;
+
+	for (int i = first_no_generated; i < first_no_generated + count_of_bonuses; i++)
+	{
+		do
+		{
+			x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
+			y = (double)rand() / (double)RAND_MAX * ((borders.y2 - size - 5) - (borders.y1 + 5)) + (borders.y1 + 5);
+
+			int j = first_no_generated;
+			fixation = true;
+			while ((j < i) && (fixation))
+			{
+				if ((bonuses.GetCoordinateX(j) > (x - size - 5)) && (bonuses.GetCoordinateX(j) < (x + size + 5)) && (bonuses.GetCoordinateY(j) > (y - size - 5)) && (bonuses.GetCoordinateY(j) < (y + size + 5))) fixation = false;
+				else j++;
+			}
+
+		} while (!fixation);
+
+		bonuses.SetSpriteCoordinates(i, x, y);
+	}
+
+	first_no_generated += count_of_bonuses;
 }
 
 void MapWithVectorMotion::RedefinePlayer(Player*& player, Vector2f steps)
@@ -257,9 +339,7 @@ void MapWithVectorMotion::Draw(unique_ptr<RenderWindow>& window)
 	window->draw(playground);
 }
 
-void MapWithVectorMotion::CheckCollsisionWithMobs(Gun& obj)
-{
-}
+void MapWithVectorMotion::CheckCollsisionWithMobs(Gun& obj) { ; }
 
 void MapWithVectorMotion::ChechCollisionWithWalls(Player& player, Game& rules)
 {
@@ -272,6 +352,4 @@ void MapWithVectorMotion::ChechCollisionWithWalls(Player& player, Game& rules)
 	}
 }
 
-void MapWithVectorMotion::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules)
-{
-}
+void MapWithVectorMotion::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) { ; }

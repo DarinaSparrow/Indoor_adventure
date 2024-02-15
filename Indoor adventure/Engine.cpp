@@ -92,6 +92,7 @@ void Engine::draw()
 	window->clear();
 	window->draw(game);
 	playgrounds.Draw(window);
+	bonuses.Draw(window);
 	my_gun.draw(*window);
 	if (player->get_visible()) {
 		auto draw_player = player->get_player();
@@ -116,6 +117,7 @@ void Engine::run()
 {
 	Clock clock;
 	playgrounds.InstallTheInitialMap(player);
+	playgrounds.GenerateBonuses(bonuses);
 	while (window->isOpen()) {
 		Time dt = clock.restart();
 

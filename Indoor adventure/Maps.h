@@ -3,6 +3,7 @@
 #include "header.h"
 #include "Map.h"
 #include "Player.h"
+#include "Bonus.h"
 #include "Gun.h"
 #include <vector>
 #include <ctime>
@@ -33,7 +34,6 @@ public:
 		GenerateLimitsOfMaps();
 		GenerateComplicationsOfMaps();
 		// генерация персонажа
-		// генерация бонусов на картах
 	}
 
 	string GetNameOfCurrentMap();
@@ -42,19 +42,15 @@ public:
 	void GenerateLimitsOfMaps();
 	void GenerateComplicationsOfMaps();
 	// генерация персонажа
-	// генерация бонусов на картах
+	void GenerateBonuses(Bonus& bonuses);
 
 	void InstallTheInitialMap(Player*& player);
 
 	void CheckTheTransitionBetweenMaps(Player*& player);
 
 	void ChechCollisionWithMobs(Gun& obj);
-
 	void ChechCollisionWithWalls(Player& player, Game& rules);
-
 	void ChechCollisionWithPlayer(Gun& obj,Player& player, Game& rules);
-
-
 
 	void Draw(unique_ptr<RenderWindow>& window);
 
