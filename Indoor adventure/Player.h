@@ -67,7 +67,7 @@ public:
 		visible = true;
 		slide = false;
 
-		sprite_player.scale(Vector2f(2,2));
+		sprite_player.scale(Vector2f(1.5, 1.5));
 	}
 
 	virtual void set_dead(bool fl) = 0;
