@@ -65,6 +65,11 @@ void InvisibleMap::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rule
 {
 }
 
+void InvisibleMap::ChechCollisionWithObstacles(Player& player)
+{
+
+}
+
 void MapWithMobs::GenerateComplications()
 {
 	double x, y, size_x, size_y;
@@ -165,6 +170,11 @@ void MapWithMobs::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules
 	//}
 }
 
+void MapWithMobs::ChechCollisionWithObstacles(Player& player)
+{
+
+}
+
 void MapWithStaticMotion::GenerateComplications()
 {
 	double x, y, size;
@@ -238,6 +248,18 @@ void MapWithStaticMotion::ChechCollisionWithPlayer(Gun& obj, Player& player, Gam
 {
 }
 
+void MapWithStaticMotion::ChechCollisionWithObstacles(Player& player)
+{
+	for (int i = 0; i < count_of_obstacles; ++i)
+	{
+		if (obstacles[i]->barrier.getGlobalBounds().contains(player.get_player().getPosition().x + 40, player.get_player().getPosition().y + 90))
+		{
+			player.get_player().move(-player.get_steps().x, -player.get_steps().y);
+			return;
+		}
+	}
+}
+
 void MapWithVectorMotion::GenerateComplications() { ; }
 
 void MapWithVectorMotion::GenerateBonus() // генерация бонусов
@@ -274,4 +296,9 @@ void MapWithVectorMotion::ChechCollisionWithWalls(Player& player, Game& rules)
 
 void MapWithVectorMotion::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules)
 {
+}
+
+void MapWithVectorMotion::ChechCollisionWithObstacles(Player& player)
+{
+
 }

@@ -104,6 +104,13 @@ void Maps::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules)
 
 }
 
+void Maps::ChechCollisionWithObstacles(Player& player)
+{
+	for (int i = 0; i < maps.size(); i++) {
+		maps[i]->ChechCollisionWithObstacles(player);
+	}
+}
+
 void Maps :: Draw(unique_ptr<RenderWindow>& window)
 {
 	vector <Map*> :: iterator iter;
