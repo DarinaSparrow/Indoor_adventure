@@ -84,10 +84,6 @@ void Engine::update(Time const& delta_time)
 	playgrounds.ChechCollisionWithWalls(*player, game);
 	player->update(delta_time);
 	my_gun.update(delta_time);
-	player_time += delta_time;
-	if (player_time > microseconds(3)) {
-		player_time = milliseconds(0);
-	}
 }
 
 
