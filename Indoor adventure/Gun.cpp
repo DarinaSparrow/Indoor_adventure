@@ -72,6 +72,17 @@ void Gun::update_mouse_pos(Vector2i pos)
 }
 
 
+Sprite& Gun::get_bul()
+{
+	return bullet;
+}
+
+void Gun::refresh_bul()
+{
+	shooting = false;
+}
+
+
 void Gun::draw(RenderWindow& window) const
 {
     if (!shooting) {

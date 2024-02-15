@@ -39,9 +39,9 @@ void InvisibleMap::GenerateBonus() // генерация бонусов
 	;
 }
 
-void InvisibleMap::RedefinePlayer(Player*& player)
+void InvisibleMap::RedefinePlayer(Player*& player, Vector2f steps)
 {
-	Player* new_player = new Player_invisible(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), player->get_steps());
+	Player* new_player = new Player_invisible(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), steps);
 	delete player;
 	player = new_player;
 }
@@ -49,6 +49,20 @@ void InvisibleMap::RedefinePlayer(Player*& player)
 void InvisibleMap::Draw(unique_ptr<RenderWindow>& window)
 {
 	window->draw(playground);
+}
+
+void InvisibleMap::CheckCollsisionWithMobs(Gun& obj)
+{
+
+}
+
+void InvisibleMap::ChechCollisionWithWalls(Player& player, Game& rules)
+{
+
+}
+
+void InvisibleMap::ChechCollisionWithPlayer(Player& player, Game& rules)
+{
 }
 
 void MapWithMobs::GenerateComplications()
@@ -92,6 +106,8 @@ void MapWithMobs::GenerateComplications()
 		enemies[i]->x2 = x + size_x;
 		enemies[i]->y1 = y;
 		enemies[i]->y2 = y + size_y;
+
+		//enemies[i]->mob.setScale(Vector2f(1.0, 1.0));
 	}
 }
 
@@ -100,9 +116,9 @@ void MapWithMobs::GenerateBonus() // генерация бонусов
 	;
 }
 
-void MapWithMobs::RedefinePlayer(Player*& player)
+void MapWithMobs::RedefinePlayer(Player*& player, Vector2f steps)
 {
-	Player* new_player = new Player_danger_zone(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), player->get_steps());
+	Player* new_player = new Player_danger_zone(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), steps);
 	delete player;
 	player = new_player;
 }
@@ -111,6 +127,35 @@ void MapWithMobs::Draw(unique_ptr<RenderWindow>& window)
 {
 	window->draw(playground);
 	for (int i = 0; i < count_of_enemies; i++) window->draw(enemies[i]->mob);
+}
+
+void MapWithMobs::CheckCollsisionWithMobs(Gun& obj)
+{
+	for (int i = 0; i < count_of_enemies; i++) {
+		if (enemies[i]->mob.getGlobalBounds().contains(Vector2f(obj.get_bul().getPosition().x + obj.get_bul().getGlobalBounds().width / 2.0, 
+			obj.get_bul().getPosition().y + obj.get_bul().getGlobalBounds().height / 2.0))) {
+			enemies[i]->mob.setPosition(Vector2f(-enemies[i]->mob.getPosition().x, -enemies[i]->mob.getPosition().y));
+			obj.refresh_bul();
+		}
+	}
+}
+
+void MapWithMobs::ChechCollisionWithWalls(Player& player, Game& rules)
+{
+}
+
+void MapWithMobs::ChechCollisionWithPlayer(Player& player, Game& rules)
+{
+	for (int i = 0; i < count_of_enemies; i++) {
+		if (player.get_player().getGlobalBounds().intersects(enemies[i]->mob.getGlobalBounds())) {
+			enemies[i]->mob.setPosition(Vector2f(-enemies[i]->mob.getPosition().x, -enemies[i]->mob.getPosition().y));
+			rules.decrease_lives();
+		}
+		if (enemies[i]->mob.getGlobalBounds().intersects(player.get_player().getGlobalBounds())) {
+			enemies[i]->mob.setPosition(Vector2f(-enemies[i]->mob.getPosition().x, -enemies[i]->mob.getPosition().y));
+			rules.decrease_lives();
+		}
+	}
 }
 
 void MapWithStaticMotion::GenerateComplications()
@@ -161,9 +206,9 @@ void MapWithStaticMotion::GenerateBonus() // генерация бонусов
 	;
 }
 
-void MapWithStaticMotion::RedefinePlayer(Player*& player)
+void MapWithStaticMotion::RedefinePlayer(Player*& player, Vector2f steps)
 {
-	Player* new_player = new Player_static(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), player->get_steps());
+	Player* new_player = new Player_static(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), steps);
 	delete player;
 	player = new_player;
 }
@@ -174,6 +219,18 @@ void MapWithStaticMotion::Draw(unique_ptr<RenderWindow>& window)
 	for (int i = 0; i < count_of_obstacles; i++) window->draw(obstacles[i]->barrier);
 }
 
+void MapWithStaticMotion::CheckCollsisionWithMobs(Gun& obj)
+{
+}
+
+void MapWithStaticMotion::ChechCollisionWithWalls(Player& player, Game& rules)
+{
+}
+
+void MapWithStaticMotion::ChechCollisionWithPlayer(Player& player, Game& rules)
+{
+}
+
 void MapWithVectorMotion::GenerateComplications() { ; }
 
 void MapWithVectorMotion::GenerateBonus() // генерация бонусов
@@ -181,9 +238,9 @@ void MapWithVectorMotion::GenerateBonus() // генерация бонусов
 	;
 }
 
-void MapWithVectorMotion::RedefinePlayer(Player*& player)
+void MapWithVectorMotion::RedefinePlayer(Player*& player, Vector2f steps)
 {
-	Player* new_player = new Player_vector(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), player->get_steps());
+	Player* new_player = new Player_vector(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), steps);
 	delete player;
 	player = new_player;
 }
@@ -191,4 +248,23 @@ void MapWithVectorMotion::RedefinePlayer(Player*& player)
 void MapWithVectorMotion::Draw(unique_ptr<RenderWindow>& window)
 {
 	window->draw(playground);
+}
+
+void MapWithVectorMotion::CheckCollsisionWithMobs(Gun& obj)
+{
+}
+
+void MapWithVectorMotion::ChechCollisionWithWalls(Player& player, Game& rules)
+{
+	if (playground.getGlobalBounds().contains(player.get_player().getGlobalBounds().getPosition()))
+	{
+		if (player.get_player().getGlobalBounds().top == player.get_bords().getGlobalBounds().top) rules.kill();
+		if (player.get_player().getGlobalBounds().left == player.get_bords().getGlobalBounds().left) rules.kill();
+		if (player.get_player().getGlobalBounds().top + player.get_player().getGlobalBounds().height == player.get_bords().getGlobalBounds().top + player.get_bords().getGlobalBounds().height) rules.kill();
+		if (player.get_player().getGlobalBounds().left + player.get_player().getGlobalBounds().width == player.get_bords().getGlobalBounds().left + player.get_bords().getGlobalBounds().width) rules.kill();
+	}
+}
+
+void MapWithVectorMotion::ChechCollisionWithPlayer(Player& player, Game& rules)
+{
 }

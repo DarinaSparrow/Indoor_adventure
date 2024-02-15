@@ -3,6 +3,7 @@
 #include "header.h"
 #include "Map.h"
 #include "Player.h"
+#include "Gun.h"
 #include <vector>
 #include <ctime>
 #include <algorithm>
@@ -43,9 +44,17 @@ public:
 	// генерация персонажа
 	// генерация бонусов на картах
 
-	void InstallTheInitialMap(Player* player);
+	void InstallTheInitialMap(Player*& player);
 
 	void CheckTheTransitionBetweenMaps(Player*& player);
+
+	void ChechCollisionWithMobs(Gun& obj);
+
+	void ChechCollisionWithWalls(Player& player, Game& rules);
+
+	void ChechCollisionWithPlayer(Player& player, Game& rules);
+
+
 
 	void Draw(unique_ptr<RenderWindow>& window);
 

@@ -79,7 +79,7 @@ void Player::update(Time const& delta_time)
 			}
 		}
 		else {
-
+			sprite_player.setColor(Color::Red);
 		}
 	}
 }

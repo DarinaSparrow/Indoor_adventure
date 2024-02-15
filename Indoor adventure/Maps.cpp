@@ -32,17 +32,29 @@ void Maps :: GenerateComplicationsOfMaps()
 	for (iter = maps.begin(); iter != maps.end(); iter++) (*iter)->GenerateComplications();
 }
 
-void Maps :: InstallTheInitialMap(Player* player) // переделать после генерации персонажа
+void Maps :: InstallTheInitialMap(Player*& player) // переделать после генерации персонажа
 {
 	if (player->get_player().getPosition().x + 37 < win_width / 2)
 	{
-		if (player->get_player().getPosition().y + 60 < win_height / 2) current_map = maps[0];
-		else current_map = maps[2];
+		if (player->get_player().getPosition().y + 60 < win_height / 2) {
+			current_map = maps[0];
+			current_map->RedefinePlayer(player, Vector2f(0,0));
+		}
+		else {
+			current_map = maps[2];
+			current_map->RedefinePlayer(player, Vector2f(0, 0));
+		}
 	}
 	else
 	{
-		if (player->get_player().getPosition().y + 60 < win_height / 2) current_map = maps[1];
-		else current_map = maps[3];
+		if (player->get_player().getPosition().y + 60 < win_height / 2) {
+			current_map = maps[1];
+			current_map->RedefinePlayer(player, Vector2f(0, 0));
+		}
+		else {
+			current_map = maps[3];
+			current_map->RedefinePlayer(player, Vector2f(0, 0));
+		}
 	}
 }
 
@@ -56,12 +68,40 @@ void Maps::CheckTheTransitionBetweenMaps(Player*& player)
 			{
 				if (maps[i]->СheckPersonLocationOnMap(player->get_player().getPosition().x + 40, player->get_player().getPosition().y + 90))
 				{
-					current_map = maps[i];
-					current_map->RedefinePlayer(player);
+					if (current_map->GetNameOfTheMap() == "Vector") {
+						current_map = maps[i];
+						current_map->RedefinePlayer(player, Vector2f(0,0));
+					}
+					else {
+						current_map = maps[i];
+						current_map->RedefinePlayer(player, player->get_steps());
+					}
 				}
 			}
 		}
 	}
+}
+
+void Maps::ChechCollisionWithMobs(Gun& obj)
+{
+	for (int i = 0; i < maps.size(); i++) {
+		maps[i]->CheckCollsisionWithMobs(obj);
+	}
+}
+
+void Maps::ChechCollisionWithWalls(Player& player, Game& rules)
+{
+	for (int i = 0; i < maps.size(); i++) {
+		maps[i]->ChechCollisionWithWalls(player, rules);
+	}
+}
+
+void Maps::ChechCollisionWithPlayer(Player& player, Game& rules)
+{
+	for (int i = 0; i < maps.size(); i++) {
+		maps[i]->ChechCollisionWithPlayer(player, rules);
+	}
+
 }
 
 void Maps :: Draw(unique_ptr<RenderWindow>& window)
