@@ -135,11 +135,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animator.cpp" />
-    <ClCompile Include="AssertManager.cpp" />
+    <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Bonus.cpp" />
     <ClCompile Include="End.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameSound.cpp" />
     <ClCompile Include="Gun.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -148,11 +149,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h" />
-    <ClInclude Include="AssertManager.h" />
+    <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Bonus.h" />
     <ClInclude Include="End.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameSound.h" />
     <ClInclude Include="Gun.h" />
     <ClInclude Include="header.h" />
     <ClInclude Include="HostileMobs.h" />

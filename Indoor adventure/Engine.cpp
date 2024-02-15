@@ -4,9 +4,11 @@
 void Engine::input()
 {
 	Event event_play;
-	
+	my_gun.update_bullet_pos(player->get_player());
+
 	while (window->pollEvent(event_play)) {
 		if (event_play.key.code == Keyboard::Escape) {
+			window->close();
 		}
 
 		if (event_play.type == event_play.Closed) {
@@ -29,15 +31,21 @@ void Engine::input()
 			{
 			case Keyboard::Up: {player->set_step_y(); break; }
 			case Keyboard::Down: {player->set_step_y(); break; }
-			case Keyboard::Left: {player->set_step_x(); game.set_end_game(false); break; }
-			case Keyboard::Right: {player->set_step_x(); game.set_end_game(true); break; }
+			case Keyboard::Left: {player->set_step_x(); break; }
+			case Keyboard::Right: {player->set_step_x(); break; }
 			default: break;
 			}
 		}
 
 		if (event_play.type == Event::MouseMoved) {
-				my_gun.set_x(Mouse::getPosition(*window).x);
-				my_gun.set_y(Mouse::getPosition(*window).y);
+			my_gun.update_mouse_pos(Mouse::getPosition(*window));
+		}
+
+		if (event_play.type == Event::MouseButtonPressed) {
+			if (event_play.key.code == Mouse::Left) {
+				if (!my_gun.check_shoot())
+					my_gun.shoot();
+			}
 		}
 	}
 }
@@ -45,9 +53,6 @@ void Engine::input()
 
 void Engine::update(Time const& delta_time)
 {
-	if (playgrounds.GetNameOfCurrentMap() != game.get_playground_name())
-		game.update_playground(playgrounds.GetNameOfCurrentMap());
-
 	game.update(delta_time);
 	player->update(delta_time);
 	my_gun.update(delta_time);
@@ -61,19 +66,11 @@ void Engine::update(Time const& delta_time)
 void Engine::draw()
 {
 	window->clear();
-
 	window->draw(game);
 	playgrounds.Draw(window);
+	my_gun.draw(*window);
 	auto draw_player = player->get_player();
 	window->draw(draw_player);
-	auto draw_aim = my_gun.get_aim();
-	auto draw_bullet = my_gun.get_bullet();
-	window->draw(draw_aim);
-	window->draw(draw_bullet);
-	
-	if (game.get_end_game())
-		window->draw(end);
-
 	window->display();
 }
 
