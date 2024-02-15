@@ -27,6 +27,11 @@ void Gun::update(Time const& delta_time)
 		aim.setPosition(last_pos);
     }
 
+	if ((pos_x - bullet.getPosition().x) * (pos_x - bullet.getPosition().x)
+		+ (pos_y - bullet.getPosition().y) * (pos_y - bullet.getPosition().y) < 7500) {
+		aim.setPosition(last_pos);
+	}
+
 	if (shooting) {
 		update_time += delta_time;
 

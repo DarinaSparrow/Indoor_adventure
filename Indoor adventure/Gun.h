@@ -1,13 +1,14 @@
 #pragma once
 #include "header.h"
 #include "AssetManager.h"
-
+#include <math.h>
 
 class Gun
 {
 private:
 	Sprite aim;
 	Sprite bullet;
+	Sprite my_player;
 	double pos_x, pos_y;
 	double width_aim, height_aim;
 
@@ -22,7 +23,7 @@ private:
 	Vector2f step;
 
 public:
-	Gun(RenderWindow& window, Sprite player, RectangleShape& border_zone) : border_zone(border_zone)
+	Gun(RenderWindow& window, Sprite player, RectangleShape& border_zone) : border_zone(border_zone), my_player(player)
 	{
 		pos_x = Mouse::getPosition(window).x;
 		pos_y = Mouse::getPosition(window).y;
