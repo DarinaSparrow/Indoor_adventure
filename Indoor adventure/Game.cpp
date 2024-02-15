@@ -14,6 +14,7 @@ Game::Game()
 	end_game = false;
 	timer = 300; // 5 минут
 	lives = 3; // жизни игрока
+	score = 0;
 	
 	game_font.loadFromFile("Resourses/weekend.ttf");
 
@@ -23,19 +24,19 @@ Game::Game()
 	playground_text.setFillColor(Color::White);
 	playground_text.setString(String::fromUtf32(playground_name.begin(), playground_name.end()));
 
-	bonuses_text.setFont(game_font);
-	bonuses_text.setCharacterSize(font_size);
-	bonuses_text.setFillColor(Color::White);
-	bonuses_string << 0;
-	bonuses_text.setString(L"Bonuses: " + bonuses_string.str() + " ");
-	bonuses_text.setPosition(win_width - bonuses_text.getGlobalBounds().width, 0);
+	score_text.setFont(game_font);
+	score_text.setCharacterSize(font_size);
+	score_text.setFillColor(Color::White);
+	score_string << score;
+	score_text.setString(L"Bonuses: " + score_string.str() + " ");
+	score_text.setPosition(win_width - score_text.getGlobalBounds().width, 0);
 
 	timer_text.setFont(game_font);
 	timer_text.setCharacterSize(font_size);
 	timer_text.setFillColor(Color::White);
 	timer_string << timer;
 	timer_text.setString(L"Time: " + timer_string.str() + " ");
-	timer_text.setPosition(win_width - timer_text.getGlobalBounds().width, bonuses_text.getGlobalBounds().top + bonuses_text.getGlobalBounds().height);
+	timer_text.setPosition(win_width - timer_text.getGlobalBounds().width, score_text.getGlobalBounds().top + score_text.getGlobalBounds().height);
 
 	
 	lives_sprite.setTexture(AssetManager::get_texture("Resourses/lives.png"));
@@ -85,6 +86,10 @@ void Game::set_end_game(bool end_game) {
 	this->end_game = end_game;
 }
 
+int Game::get_score() {
+	return score;
+}
+
 string Game::get_playground_name() {
 	return playground_name;
 }
@@ -109,17 +114,18 @@ void Game::update_playground(const string& playground_name) {
 	playground_text.setString(String::fromUtf8(this->playground_name.begin(), this->playground_name.end()));
 }
 
-void Game::update_bonuses(int bonuses)
+void Game::update_score()
 {
-	bonuses_string << bonuses;
-	bonuses_text.setString(L"Bonuses: " + bonuses_string.str() + " ");
-	bonuses_text.setPosition(win_width - bonuses_text.getGlobalBounds().width, 0);
+	score += 1;
+	score_string << score;
+	score_text.setString(L"Bonuses: " + score_string.str() + " ");
+	score_text.setPosition(win_width - score_text.getGlobalBounds().width, 0);
 }
 
 void Game::draw(RenderTarget& target, RenderStates states) const
 {
 	target.draw(background_sprite);
-	target.draw(bonuses_text);
+	target.draw(score_text);
 	target.draw(timer_text);
 	if (!end_game)
 		target.draw(lives_sprite);

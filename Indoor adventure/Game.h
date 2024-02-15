@@ -14,15 +14,16 @@ private:
 
 	Font game_font;
 	Text timer_text;
-	Text bonuses_text;
+	Text score_text;
 	ostringstream timer_string;
-	ostringstream bonuses_string;
+	ostringstream score_string;
 
 	Text playground_text;
 
 	string playground_name;
 	float timer;
 	int lives;
+	int score;
 
 	bool end_game;
 
@@ -34,13 +35,14 @@ public:
 
 	bool get_end_game();
 	void set_end_game(bool end_game);
+	int get_score();
 	string get_playground_name();
 
 	void decrease_lives();
 
 	void kill();
 	void update_playground(const string& playground_name);
-	void update_bonuses(int bonuses);
+	void update_score();
 
 	void update(Time const& delta_time);
 
