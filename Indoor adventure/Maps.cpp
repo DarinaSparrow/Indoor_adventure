@@ -48,13 +48,13 @@ void Maps :: InstallTheInitialMap(Player* player) // ïåðåäåëàòü ïîñëå ãåíåðàöèè 
 
 void Maps :: CheckTheTransitionBetweenMaps(Player*& player)
 {
-	if (!current_map->ÑheckPersonLocationOnMap(player->get_player().getPosition().x + 37, player->get_player().getPosition().y + 60))
+	if (!current_map->ÑheckPersonLocationOnMap(player->get_player().getPosition().x + 40, player->get_player().getPosition().y + 90))
 	{
 		for (int i = 0; i < maps.size(); i++)
 		{
 			if (current_map != maps[i])
 			{
-				if (maps[i]->ÑheckPersonLocationOnMap(player->get_player().getPosition().x + 37, player->get_player().getPosition().y + 60))
+				if (maps[i]->ÑheckPersonLocationOnMap(player->get_player().getPosition().x + 40, player->get_player().getPosition().y + 90))
 				{
 					current_map = maps[i];
 					current_map->RedefinePlayer(player);

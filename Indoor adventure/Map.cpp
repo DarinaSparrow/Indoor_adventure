@@ -58,10 +58,10 @@ void MapWithMobs::GenerateComplications()
 
 	srand(time(NULL));
 
-	count_of_enemies = rand() % (5 - 3 + 1) + 3;
+	count_of_enemies = rand() % (7 - 5 + 1) + 5;
 
-	size_x = 84;
-	size_y = 120;
+	size_x = 57;
+	size_y = 80;
 
 	enemies = new Mob*[count_of_enemies];
 	for (int i = 0; i < count_of_enemies; i++)
@@ -74,13 +74,13 @@ void MapWithMobs::GenerateComplications()
 			x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size_x - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
 			y = (double)rand() / (double)RAND_MAX * ((borders.y2 - size_y - 5) - (borders.y1 + 5)) + (borders.y1 + 5);
 
-			/*int j = 0;
+			int j = 0;
 			fixation = true;
 			while ((j < i) && (fixation))
 			{
-				if ((enemies[j]->x1 > (x - size_x - 150)) && (enemies[j]->x1 < (x + size_x + 150)) && (enemies[j]->y1 > (y - size_y - 150)) && (enemies[j]->y1 < (y + size_y + 150))) fixation = false;
+				if ((enemies[j]->x1 > (x - size_x - 50)) && (enemies[j]->x1 < (x + size_x + 50)) && (enemies[j]->y1 > (y - size_y - 50)) && (enemies[j]->y1 < (y + size_y + 50))) fixation = false;
 				else j++;
-			}*/
+			}
 
 		} while (!fixation);
 
@@ -120,9 +120,9 @@ void MapWithStaticMotion::GenerateComplications()
 
 	srand(time(NULL));
 
-	count_of_obstacles = rand() % (5 - 3 + 1) + 3;
+	count_of_obstacles = rand() % (7 - 5 + 1) + 5;
 
-	size = 100;
+	size = 75;
 
 	obstacles = new Barriers * [count_of_obstacles];
 	for (int i = 0; i < count_of_obstacles; i++)
@@ -135,13 +135,13 @@ void MapWithStaticMotion::GenerateComplications()
 			x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
 			y = (double)rand() / (double)RAND_MAX * ((borders.y2 - size - 5) - (borders.y1 + 5)) + (borders.y1 + 5);
 
-			/*int j = 0;
+			int j = 0;
 			fixation = true;
 			while ((j < i) && (fixation))
 			{
-				if ((obstacles[j]->x1 > (x - size - 150)) && (obstacles[j]->x1 < (x + size + 150)) && (obstacles[j]->y1 > (y - size - 150)) && (obstacles[j]->y1 < (y + size + 150))) fixation = false;
+				if ((obstacles[j]->x1 > (x - size - 40)) && (obstacles[j]->x1 < (x + size + 40)) && (obstacles[j]->y1 > (y - size - 40)) && (obstacles[j]->y1 < (y + size + 40))) fixation = false;
 				else j++;
-			}*/
+			}
 
 		} while (!fixation);
 
