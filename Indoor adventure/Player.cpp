@@ -92,6 +92,11 @@ Sprite& Player::get_player()
 	return sprite_player;
 }
 
+RectangleShape& Player::get_bords()
+{
+	return border;
+}
+
 
 void Player_static::set_dead(bool fl)
 {

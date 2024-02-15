@@ -7,6 +7,8 @@
 class Player
 {
 private:
+	RectangleShape border;
+
 	struct Borders
 	{
 		double x; 
@@ -62,6 +64,8 @@ public:
 		borders.max_x = static_cast<double>(borders_zone.getPosition().x + borders_zone.getSize().x);
 		borders.max_y = static_cast<double>(borders_zone.getPosition().y + borders_zone.getSize().y);
 
+		border = borders_zone;
+
 
 		dead = false;
 		visible = true;
@@ -93,6 +97,7 @@ public:
 
 	void set_borders_player(double x, double y, double max_x, double max_y);
 	Sprite& get_player();
+	RectangleShape& get_bords();
 };
 
 
