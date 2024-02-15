@@ -11,6 +11,7 @@ void Gun::shoot()
 	step = Vector2f(dX_step * 0.05, dY_step * 0.05);
 }
 
+
 bool Gun::check_shoot()
 {
 	return shooting;
@@ -22,8 +23,8 @@ void Gun::update(Time const& delta_time)
     Vector2f last_pos = aim.getPosition();
 
     aim.setPosition(Vector2f(pos_x - width_aim, pos_y - height_aim));
-    if (!border_zone.getGlobalBounds().contains(Vector2f(aim.getPosition().x + aim.getGlobalBounds().width / 2.0, aim.getPosition().y + aim.getGlobalBounds().height / 2.0))) {
-        aim.setPosition(last_pos);
+    if (!border_zone.getGlobalBounds().contains(Vector2f(aim.getPosition().x + aim.getGlobalBounds().width / 2.0, aim.getPosition().y + aim.getGlobalBounds().height / 2.0))){
+		aim.setPosition(last_pos);
     }
 
 	if (shooting) {

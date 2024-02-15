@@ -1,6 +1,7 @@
 #pragma once
 #include "header.h"
 #include "Animator.h"
+#include "GameSound.h"
 #include <tuple>
 
 
@@ -8,6 +9,7 @@ class Player
 {
 private:
 	RectangleShape border;
+	GameSound& game_sound;
 
 	struct Borders
 	{
@@ -32,30 +34,29 @@ protected:
 	bool slide;
 
 public:
-	Player(RectangleShape& borders_zone, Vector2f my_pos = Vector2f(win_width / 2, 650), double time = 0.3,
-		Vector2i sprite_size = Vector2i(50, 80))
+	Player(RectangleShape& borders_zone, Vector2f my_pos, GameSound& my_game_sound) : border(borders_zone), game_sound(my_game_sound)
 	{
 		sprite_player.setPosition(my_pos.x, my_pos.y);
 		
 		auto& idle_static = anim_player.create_animation("static", "Resourses/down.png",
-			seconds(time), true);
-		idle_static.AddFrames(Vector2i(0, 0), sprite_size, 1, 1);
+			seconds(0.3), true);
+		idle_static.AddFrames(Vector2i(0, 0), Vector2i(50, 80), 1, 1);
 
 		auto& idle_run_down = anim_player.create_animation("run_down", "Resourses/down.png",
-			seconds(time), true);
-		idle_run_down.AddFrames(Vector2i(0, 0), sprite_size, 3, 1);
+			seconds(0.3), true);
+		idle_run_down.AddFrames(Vector2i(0, 0), Vector2i(50, 80), 3, 1);
 
 		auto& idle_run_up = anim_player.create_animation("run_up", "Resourses/up.png",
-			seconds(time), true);
-		idle_run_up.AddFrames(Vector2i(0, 0), sprite_size, 3, 1);
+			seconds(0.3), true);
+		idle_run_up.AddFrames(Vector2i(0, 0), Vector2i(50, 80), 3, 1);
 
 		auto& idle_run_right = anim_player.create_animation("run_right", "Resourses/right.png",
-			seconds(time), true);
-		idle_run_right.AddFrames(Vector2i(0, 0), sprite_size, 3, 1);
+			seconds(0.3), true);
+		idle_run_right.AddFrames(Vector2i(0, 0), Vector2i(50, 80), 3, 1);
 
 		auto& idle_run_left = anim_player.create_animation("run_left", "Resourses/left.png",
-			seconds(time), true);
-		idle_run_left.AddFrames(Vector2i(0, 0), sprite_size, 3, 1);
+			seconds(0.3), true);
+		idle_run_left.AddFrames(Vector2i(0, 0), Vector2i(50, 80), 3, 1);
 
 
 		borders.x = static_cast<double>(borders_zone.getPosition().x);
@@ -63,8 +64,6 @@ public:
 
 		borders.max_x = static_cast<double>(borders_zone.getPosition().x + borders_zone.getSize().x);
 		borders.max_y = static_cast<double>(borders_zone.getPosition().y + borders_zone.getSize().y);
-
-		border = borders_zone;
 
 
 		dead = false;
@@ -104,8 +103,7 @@ public:
 class Player_static: public Player
 {
 public:
-	Player_static(RectangleShape& borders_zone, Vector2f my_pos = Vector2f(win_width / 2, 650), double time = 0.3,
-		Vector2i sprite_size = Vector2i(50, 80)) : Player(borders_zone, my_pos, time, sprite_size)
+	Player_static(RectangleShape& borders_zone, Vector2f my_pos, GameSound& my_game_sound) : Player(borders_zone, my_pos, my_game_sound)
 	{
 		dead = false;
 		visible = true;
@@ -128,8 +126,7 @@ public:
 class Player_vector : public Player
 {
 public:
-	Player_vector(RectangleShape& borders_zone, Vector2f my_pos = Vector2f(win_width / 2, 650), double time = 0.3,
-		Vector2i sprite_size = Vector2i(50, 80)) : Player(borders_zone, my_pos, time, sprite_size)
+	Player_vector(RectangleShape& borders_zone, Vector2f my_pos, GameSound& my_game_sound) : Player(borders_zone, my_pos, my_game_sound)
 	{
 		dead = false;
 		visible = true;
@@ -152,8 +149,7 @@ public:
 class Player_invisible : public Player
 {
 public:
-	Player_invisible(RectangleShape& borders_zone, Vector2f my_pos = Vector2f(win_width / 2, 650), double time = 0.3,
-		Vector2i sprite_size = Vector2i(50, 80)) : Player(borders_zone, my_pos, time, sprite_size)
+	Player_invisible(RectangleShape& borders_zone, Vector2f my_pos, GameSound& my_game_sound) : Player(borders_zone, my_pos, my_game_sound)
 	{
 		dead = false;
 		visible = false;
@@ -176,8 +172,7 @@ public:
 class Player_danger_zone : public Player
 {
 public:
-	Player_danger_zone(RectangleShape& borders_zone, Vector2f my_pos = Vector2f(win_width / 2, 650), double time = 0.3,
-		Vector2i sprite_size = Vector2i(50, 80)) : Player(borders_zone, my_pos, time, sprite_size)
+	Player_danger_zone(RectangleShape& borders_zone, Vector2f my_pos, GameSound& my_game_sound) : Player(borders_zone, my_pos, my_game_sound)
 	{
 		dead = false;
 		visible = true;

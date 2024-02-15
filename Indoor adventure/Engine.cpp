@@ -77,6 +77,9 @@ void Engine::draw()
 
 Engine::Engine()
 {
+	icon.loadFromFile("Resourses/icon.png");
+	window->setIcon(200, 200, icon.getPixelsPtr());
+
 	window->setVerticalSyncEnabled(true);
 }
 

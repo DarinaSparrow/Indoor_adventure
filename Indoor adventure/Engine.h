@@ -6,6 +6,7 @@
 #include "Game.h"
 #include "Maps.h"
 #include "Gun.h"
+#include "GameSound.h"
 
 
 class Engine
@@ -16,10 +17,12 @@ private:
 	unique_ptr<RenderWindow> window = make_unique<RenderWindow>(VideoMode(win_width, win_height),
 		"Indoor Adventure", Style::Default);
 
-	Game game;
+	Image icon;
 
-	// Анимация игрока
-	Player* player = new Player_static(game.get_maps());
+	Game game;
+	GameSound mus_and_sound;
+
+	Player* player = new Player_static(game.get_maps(), Vector2f(win_width / 2, 650), mus_and_sound);
 	Time player_time;	
 
 	Gun my_gun = Gun(*window,player->get_player(), game.get_maps());

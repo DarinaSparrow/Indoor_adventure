@@ -16,6 +16,7 @@ private:
 	double rotation;
 
 	RectangleShape border_zone;
+
 	Time update_time;
 
 	Vector2f step;
@@ -48,6 +49,9 @@ public:
 
 		shooting = false;
 		step = Vector2f(0, 0);
+
+		dX_step = 0.0;
+		dY_step = 0.0;
 	}
 
 

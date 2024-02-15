@@ -12,7 +12,7 @@ private:
 
 public:
 	GameSound() {
-		array<string, num_of_sounds> name_files{ };
+		array<string, num_of_sounds> name_files{  };
 		for (int i = 0; i < num_of_sounds; ++i) {
 			game_sounds[i].setBuffer(AssetManager::get_sound_buffer(name_files[i]));
 		}
