@@ -33,7 +33,7 @@ Game::Game()
 	lives_sprite.scale(0.05f, 0.05f);
 	lives_sprite.setPosition(Vector2f(win_width - lives_sprite.getGlobalBounds().width, timer_text.getGlobalBounds().top + timer_text.getGlobalBounds().height));
 
-	skulls_sprite.setTexture(AssertManager::get_texture("Resourses/sculls.png"));
+	skulls_sprite.setTexture(AssetManager::get_texture("Resourses/sculls.png"));
 	skulls_sprite.scale(0.05f, 0.05f);
 	skulls_sprite.setPosition(Vector2f(win_width - skulls_sprite.getGlobalBounds().width, timer_text.getGlobalBounds().top + timer_text.getGlobalBounds().height));
 }

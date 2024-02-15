@@ -5,15 +5,15 @@ End::End()
 	dark.setSize(Vector2f(win_width, win_height));
 	dark.setFillColor(Color(0, 0, 0, 164));
 
-	end_text.setFont(AssertManager::get_font("Resourses/weekend.ttf"));
+	end_text.setFont(AssetManager::get_font("Resourses/weekend.ttf"));
 	end_text.setCharacterSize(win_height / 10);
 	end_text.setFillColor(Color::White);
 
-	result_text.setFont(AssertManager::get_font("Resourses/weekend.ttf"));
+	result_text.setFont(AssetManager::get_font("Resourses/weekend.ttf"));
 	result_text.setCharacterSize(win_height / 12);
 	result_text.setFillColor(Color::White);
 
-	continue_text.setFont(AssertManager::get_font("Resourses/weekend.ttf"));
+	continue_text.setFont(AssetManager::get_font("Resourses/weekend.ttf"));
 	continue_text.setCharacterSize(win_height / 14);
 	continue_text.setFillColor(Color::White);
 
