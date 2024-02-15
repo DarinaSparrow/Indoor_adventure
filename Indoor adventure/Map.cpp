@@ -60,6 +60,8 @@ void InvisibleMap::GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& firs
 
 		bonuses.SetSpriteCoordinates(i, x, y);
 	}
+
+	first_no_generated += count_of_bonuses;
 }
 
 void InvisibleMap::RedefinePlayer(Player*& player, Vector2f steps)
@@ -97,7 +99,6 @@ void MapWithMobs::GenerateComplications()
 	{
 		enemies[i] = new Mob;
 
-		fixation = true;
 		do
 		{
 			x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size_x - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
@@ -219,7 +220,6 @@ void MapWithStaticMotion::GenerateComplications()
 	{
 		obstacles[i] = new Barriers;
 
-		fixation = true;
 		do
 		{
 			x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
