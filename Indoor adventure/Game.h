@@ -1,8 +1,6 @@
 #pragma once
-#include "header.h"
-#include "Animator.h"
+#include "AssertManager.h"
 #include "chrono"
-#include <vector>
 
 
 // Класс для реализации интерефейса
@@ -16,6 +14,7 @@ private:
 
 	Sprite background_sprite;
 	Sprite lives_sprite;
+	Sprite skulls_sprite;
 
 	Font game_font;
 	Text timer_text;
@@ -23,26 +22,28 @@ private:
 
 	Text playground_text;
 
+	string playground_name;
 	float timer;
 	int lives;
+
+	bool end_game;
 
 public:
 	Game();
 	RectangleShape& get_maps();
 
+	void restart();
+
+	bool get_end_game();
+	void set_end_game(bool end_game);
+	string get_playground_name();
+
 	void decrease_lives();
 
 	void kill();
-	void update_playground(const string& playground);
+	void update_playground(const string& playground_name);
 
 	void update(Time const& delta_time);
 
-	virtual void draw(RenderTarget& target, RenderStates states) const
-	{
-		target.draw(background_sprite);
-		target.draw(timer_text);
-		target.draw(lives_sprite);
-		target.draw(maps);
-		target.draw(playground_text);
-	}
+	virtual void draw(RenderTarget& target, RenderStates states) const;
 };

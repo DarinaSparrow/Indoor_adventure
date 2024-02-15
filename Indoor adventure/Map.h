@@ -36,7 +36,7 @@ public:
 
 	InvisibleMap()
 	{
-		name = "Карта-невидимка";
+		name = "Invisible";
 
 		playground_texture.loadFromFile("Resourses/Playground 1.png");
 		playground.setTexture(&playground_texture);
@@ -61,7 +61,7 @@ public:
 
 	MapWithMobs()
 	{
-		name = "Карта с мобами";
+		name = "Mobs";
 
 		playground_texture.loadFromFile("Resourses/Playground 2.png");
 		playground.setTexture(&playground_texture);
@@ -96,7 +96,7 @@ public:
 
 	MapWithStaticMotion()
 	{
-		name = "Карта статического движения";
+		name = "Static movement";
 
 		playground_texture.loadFromFile("Resourses/Playground 3.png");
 		playground.setTexture(&playground_texture);
@@ -122,7 +122,7 @@ public:
 
 	MapWithVectorMotion()
 	{
-		name = "Карта векторного движения";
+		name = "Vector movement";
 
 		playground_texture.loadFromFile("Resourses/Playground 4.png");
 		playground.setTexture(&playground_texture);

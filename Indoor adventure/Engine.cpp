@@ -7,7 +7,6 @@ void Engine::input()
 	
 	while (window->pollEvent(event_play)) {
 		if (event_play.key.code == Keyboard::Escape) {
-			window->close();
 		}
 
 		if (event_play.type == event_play.Closed) {
@@ -30,8 +29,8 @@ void Engine::input()
 			{
 			case Keyboard::Up: {player->set_step_y(); break; }
 			case Keyboard::Down: {player->set_step_y(); break; }
-			case Keyboard::Left: {player->set_step_x(); break; }
-			case Keyboard::Right: {player->set_step_x(); break; }
+			case Keyboard::Left: {player->set_step_x(); game.set_end_game(false); break; }
+			case Keyboard::Right: {player->set_step_x(); game.set_end_game(true); break; }
 			default: break;
 			}
 		}
@@ -46,6 +45,8 @@ void Engine::input()
 
 void Engine::update(Time const& delta_time)
 {
+	if (playgrounds.GetNameOfCurrentMap() != game.get_playground_name())
+		game.update_playground(playgrounds.GetNameOfCurrentMap());
 
 	game.update(delta_time);
 	player->update(delta_time);
@@ -60,6 +61,7 @@ void Engine::update(Time const& delta_time)
 void Engine::draw()
 {
 	window->clear();
+
 	window->draw(game);
 	playgrounds.Draw(window);
 	auto draw_player = player->get_player();
@@ -68,6 +70,10 @@ void Engine::draw()
 	auto draw_bullet = my_gun.get_bullet();
 	window->draw(draw_aim);
 	window->draw(draw_bullet);
+	
+	if (game.get_end_game())
+		window->draw(end);
+
 	window->display();
 }
 

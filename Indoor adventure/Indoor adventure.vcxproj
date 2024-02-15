@@ -137,6 +137,7 @@
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="AssertManager.cpp" />
     <ClCompile Include="Bonus.cpp" />
+    <ClCompile Include="End.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gun.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Animator.h" />
     <ClInclude Include="AssertManager.h" />
     <ClInclude Include="Bonus.h" />
+    <ClInclude Include="End.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gun.h" />
