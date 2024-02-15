@@ -9,7 +9,7 @@ Bonus::Bonus(RenderWindow& window, Vector2f my_pos, double time, Vector2i sprite
 
 void Bonus::set_catch_it(bool status)
 {
-	catch_it = status;
+	caught = status;
 }
 
 

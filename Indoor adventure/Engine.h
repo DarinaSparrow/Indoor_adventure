@@ -8,6 +8,7 @@
 #include "Gun.h"
 #include "GameSound.h"
 #include "End.h"
+#include "Bonus.h"
 
 
 class Engine
@@ -31,6 +32,7 @@ private:
 	Maps playgrounds;
 
 	End end;
+	Bonus bonus;
 
 	void input();
 	void update(Time const& delta_time);
