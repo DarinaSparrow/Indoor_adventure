@@ -3,6 +3,7 @@
 Game::Game()
 {
 	int pos = static_cast<int>(double(win_width - win_height) / 2.0);
+	int font_size = win_height / 20;
 
 	maps.setSize(Vector2f(win_height, win_height));
 	maps.setPosition(Vector2f(pos, 0));
@@ -18,17 +19,25 @@ Game::Game()
 
 	playground_name = "Playground";
 	playground_text.setFont(game_font);
-	playground_text.setCharacterSize(win_height / 20);
+	playground_text.setCharacterSize(font_size);
 	playground_text.setFillColor(Color::White);
 	playground_text.setString(String::fromUtf32(playground_name.begin(), playground_name.end()));
 
+	bonuses_text.setFont(game_font);
+	bonuses_text.setCharacterSize(font_size);
+	bonuses_text.setFillColor(Color::White);
+	bonuses_string << 0;
+	bonuses_text.setString(L"Bonuses: " + bonuses_string.str() + " ");
+	bonuses_text.setPosition(win_width - bonuses_text.getGlobalBounds().width, 0);
+
 	timer_text.setFont(game_font);
-	timer_text.setCharacterSize(win_height / 20);
+	timer_text.setCharacterSize(font_size);
 	timer_text.setFillColor(Color::White);
 	timer_string << timer;
 	timer_text.setString(L"Time: " + timer_string.str() + " ");
-	timer_text.setPosition(win_width - timer_text.getGlobalBounds().width, 0);
+	timer_text.setPosition(win_width - timer_text.getGlobalBounds().width, bonuses_text.getGlobalBounds().top + bonuses_text.getGlobalBounds().height);
 
+	
 	lives_sprite.setTexture(AssetManager::get_texture("Resourses/lives.png"));
 	lives_sprite.scale(0.05f, 0.05f);
 	lives_sprite.setPosition(Vector2f(win_width - lives_sprite.getGlobalBounds().width, timer_text.getGlobalBounds().top + timer_text.getGlobalBounds().height));
@@ -100,9 +109,17 @@ void Game::update_playground(const string& playground_name) {
 	playground_text.setString(String::fromUtf8(this->playground_name.begin(), this->playground_name.end()));
 }
 
+void Game::update_bonuses(int bonuses)
+{
+	bonuses_string << bonuses;
+	bonuses_text.setString(L"Bonuses: " + bonuses_string.str() + " ");
+	bonuses_text.setPosition(win_width - bonuses_text.getGlobalBounds().width, 0);
+}
+
 void Game::draw(RenderTarget& target, RenderStates states) const
 {
 	target.draw(background_sprite);
+	target.draw(bonuses_text);
 	target.draw(timer_text);
 	if (!end_game)
 		target.draw(lives_sprite);

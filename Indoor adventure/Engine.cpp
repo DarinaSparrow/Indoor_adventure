@@ -57,8 +57,8 @@ void Engine::update(Time const& delta_time)
 		game.update_playground(playgrounds.GetNameOfCurrentMap());
 
 	game.update(delta_time);
-	player->update(delta_time);
 	playgrounds.CheckTheTransitionBetweenMaps(player);
+	player->update(delta_time);
 	my_gun.update(delta_time);
 	player_time += delta_time;
 	if (player_time > microseconds(3)) {

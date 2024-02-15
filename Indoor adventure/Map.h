@@ -41,7 +41,7 @@ public:
 
 	InvisibleMap()
 	{
-		name = "Invisible map";
+		name = "Invisible";
 
 		playground_texture.loadFromFile("Resourses/Playground 1.png");
 		playground.setTexture(&playground_texture);
@@ -74,7 +74,7 @@ public:
 
 	MapWithMobs()
 	{
-		name = "Map with hostile mobs";
+		name = "Mobs";
 
 		playground_texture.loadFromFile("Resourses/Playground 2.png");
 		playground.setTexture(&playground_texture);
@@ -113,7 +113,7 @@ public:
 
 	MapWithStaticMotion()
 	{
-		name = "Static motion map";
+		name = "Static";
 
 		playground_texture.loadFromFile("Resourses/Playground 3.png");
 		playground.setTexture(&playground_texture);
@@ -141,7 +141,7 @@ public:
 
 	MapWithVectorMotion()
 	{
-		name = "Vector motion map";
+		name = "Vector";
 
 		playground_texture.loadFromFile("Resourses/Playground 4.png");
 		playground.setTexture(&playground_texture);

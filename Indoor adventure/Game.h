@@ -14,7 +14,9 @@ private:
 
 	Font game_font;
 	Text timer_text;
+	Text bonuses_text;
 	ostringstream timer_string;
+	ostringstream bonuses_string;
 
 	Text playground_text;
 
@@ -38,6 +40,7 @@ public:
 
 	void kill();
 	void update_playground(const string& playground_name);
+	void update_bonuses(int bonuses);
 
 	void update(Time const& delta_time);
 
