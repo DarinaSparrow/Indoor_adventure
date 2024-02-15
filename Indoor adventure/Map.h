@@ -2,6 +2,7 @@
 
 #include "header.h"
 #include "Player.h"
+#include "Gun.h"
 #include <ctime>
 
 class Map
@@ -30,6 +31,9 @@ public:
 	bool ÑheckPersonLocationOnMap(double current_x, double current_y);
 	virtual void RedefinePlayer(Player*& player, Vector2f steps) = 0;
 
+	virtual void CheckCollsisions(Gun& obj) = 0;
+
+
 	virtual void Draw(unique_ptr<RenderWindow>& window) = 0;
 
 	~Map() { ; }
@@ -53,6 +57,8 @@ public:
 	void RedefinePlayer(Player*& player, Vector2f steps) override;
 
 	void Draw(unique_ptr<RenderWindow>& window) override;
+
+	void CheckCollsisions(Gun& obj) override;
 
 	~InvisibleMap() { ; }
 };
@@ -88,6 +94,8 @@ public:
 	void RedefinePlayer(Player*& player, Vector2f steps) override;
 
 	void Draw(unique_ptr<RenderWindow>& window) override;
+
+	void CheckCollsisions(Gun& obj) override;
 
 	~MapWithMobs()
 	{
@@ -128,6 +136,8 @@ public:
 
 	void Draw(unique_ptr<RenderWindow>& window) override;
 
+	void CheckCollsisions(Gun& obj) override;
+
 	~MapWithStaticMotion()
 	{
 		for (int i = 0; i < count_of_obstacles; i++) delete obstacles[i];
@@ -153,6 +163,8 @@ public:
 	void RedefinePlayer(Player*& player, Vector2f steps) override;
 
 	void Draw(unique_ptr<RenderWindow>& window) override;
+
+	void CheckCollsisions(Gun& obj) override;
 
 	~MapWithVectorMotion() { ; }
 };

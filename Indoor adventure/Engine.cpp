@@ -70,6 +70,7 @@ void Engine::update(Time const& delta_time)
 
 	game.update(delta_time);
 	playgrounds.CheckTheTransitionBetweenMaps(player);
+	playgrounds.ChechCollisionWithMobs(my_gun);
 	player->update(delta_time);
 	my_gun.update(delta_time);
 	player_time += delta_time;

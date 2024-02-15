@@ -51,6 +51,11 @@ void InvisibleMap::Draw(unique_ptr<RenderWindow>& window)
 	window->draw(playground);
 }
 
+void InvisibleMap::CheckCollsisions(Gun& obj)
+{
+
+}
+
 void MapWithMobs::GenerateComplications()
 {
 	double x, y, size_x, size_y;
@@ -111,6 +116,17 @@ void MapWithMobs::Draw(unique_ptr<RenderWindow>& window)
 {
 	window->draw(playground);
 	for (int i = 0; i < count_of_enemies; i++) window->draw(enemies[i]->mob);
+}
+
+void MapWithMobs::CheckCollsisions(Gun& obj)
+{
+	for (int i = 0; i < count_of_enemies; i++) {
+		if (enemies[i]->mob.getGlobalBounds().contains(Vector2f(obj.get_bul().getPosition().x + obj.get_bul().getGlobalBounds().width / 2.0, 
+			obj.get_bul().getPosition().y + obj.get_bul().getGlobalBounds().height / 2.0))) {
+			enemies[i]->mob.setPosition(Vector2f(-enemies[i]->mob.getPosition().x, -enemies[i]->mob.getPosition().y));
+			obj.refresh_bul();
+		}
+	}
 }
 
 void MapWithStaticMotion::GenerateComplications()
@@ -174,6 +190,10 @@ void MapWithStaticMotion::Draw(unique_ptr<RenderWindow>& window)
 	for (int i = 0; i < count_of_obstacles; i++) window->draw(obstacles[i]->barrier);
 }
 
+void MapWithStaticMotion::CheckCollsisions(Gun& obj)
+{
+}
+
 void MapWithVectorMotion::GenerateComplications() { ; }
 
 void MapWithVectorMotion::GenerateBonus() // генерация бонусов
@@ -191,4 +211,8 @@ void MapWithVectorMotion::RedefinePlayer(Player*& player, Vector2f steps)
 void MapWithVectorMotion::Draw(unique_ptr<RenderWindow>& window)
 {
 	window->draw(playground);
+}
+
+void MapWithVectorMotion::CheckCollsisions(Gun& obj)
+{
 }

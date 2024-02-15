@@ -63,6 +63,10 @@ public:
 	void update_bullet_pos(Sprite player);
 	void update_mouse_pos(Vector2i pos);
 
+
+	Sprite& get_bul();
+	void refresh_bul();
+
 	void draw(RenderWindow& window) const;
 };
 

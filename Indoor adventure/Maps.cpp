@@ -32,17 +32,29 @@ void Maps :: GenerateComplicationsOfMaps()
 	for (iter = maps.begin(); iter != maps.end(); iter++) (*iter)->GenerateComplications();
 }
 
-void Maps :: InstallTheInitialMap(Player* player) // переделать после генерации персонажа
+void Maps :: InstallTheInitialMap(Player*& player) // переделать после генерации персонажа
 {
 	if (player->get_player().getPosition().x + 37 < win_width / 2)
 	{
-		if (player->get_player().getPosition().y + 60 < win_height / 2) current_map = maps[0];
-		else current_map = maps[2];
+		if (player->get_player().getPosition().y + 60 < win_height / 2) {
+			current_map = maps[0];
+			current_map->RedefinePlayer(player, Vector2f(0,0));
+		}
+		else {
+			current_map = maps[2];
+			current_map->RedefinePlayer(player, Vector2f(0, 0));
+		}
 	}
 	else
 	{
-		if (player->get_player().getPosition().y + 60 < win_height / 2) current_map = maps[1];
-		else current_map = maps[3];
+		if (player->get_player().getPosition().y + 60 < win_height / 2) {
+			current_map = maps[1];
+			current_map->RedefinePlayer(player, Vector2f(0, 0));
+		}
+		else {
+			current_map = maps[3];
+			current_map->RedefinePlayer(player, Vector2f(0, 0));
+		}
 	}
 }
 
@@ -68,23 +80,12 @@ void Maps::CheckTheTransitionBetweenMaps(Player*& player)
 			}
 		}
 	}
-	else {
-		if (current_map->GetNameOfTheMap() == "Vector motion map") {
-			Player_vector* tmp = new Player_vector(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), player->get_steps());
-			if (player->get_params() != tmp->get_params()) 	current_map->RedefinePlayer(player, player->get_steps());
-		}
-		else if (current_map->GetNameOfTheMap() == "Invisible map") {
-			Player_invisible* tmp = new Player_invisible(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), player->get_steps());
-			if (player->get_params() != tmp->get_params()) 	current_map->RedefinePlayer(player, player->get_steps());
-		}
-		else if (current_map->GetNameOfTheMap() == "Map with hostile mobs") {
-			Player_danger_zone* tmp = new Player_danger_zone(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), player->get_steps());
-			if (player->get_params() != tmp->get_params()) 	current_map->RedefinePlayer(player, player->get_steps());
-		}
-		else if (current_map->GetNameOfTheMap() == "Static motion map") {
-			Player_static* tmp = new Player_static(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), player->get_steps());
-			if (player->get_params() != tmp->get_params()) 	current_map->RedefinePlayer(player, player->get_steps());
-		}
+}
+
+void Maps::ChechCollisionWithMobs(Gun& obj)
+{
+	for (int i = 0; i < maps.size(); i++) {
+		maps[i]->CheckCollsisions(obj);
 	}
 }
 
