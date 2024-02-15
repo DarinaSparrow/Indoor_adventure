@@ -7,6 +7,7 @@
 #include "Maps.h"
 #include "Gun.h"
 #include "GameSound.h"
+#include "End.h"
 
 
 class Engine
@@ -28,6 +29,8 @@ private:
 	Gun my_gun = Gun(*window,player->get_player(), game.get_maps());
 
 	Maps playgrounds;
+
+	End end;
 
 	void input();
 	void update(Time const& delta_time);

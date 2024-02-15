@@ -53,6 +53,9 @@ void Engine::input()
 
 void Engine::update(Time const& delta_time)
 {
+	if (playgrounds.GetNameOfCurrentMap() != game.get_playground_name())
+		game.update_playground(playgrounds.GetNameOfCurrentMap());
+
 	game.update(delta_time);
 	player->update(delta_time);
 	my_gun.update(delta_time);
@@ -71,6 +74,8 @@ void Engine::draw()
 	my_gun.draw(*window);
 	auto draw_player = player->get_player();
 	window->draw(draw_player);
+	if (game.get_end_game())
+		window->draw(end);
 	window->display();
 }
 

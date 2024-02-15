@@ -11,7 +11,7 @@ Game::Game()
 	background_sprite.setTexture(AssetManager::get_texture("Resourses/background_image.png"));
 
 	end_game = false;
-	timer = 10; // 5 минут
+	timer = 300; // 5 минут
 	lives = 3; // жизни игрока
 	
 	game_font.loadFromFile("Resourses/weekend.ttf");
@@ -46,7 +46,7 @@ void Game::update(Time const& delta_time)
 		timer -= delta_time.asSeconds();
 
 		timer_string.str("");
-		timer_string << timer;
+		timer_string << int(timer);
 		timer_text.setString(L"Time: " + timer_string.str() + " ");
 	}
 
