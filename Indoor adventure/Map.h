@@ -2,7 +2,6 @@
 
 #include "header.h"
 #include "Player.h"
-#include "HostileMobs.h"
 #include <ctime>
 
 class Map
@@ -30,7 +29,7 @@ public:
 
 	bool СheckPersonLocationOnMap(double current_x, double current_y);
 	virtual void RedefinePlayer(Player*& player) = 0;
-		
+
 	virtual void Draw(unique_ptr<RenderWindow>& window) = 0;
 
 	~Map() { ; }
@@ -42,14 +41,14 @@ public:
 
 	InvisibleMap()
 	{
-		name = "Invisible";
+		name = "Invisible map";
 
 		playground_texture.loadFromFile("Resourses/Playground 1.png");
 		playground.setTexture(&playground_texture);
 	}
 
 	void GenerateComplications() override;
-	void GenerateBonus() override; // генерация бонусов
+	void GenerateBonus() override;
 
 	void RedefinePlayer(Player*& player) override;
 
@@ -63,22 +62,32 @@ class MapWithMobs : public Map
 private:
 
 	int count_of_enemies;
-	HostileMobs** enemies;
+	struct Mob
+	{
+		RectangleShape mob;
+		double x1, x2, y1, y2;
+	};
+	Texture enemies_texture;
+	Mob** enemies;
 
 public:
 
 	MapWithMobs()
 	{
-		name = "Mobs";
+		name = "Map with hostile mobs";
 
 		playground_texture.loadFromFile("Resourses/Playground 2.png");
 		playground.setTexture(&playground_texture);
+
+		enemies_texture.loadFromFile("Resourses/Mob.png");
 	}
 
-	void GenerateComplications() override; // генерация мобов
-	void GenerateBonus() override; // генерация бонусов
+	void GenerateComplications() override;
+	void GenerateBonus() override;
 
-	RectangleShape& Draw() override; // отрисовка
+	void RedefinePlayer(Player*& player) override;
+
+	void Draw(unique_ptr<RenderWindow>& window) override;
 
 	~MapWithMobs()
 	{
@@ -104,7 +113,7 @@ public:
 
 	MapWithStaticMotion()
 	{
-		name = "Static movement";
+		name = "Static motion map";
 
 		playground_texture.loadFromFile("Resourses/Playground 3.png");
 		playground.setTexture(&playground_texture);
@@ -112,12 +121,12 @@ public:
 		obstacles_texture.loadFromFile("Resourses/Box.png");
 	}
 
-	void GenerateComplications() override; // генерация препятствий
-	void GenerateBonus() override; // генерация бонусов
+	void GenerateComplications() override;
+	void GenerateBonus() override;
 
 	void RedefinePlayer(Player*& player) override;
 
-	void Draw(unique_ptr<RenderWindow>& window) override; // отрисовка
+	void Draw(unique_ptr<RenderWindow>& window) override;
 
 	~MapWithStaticMotion()
 	{
@@ -132,18 +141,18 @@ public:
 
 	MapWithVectorMotion()
 	{
-		name = "Vector movement";
+		name = "Vector motion map";
 
 		playground_texture.loadFromFile("Resourses/Playground 4.png");
 		playground.setTexture(&playground_texture);
 	}
 
-	void GenerateComplications() override; // генерация препятствий
-	void GenerateBonus() override; // генерация бонусов
+	void GenerateComplications() override;
+	void GenerateBonus() override;
 
 	void RedefinePlayer(Player*& player) override;
 
-	void Draw(unique_ptr<RenderWindow>& window) override; // отрисовка
+	void Draw(unique_ptr<RenderWindow>& window) override;
 
 	~MapWithVectorMotion() { ; }
 };

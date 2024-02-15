@@ -157,7 +157,6 @@
     <ClInclude Include="GameSound.h" />
     <ClInclude Include="Gun.h" />
     <ClInclude Include="header.h" />
-    <ClInclude Include="HostileMobs.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Maps.h" />
     <ClInclude Include="Player.h" />
