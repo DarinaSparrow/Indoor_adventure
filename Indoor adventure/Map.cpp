@@ -18,6 +18,14 @@ void Map::SetLimits(bool limits)
 
 string Map::GetNameOfTheMap() { return name; }
 
+double Map::GetX1() { return borders.x1; }
+
+double Map::GetX2() { return borders.x2; }
+
+double Map::GetY1() { return borders.y1; }
+
+double Map::GetY2() { return borders.y2; }
+
 bool Map::ÑheckPersonLocationOnMap(double current_x, double current_y)
 {
 	if (limits)
@@ -62,6 +70,11 @@ void InvisibleMap::GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& firs
 	}
 
 	first_no_generated += count_of_bonuses;
+}
+
+void InvisibleMap::GenerateCoordinatesOfPlayer(Player* player)
+{
+	;
 }
 
 void InvisibleMap::RedefinePlayer(Player*& player, Vector2f steps)
@@ -170,6 +183,11 @@ void MapWithMobs::GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first
 	}
 
 	first_no_generated += count_of_bonuses;
+}
+
+void MapWithMobs::GenerateCoordinatesOfPlayer(Player* player)
+{
+	;
 }
 
 void MapWithMobs::RedefinePlayer(Player*& player, Vector2f steps)
@@ -299,6 +317,11 @@ void MapWithStaticMotion::GenerateBonus(Bonus& bonuses, int count_of_bonuses, in
 	first_no_generated += count_of_bonuses;
 }
 
+void MapWithStaticMotion::GenerateCoordinatesOfPlayer(Player* player)
+{
+	;
+}
+
 void MapWithStaticMotion::RedefinePlayer(Player*& player, Vector2f steps)
 {
 	Player* new_player = new Player_static(player->get_bords(), player->get_player().getPosition(), player->get_sound(), player->get_cur_anim(), steps);
@@ -360,6 +383,11 @@ void MapWithVectorMotion::GenerateBonus(Bonus& bonuses, int count_of_bonuses, in
 	}
 
 	first_no_generated += count_of_bonuses;
+}
+
+void MapWithVectorMotion::GenerateCoordinatesOfPlayer(Player* player)
+{
+	;
 }
 
 void MapWithVectorMotion::RedefinePlayer(Player*& player, Vector2f steps)
