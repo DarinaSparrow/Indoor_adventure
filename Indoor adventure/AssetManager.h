@@ -2,9 +2,6 @@
 #include "header.h"
 #include <map>
 
-
-// Класс менеджера ресурсов
-// Реализован на основе Singleton - у данного класса может быть всего один объект 
 class AssetManager
 {
 private:

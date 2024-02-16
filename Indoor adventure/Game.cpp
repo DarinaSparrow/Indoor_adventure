@@ -12,8 +12,8 @@ Game::Game()
 	background_sprite.setTexture(AssetManager::get_texture("Resourses/background_image.png"));
 
 	end_game = false;
-	timer = 300; // 5 минут
-	lives = 3; // жизни игрока
+	timer = 300; 
+	lives = 3; 
 	score = 0;
 	
 	game_font.loadFromFile("Resourses/weekend.ttf");
@@ -81,8 +81,8 @@ RectangleShape& Game::get_maps() {
 void Game::restart()
 {
 	end_game = false;
-	timer = 300; // 5 минут
-	lives = 3; // жизни игрока
+	timer = 300; 
+	lives = 3; 
 	score = 0;
 
 	score_string.str("");

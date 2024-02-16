@@ -60,32 +60,6 @@ void Maps::GenerateCoordinatesOfPlayer(Player*& player)
 	maps[number]->GenerateCoordinatesOfPlayer(player);
 }
 
-//void Maps :: InstallTheInitialMap(Player*& player) // ïåðåäåëàòü ïîñëå ãåíåðàöèè ïåðñîíàæà
-//{
-//	if (player->get_player().getPosition().x + 37 < win_width / 2)
-//	{
-//		if (player->get_player().getPosition().y + 60 < win_height / 2) {
-//			current_map = maps[0];
-//			current_map->RedefinePlayer(player, Vector2f(0,0));
-//		}
-//		else {
-//			current_map = maps[2];
-//			current_map->RedefinePlayer(player, Vector2f(0, 0));
-//		}
-//	}
-//	else
-//	{
-//		if (player->get_player().getPosition().y + 60 < win_height / 2) {
-//			current_map = maps[1];
-//			current_map->RedefinePlayer(player, Vector2f(0, 0));
-//		}
-//		else {
-//			current_map = maps[3];
-//			current_map->RedefinePlayer(player, Vector2f(0, 0));
-//		}
-//	}
-//}
-
 void Maps::CheckTheTransitionBetweenMaps(Player*& player)
 {
 	if (!current_map->ÑheckPersonLocationOnMap(player->get_player().getPosition().x + 40, player->get_player().getPosition().y + 90))
