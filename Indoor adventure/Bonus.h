@@ -46,6 +46,8 @@ public:
 
 	void Draw(unique_ptr<RenderWindow>& window);
 
+	void Restart();
+
 	~Bonus()
 	{
 		delete[] coins;

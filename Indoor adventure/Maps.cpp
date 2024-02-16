@@ -146,3 +146,12 @@ void Maps :: Draw(unique_ptr<RenderWindow>& window)
 
 	for (iter = maps.begin(); iter != maps.end(); iter++) (*iter)->Draw(window);
 }
+
+void Maps :: Restart(Bonus& bonuses, Player*& player)
+{
+	Generate—oordinatesOfMaps();
+	GenerateLimitsOfMaps();
+	GenerateComplicationsOfMaps();
+	GenerateBonuses(bonuses);
+	GenerateCoordinatesOfPlayer(player);
+}

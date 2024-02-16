@@ -476,11 +476,6 @@ void MapWithVectorMotion::ChechCollisionWithWalls(Player& player, Game& rules)
 	}
 }
 
-void MapWithVectorMotion::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules)
-{
-}
+void MapWithVectorMotion::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) { ; }
 
-void MapWithVectorMotion::ChechCollisionWithObstacles(Player& player)
-{
-
-}
+void MapWithVectorMotion::ChechCollisionWithObstacles(Player& player) { ; }
