@@ -127,10 +127,8 @@ void Engine::draw()
 void Engine::restart()
 {
 	game.restart();
-	//playgrounds.restart();
-	//bonuses.restart();
-	//my_gun.restart();
-	//player.restart();
+	playgrounds.Restart(bonuses, player);
+	bonuses.Restart();
 }
 
 
