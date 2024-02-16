@@ -33,6 +33,7 @@ protected:
 	bool dead;
 	bool visible;
 	bool slide;
+	bool fire;
 
 public:
 	Player(RectangleShape& borders_zone, Vector2f my_pos, GameSound& my_game_sound, string anim = "static", Vector2f steps = Vector2f(0,0)) 
@@ -71,6 +72,7 @@ public:
 		dead = false;
 		visible = true;
 		slide = false;
+		fire = false;
 
 		sprite_player.scale(Vector2f(1.5, 1.5));
 
@@ -86,7 +88,11 @@ public:
 	virtual void set_slide(bool fl) = 0;
 	virtual bool get_slide() = 0;
 
-	virtual tuple<bool, bool, bool> get_params() = 0;
+	virtual void set_fire(bool fl) = 0;
+	virtual bool get_fire() = 0;
+
+
+	virtual tuple<bool, bool, bool, bool> get_params() = 0;
 
 	void set_step_x(double x = 0.0);
 	void set_step_y(double y = 0.0);
@@ -119,6 +125,7 @@ public:
 		dead = false;
 		visible = true;
 		slide = false;
+		fire = false;
 	}
 
 	void set_dead(bool fl) override;
@@ -130,7 +137,11 @@ public:
 	void set_slide(bool fl) override;
 	bool get_slide() override;
 
-	tuple<bool, bool, bool> get_params() override;
+	void set_fire(bool fl) override;
+	bool get_fire() override;
+
+
+	tuple<bool, bool, bool, bool> get_params() override;
 };
 
 
@@ -143,6 +154,7 @@ public:
 		dead = false;
 		visible = true;
 		slide = true;
+		fire = false;
 	}
 
 	void set_dead(bool fl) override;
@@ -154,7 +166,11 @@ public:
 	void set_slide(bool fl) override;
 	bool get_slide() override;
 
-	tuple<bool, bool, bool> get_params() override;
+	void set_fire(bool fl) override;
+	bool get_fire() override;
+
+
+	tuple<bool, bool, bool, bool> get_params() override;
 };
 
 
@@ -167,6 +183,7 @@ public:
 		dead = false;
 		visible = false;
 		slide = false;
+		fire = false;
 	}
 
 	void set_dead(bool fl) override;
@@ -178,7 +195,11 @@ public:
 	void set_slide(bool fl) override;
 	bool get_slide() override;
 
-	tuple<bool, bool, bool> get_params() override;
+	void set_fire(bool fl) override;
+	bool get_fire() override;
+
+
+	tuple<bool, bool, bool, bool> get_params() override;
 };
 
 
@@ -191,6 +212,7 @@ public:
 		dead = false;
 		visible = true;
 		slide = false;
+		fire = true;
 	}
 
 	void set_dead(bool fl) override;
@@ -202,5 +224,9 @@ public:
 	void set_slide(bool fl) override;
 	bool get_slide() override;
 
-	tuple<bool, bool, bool> get_params() override;
+	void set_fire(bool fl) override;
+	bool get_fire() override;
+
+
+	tuple<bool, bool, bool, bool> get_params() override;
 };

@@ -93,6 +93,14 @@ void Engine::update(Time const& delta_time)
 		my_gun.update(delta_time);
 	}
 }
+	game.update(delta_time);
+	playgrounds.CheckTheTransitionBetweenMaps(player);
+	playgrounds.ChechCollisionWithPlayer(my_gun, *player, game);
+	playgrounds.ChechCollisionWithMobs(my_gun);
+	playgrounds.ChechCollisionWithWalls(*player, game);
+	player->update(delta_time);
+	if (player->get_fire())	my_gun.update(delta_time);
+}
 
 
 void Engine::draw()
