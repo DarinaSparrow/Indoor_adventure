@@ -76,7 +76,7 @@ void Engine::input()
 
 void Engine::update(Time const& delta_time)
 {
-	if (game.get_end_game())
+	if (game.get_end_game() && game.get_score() != bonuses.GetTotal())
 		end.result(false, game.get_score());
 	else if (game.get_score() == bonuses.GetTotal())
 	{
