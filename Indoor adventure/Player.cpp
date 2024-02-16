@@ -330,4 +330,3 @@ tuple<bool, bool, bool, bool> Player_danger_zone::get_params()
 {
 	return tuple<bool, bool, bool, bool>(dead, visible, slide, fire);
 }
-
