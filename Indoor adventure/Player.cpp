@@ -61,9 +61,7 @@ void Player::update(Time const& delta_time)
 	time_damage += delta_time;
 	if (time_damage > microseconds(1000000)) {
 		time_damage = microseconds(0);
-		if (sprite_player.getColor() == Color::Red) {
-			sprite_player.setColor(Color::White);
-		}
+		sprite_player.setColor(Color::White);
 	}
 
 	if (time_update > microseconds(3))
@@ -119,6 +117,29 @@ GameSound& Player::get_sound()
 string Player::get_cur_anim()
 {
 	return anim_player.get_current_animation_name();
+}
+
+void Player::catch_bonus(Gun& obj, Game& rules, Bonus& coins)
+{
+	int num = coins.GetTotal();
+	for (int i = 0; i < num; i++) {
+		if (sprite_player.getGlobalBounds().contains(Vector2f(coins.get_coins()[i].sprite_coin.getGlobalBounds().left + coins.get_coins()[i].sprite_coin.getGlobalBounds().width / 2.0,
+			coins.get_coins()[i].sprite_coin.getGlobalBounds().top + coins.get_coins()[i].sprite_coin.getGlobalBounds().height / 2.0))) {
+			coins.get_coins()[i].sprite_coin.setPosition(Vector2f(-coins.get_coins()[i].sprite_coin.getPosition().x, -coins.get_coins()[i].sprite_coin.getPosition().y));
+			rules.update_score();
+			sprite_player.setColor(Color::Green);
+		}
+
+		//if (coins->get_coins()[i].sprite_coin.getGlobalBounds().contains(Vector2f(obj.get_bul().getPosition().x + obj.get_bul().getGlobalBounds().width / 2.0,
+		//	obj.get_bul().getPosition().y + obj.get_bul().getGlobalBounds().height / 2.0))) {
+		//	coins->get_coins()[i].sprite_coin.setPosition(Vector2f(-coins->get_coins()[i].sprite_coin.getPosition().x, -coins->get_coins()[i].sprite_coin.getPosition().y));
+		//	if (sprite_player.getGlobalBounds().contains(Vector2f(obj.get_bul().getPosition().x, obj.get_bul().getPosition().y))) {
+		//		rules.update_score();
+		//		sprite_player.setColor(Color::Green);
+		//	}
+		//	obj.refresh_bul();
+		//}
+	}
 }
 
 

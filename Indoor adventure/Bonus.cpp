@@ -14,6 +14,13 @@ double Bonus::GetCoordinateY(int i)
 	return coins[i].sprite_coin.getPosition().y;
 }
 
+Coins* Bonus::get_coins()
+{
+	return coins;
+}
+
+
+
 void Bonus::SetSpriteCoordinates(int i, double x, double y)
 {
 	coins[i].sprite_coin.setPosition(x, y);

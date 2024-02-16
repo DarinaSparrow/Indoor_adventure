@@ -2,6 +2,12 @@
 
 #include "Animator.h"
 
+struct Coins
+{
+	Sprite sprite_coin;
+	bool caught;
+};
+
 class Bonus
 {
 private:
@@ -11,15 +17,9 @@ private:
 
 	Texture bonus_texture;
 
-	struct Coins
-	{
-		Sprite sprite_coin;
-		bool caught;
-	};
 	Coins* coins;
 
 public:
-
 	Bonus()
 	{
 		total = 75;
@@ -39,6 +39,8 @@ public:
 	int GetTotal();
 	double GetCoordinateX(int i);
 	double GetCoordinateY(int i);
+
+	Coins* get_coins();
 
 	void SetSpriteCoordinates(int i, double x, double y);
 

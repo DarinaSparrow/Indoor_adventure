@@ -92,6 +92,7 @@ void Engine::update(Time const& delta_time)
 		playgrounds.ChechCollisionWithPlayer(my_gun, *player, game);
 		playgrounds.ChechCollisionWithMobs(my_gun);
 		playgrounds.ChechCollisionWithWalls(*player, game);
+		player->catch_bonus(my_gun, game, bonuses);
 		player->update(delta_time);
 		playgrounds.ChechCollisionWithObstacles(*player);
 		if (player->get_fire())	my_gun.update(delta_time);

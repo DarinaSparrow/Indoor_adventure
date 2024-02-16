@@ -51,6 +51,7 @@ public:
 	void ChechCollisionWithWalls(Player& player, Game& rules);
 	void ChechCollisionWithPlayer(Gun& obj,Player& player, Game& rules);
 
+
 	void ChechCollisionWithObstacles(Player& player);
 
 	void Draw(unique_ptr<RenderWindow>& window);

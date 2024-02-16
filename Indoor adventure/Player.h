@@ -2,6 +2,9 @@
 #include "header.h"
 #include "Animator.h"
 #include "GameSound.h"
+#include "Game.h"
+#include "Gun.h"
+#include "Bonus.h"
 #include <tuple>
 
 
@@ -108,6 +111,8 @@ public:
 	void update(Time const& delta_time);
 
 	void set_borders_player(double x, double y, double max_x, double max_y);
+
+	void catch_bonus(Gun& obj, Game& rules, Bonus& coins);
 
 	Sprite& get_player();
 	RectangleShape& get_bords();
