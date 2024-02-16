@@ -240,6 +240,7 @@ void MapWithMobs::CheckCollsisionWithMobs(Gun& obj)
 			obj.get_bul().getPosition().y + obj.get_bul().getGlobalBounds().height / 2.0))) {
 			enemies[i]->mob.setPosition(Vector2f(-enemies[i]->mob.getPosition().x, -enemies[i]->mob.getPosition().y));
 			obj.refresh_bul();
+			
 		}
 	}
 }
@@ -255,6 +256,7 @@ void MapWithMobs::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules
 			if (player.get_player().getGlobalBounds().contains(Vector2f(obj.get_bul().getPosition().x, obj.get_bul().getPosition().y))) {
 				rules.decrease_lives();
 				player.get_player().setColor(Color::Red);
+				player.play_hit();
 			}
 			obj.refresh_bul();
 		}
@@ -467,10 +469,10 @@ void MapWithVectorMotion::ChechCollisionWithWalls(Player& player, Game& rules)
 {
 	if (playground.getGlobalBounds().contains(player.get_player().getGlobalBounds().getPosition()))
 	{
-		if (player.get_player().getGlobalBounds().top == player.get_bords().getGlobalBounds().top) rules.kill();
-		if (player.get_player().getGlobalBounds().left == player.get_bords().getGlobalBounds().left) rules.kill();
-		if (player.get_player().getGlobalBounds().top + player.get_player().getGlobalBounds().height == player.get_bords().getGlobalBounds().top + player.get_bords().getGlobalBounds().height) rules.kill();
-		if (player.get_player().getGlobalBounds().left + player.get_player().getGlobalBounds().width == player.get_bords().getGlobalBounds().left + player.get_bords().getGlobalBounds().width) rules.kill();
+		if (player.get_player().getGlobalBounds().top == player.get_bords().getGlobalBounds().top) { rules.kill(); player.play_hit(); }
+		if (player.get_player().getGlobalBounds().left == player.get_bords().getGlobalBounds().left) { rules.kill(); player.play_hit(); }
+		if (player.get_player().getGlobalBounds().top + player.get_player().getGlobalBounds().height == player.get_bords().getGlobalBounds().top + player.get_bords().getGlobalBounds().height) { rules.kill(); player.play_hit(); }
+		if (player.get_player().getGlobalBounds().left + player.get_player().getGlobalBounds().width == player.get_bords().getGlobalBounds().left + player.get_bords().getGlobalBounds().width) { rules.kill(); player.play_hit(); }
 	}
 }
 

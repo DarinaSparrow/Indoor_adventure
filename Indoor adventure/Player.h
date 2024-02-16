@@ -119,6 +119,10 @@ public:
 	GameSound& get_sound();
 	string get_cur_anim();
 
+	void play_fon_music();
+	void play_hit();
+	void play_collect();
+
 	void set_position(double x, double y);
 };
 

@@ -128,17 +128,8 @@ void Player::catch_bonus(Gun& obj, Game& rules, Bonus& coins)
 			coins.get_coins()[i].sprite_coin.setPosition(Vector2f(-coins.get_coins()[i].sprite_coin.getPosition().x, -coins.get_coins()[i].sprite_coin.getPosition().y));
 			rules.update_score();
 			sprite_player.setColor(Color::Green);
+			play_collect();
 		}
-
-		//if (coins->get_coins()[i].sprite_coin.getGlobalBounds().contains(Vector2f(obj.get_bul().getPosition().x + obj.get_bul().getGlobalBounds().width / 2.0,
-		//	obj.get_bul().getPosition().y + obj.get_bul().getGlobalBounds().height / 2.0))) {
-		//	coins->get_coins()[i].sprite_coin.setPosition(Vector2f(-coins->get_coins()[i].sprite_coin.getPosition().x, -coins->get_coins()[i].sprite_coin.getPosition().y));
-		//	if (sprite_player.getGlobalBounds().contains(Vector2f(obj.get_bul().getPosition().x, obj.get_bul().getPosition().y))) {
-		//		rules.update_score();
-		//		sprite_player.setColor(Color::Green);
-		//	}
-		//	obj.refresh_bul();
-		//}
 	}
 }
 
@@ -329,4 +320,20 @@ bool Player_danger_zone::get_fire()
 tuple<bool, bool, bool, bool> Player_danger_zone::get_params()
 {
 	return tuple<bool, bool, bool, bool>(dead, visible, slide, fire);
+}
+
+
+void Player::play_fon_music()
+{
+	game_sound.play(0);
+}
+
+void Player::play_hit()
+{
+	game_sound.play_ignore(4);
+}
+
+void Player::play_collect()
+{
+	game_sound.play_ignore(2);
 }
