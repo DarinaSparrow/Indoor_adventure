@@ -131,24 +131,37 @@ void MapWithMobs::GenerateComplications()
 
 void MapWithMobs::GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated)
 {
-	double x, y, size;
+	double x, y, size_1, size_2, size_3;
 	bool fixation;
 
-	size = 50;
+	size_1 = 50;
+	size_2 = 57;
+	size_3 = 80;
 
 	for (int i = first_no_generated; i < first_no_generated + count_of_bonuses; i++)
 	{
 		do
 		{
-			x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
-			y = (double)rand() / (double)RAND_MAX * ((borders.y2 - size - 5) - (borders.y1 + 5)) + (borders.y1 + 5);
+			x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size_1 - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
+			y = (double)rand() / (double)RAND_MAX * ((borders.y2 - size_1 - 5) - (borders.y1 + 5)) + (borders.y1 + 5);
 
 			int j = first_no_generated;
 			fixation = true;
 			while ((j < i) && (fixation))
 			{
-				if ((bonuses.GetCoordinateX(j) > (x - size - 5)) && (bonuses.GetCoordinateX(j) < (x + size + 5)) && (bonuses.GetCoordinateY(j) > (y - size - 5)) && (bonuses.GetCoordinateY(j) < (y + size + 5))) fixation = false;
+				if ((bonuses.GetCoordinateX(j) > (x - size_1 - 5)) && (bonuses.GetCoordinateX(j) < (x + size_1 + 5)) && (bonuses.GetCoordinateY(j) > (y - size_1 - 5)) && (bonuses.GetCoordinateY(j) < (y + size_1 + 5))) fixation = false;
 				else j++;
+			}
+
+			if (fixation)
+			{
+				int k = 0;
+				fixation = true;
+				while ((k < count_of_enemies) && (fixation))
+				{
+					if ((x > (enemies[k]->x1 - size_1 - 5)) && (x < (enemies[k]->x1 + size_2 + 5)) && (y > (enemies[k]->y1 - size_1 - 5)) && (y < (enemies[k]->y1 + size_3 + 5))) fixation = false;
+					else k++;
+				}
 			}
 
 		} while (!fixation);
@@ -246,24 +259,36 @@ void MapWithStaticMotion::GenerateComplications()
 
 void MapWithStaticMotion::GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated)
 {
-	double x, y, size;
+	double x, y, size_1, size_2;
 	bool fixation;
 
-	size = 50;
+	size_1 = 50;
+	size_2 = 75;
 
 	for (int i = first_no_generated; i < first_no_generated + count_of_bonuses; i++)
 	{
 		do
 		{
-			x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
-			y = (double)rand() / (double)RAND_MAX * ((borders.y2 - size - 5) - (borders.y1 + 5)) + (borders.y1 + 5);
+			x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size_1 - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
+			y = (double)rand() / (double)RAND_MAX * ((borders.y2 - size_1 - 5) - (borders.y1 + 5)) + (borders.y1 + 5);
 
 			int j = first_no_generated;
 			fixation = true;
 			while ((j < i) && (fixation))
 			{
-				if ((bonuses.GetCoordinateX(j) > (x - size - 5)) && (bonuses.GetCoordinateX(j) < (x + size + 5)) && (bonuses.GetCoordinateY(j) > (y - size - 5)) && (bonuses.GetCoordinateY(j) < (y + size + 5))) fixation = false;
+				if ((bonuses.GetCoordinateX(j) > (x - size_1 - 5)) && (bonuses.GetCoordinateX(j) < (x + size_1 + 5)) && (bonuses.GetCoordinateY(j) > (y - size_1 - 5)) && (bonuses.GetCoordinateY(j) < (y + size_1 + 5))) fixation = false;
 				else j++;
+			}
+
+			if (fixation)
+			{
+				int k = 0;
+				fixation = true;
+				while ((k < count_of_obstacles) && (fixation))
+				{
+					if ((x > (obstacles[k]->x1 - size_1 - 5)) && (x < (obstacles[k]->x1 + size_2 + 5)) && (y > (obstacles[k]->y1 - size_1 - 5)) && (y < (obstacles[k]->y1 + size_2 + 5))) fixation = false;
+					else k++;
+				}
 			}
 
 		} while (!fixation);
