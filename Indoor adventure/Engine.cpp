@@ -72,19 +72,26 @@ void Engine::input()
 
 void Engine::update(Time const& delta_time)
 {
-	if (playgrounds.GetNameOfCurrentMap() != game.get_playground_name())
-		game.update_playground(playgrounds.GetNameOfCurrentMap());
+	if (game.get_end_game())
+		end.result(0, game.get_score());
+	else if (game.get_score() == bonuses.GetTotal())
+		end.result(1, game.get_score());
+	else
+	{
+		if (playgrounds.GetNameOfCurrentMap() != game.get_playground_name())
+			game.update_playground(playgrounds.GetNameOfCurrentMap());
 
-	player->set_dead(game.get_end_game());
+		player->set_dead(game.get_end_game());
 
-	game.update(delta_time);
-	playgrounds.CheckTheTransitionBetweenMaps(player);
-	playgrounds.ChechCollisionWithPlayer(my_gun, *player, game);
-	playgrounds.ChechCollisionWithMobs(my_gun);
-	playgrounds.ChechCollisionWithWalls(*player, game);
-	player->update(delta_time);
-	playgrounds.ChechCollisionWithObstacles(*player);
-	my_gun.update(delta_time);
+		game.update(delta_time);
+		playgrounds.CheckTheTransitionBetweenMaps(player);
+		playgrounds.ChechCollisionWithPlayer(my_gun, *player, game);
+		playgrounds.ChechCollisionWithMobs(my_gun);
+		playgrounds.ChechCollisionWithWalls(*player, game);
+		player->update(delta_time);
+		playgrounds.ChechCollisionWithObstacles(*player);
+		my_gun.update(delta_time);
+	}
 }
 
 

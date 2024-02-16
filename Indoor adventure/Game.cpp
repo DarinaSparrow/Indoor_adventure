@@ -78,6 +78,24 @@ RectangleShape& Game::get_maps() {
 	return maps;
 }
 
+void Game::restart()
+{
+	end_game = false;
+	timer = 300; // 5 минут
+	lives = 3; // жизни игрока
+	score = 0;
+
+	score_string.str("");
+	score_string << score;
+	score_text.setString(L"Bonuses: " + score_string.str() + " ");
+	score_text.setPosition(win_width - score_text.getGlobalBounds().width, 0);
+
+	timer_string.str("");
+	timer_string << timer;
+	timer_text.setString(L"Time: " + timer_string.str() + " ");
+	timer_text.setPosition(win_width - timer_text.getGlobalBounds().width, score_text.getGlobalBounds().top + score_text.getGlobalBounds().height);
+}
+
 bool Game::get_end_game() {
 	return end_game;
 }
