@@ -82,16 +82,7 @@ void InvisibleMap::ChechCollisionWithWalls(Player& player, Game& rules) { ; }
 
 void InvisibleMap::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) { ; }
 
-}
-
-void InvisibleMap::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules)
-{
-}
-
-void InvisibleMap::ChechCollisionWithObstacles(Player& player)
-{
-
-}
+void InvisibleMap::ChechCollisionWithObstacles(Player& player) { ; }
 
 void MapWithMobs::GenerateComplications()
 {
@@ -209,10 +200,7 @@ void MapWithMobs::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules
 	}
 }
 
-void MapWithMobs::ChechCollisionWithObstacles(Player& player)
-{
-
-}
+void MapWithMobs::ChechCollisionWithObstacles(Player& player) {	; }
 
 void MapWithStaticMotion::GenerateComplications()
 {
@@ -305,6 +293,18 @@ void MapWithStaticMotion::ChechCollisionWithWalls(Player& player, Game& rules) {
 
 void MapWithStaticMotion::ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) { ; }
 
+void MapWithStaticMotion::ChechCollisionWithObstacles(Player& player)
+{
+	for (int i = 0; i < count_of_obstacles; ++i)
+	{
+		if (obstacles[i]->barrier.getGlobalBounds().contains(player.get_player().getPosition().x + 40, player.get_player().getPosition().y + 90))
+		{
+			player.get_player().move(-player.get_steps().x, -player.get_steps().y);
+			return;
+		}
+	}
+}
+
 void MapWithVectorMotion::GenerateComplications() { ; }
 
 void MapWithVectorMotion::GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated)
@@ -329,19 +329,10 @@ void MapWithVectorMotion::GenerateBonus(Bonus& bonuses, int count_of_bonuses, in
 				else j++;
 			}
 
-void MapWithStaticMotion::ChechCollisionWithObstacles(Player& player)
-{
-	for (int i = 0; i < count_of_obstacles; ++i)
-	{
-		if (obstacles[i]->barrier.getGlobalBounds().contains(player.get_player().getPosition().x + 40, player.get_player().getPosition().y + 90))
-		{
-			player.get_player().move(-player.get_steps().x, -player.get_steps().y);
-			return;
-		}
-	}
-}
+		} while (!fixation);
 
-void MapWithVectorMotion::GenerateComplications() { ; }
+		bonuses.SetSpriteCoordinates(i, x, y);
+	}
 
 	first_no_generated += count_of_bonuses;
 }
