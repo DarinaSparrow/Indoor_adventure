@@ -26,9 +26,14 @@ public:
 	void SetLimits(bool limits);
 
 	string GetNameOfTheMap();
+	double GetX1();
+	double GetX2();
+	double GetY1();
+	double GetY2();
 
 	virtual void GenerateComplications() = 0;
 	virtual void GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated) = 0;
+	virtual void GenerateCoordinatesOfPlayer(Player* player) = 0;
 
 	bool ÑheckPersonLocationOnMap(double current_x, double current_y);
 	virtual void RedefinePlayer(Player*& player, Vector2f steps) = 0;
@@ -36,9 +41,7 @@ public:
 	virtual void CheckCollsisionWithMobs(Gun& obj) = 0;
 	virtual void ChechCollisionWithWalls(Player& player, Game& rules) = 0;
 	virtual void ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) = 0;
-
 	virtual void ChechCollisionWithObstacles(Player& player) = 0;
-
 
 	virtual void Draw(unique_ptr<RenderWindow>& window) = 0;
 
@@ -59,6 +62,7 @@ public:
 
 	void GenerateComplications() override;
 	void GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated) override;
+	void GenerateCoordinatesOfPlayer(Player* player) override;
 
 	void RedefinePlayer(Player*& player, Vector2f steps) override;
 
@@ -67,7 +71,6 @@ public:
 	void CheckCollsisionWithMobs(Gun& obj) override;
 	void ChechCollisionWithWalls(Player& player, Game& rules) override;
 	void ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) override;
-
 	void ChechCollisionWithObstacles(Player& player) override;
 
 	~InvisibleMap() { ; }
@@ -100,6 +103,7 @@ public:
 
 	void GenerateComplications() override;
 	void GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated) override;
+	void GenerateCoordinatesOfPlayer(Player* player) override;
 
 	void RedefinePlayer(Player*& player, Vector2f steps) override;
 
@@ -108,9 +112,7 @@ public:
 	void CheckCollsisionWithMobs(Gun& obj) override;
 	void ChechCollisionWithWalls(Player& player, Game& rules) override;
 	void ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) override;
-
 	void ChechCollisionWithObstacles(Player& player) override;
-
 
 	~MapWithMobs()
 	{
@@ -146,6 +148,7 @@ public:
 
 	void GenerateComplications() override;
 	void GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated) override;
+	void GenerateCoordinatesOfPlayer(Player* player) override;
 
 	void RedefinePlayer(Player*& player, Vector2f steps) override;
 
@@ -154,7 +157,6 @@ public:
 	void CheckCollsisionWithMobs(Gun& obj) override;
 	void ChechCollisionWithWalls(Player& player, Game& rules) override;
 	void ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) override;
-
 	void ChechCollisionWithObstacles(Player& player) override;
 
 	~MapWithStaticMotion()
@@ -178,6 +180,7 @@ public:
 
 	void GenerateComplications() override;
 	void GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first_no_generated) override;
+	void GenerateCoordinatesOfPlayer(Player* player) override;
 
 	void RedefinePlayer(Player*& player, Vector2f steps) override;
 
@@ -186,9 +189,7 @@ public:
 	void CheckCollsisionWithMobs(Gun& obj) override;
 	void ChechCollisionWithWalls(Player& player, Game& rules) override;
 	void ChechCollisionWithPlayer(Gun& obj, Player& player, Game& rules) override;
-
 	void ChechCollisionWithObstacles(Player& player) override;
-
 
 	~MapWithVectorMotion() { ; }
 };

@@ -152,9 +152,19 @@ bool Player_static::get_slide()
 	return slide;
 }
 
-tuple<bool, bool, bool> Player_static::get_params()
+void Player_static::set_fire(bool fl)
 {
-	return tuple<bool, bool, bool>(dead, visible, slide);
+	fire = fl;
+}
+
+bool Player_static::get_fire()
+{
+	return fire;
+}
+
+tuple<bool, bool, bool, bool> Player_static::get_params()
+{
+	return tuple<bool, bool, bool, bool>(dead, visible, slide, fire);
 }
 
 
@@ -188,9 +198,19 @@ bool Player_vector::get_slide()
 	return slide;
 }
 
-tuple<bool, bool, bool> Player_vector::get_params()
+void Player_vector::set_fire(bool fl)
 {
-	return tuple<bool, bool, bool>(dead, visible, slide);
+	fire = fl;
+}
+
+bool Player_vector::get_fire()
+{
+	return fire;
+}
+
+tuple<bool, bool, bool, bool> Player_vector::get_params()
+{
+	return tuple<bool, bool, bool, bool>(dead, visible, slide, fire);
 }
 
 
@@ -224,9 +244,20 @@ bool Player_invisible::get_slide()
 	return slide;
 }
 
-tuple<bool, bool, bool> Player_invisible::get_params()
+void Player_invisible::set_fire(bool fl)
 {
-	return tuple<bool, bool, bool>(dead, visible, slide);
+	fire = fl;
+}
+
+bool Player_invisible::get_fire()
+{
+	return fire;
+}
+
+
+tuple<bool, bool, bool, bool> Player_invisible::get_params()
+{
+	return tuple<bool, bool, bool, bool>(dead, visible, slide, fire);
 }
 
 
@@ -260,7 +291,18 @@ bool Player_danger_zone::get_slide()
 	return slide;
 }
 
-tuple<bool, bool, bool> Player_danger_zone::get_params()
+void Player_danger_zone::set_fire(bool fl)
 {
-	return tuple<bool, bool, bool>(dead, visible, slide);
+	fire = fl;
+}
+
+bool Player_danger_zone::get_fire()
+{
+	return fire;
+}
+
+
+tuple<bool, bool, bool, bool> Player_danger_zone::get_params()
+{
+	return tuple<bool, bool, bool, bool>(dead, visible, slide, fire);
 }

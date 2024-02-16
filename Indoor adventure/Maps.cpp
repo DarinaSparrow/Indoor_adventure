@@ -51,6 +51,13 @@ void Maps::GenerateBonuses(Bonus& bonuses)
 	}
 }
 
+void Maps::GenerateCoordinatesOfPlayer(Player* player)
+{
+	int number = rand() % 4;
+
+	maps[number]->GenerateCoordinatesOfPlayer(player);
+}
+
 void Maps :: InstallTheInitialMap(Player*& player) // ïåðåäåëàòü ïîñëå ãåíåðàöèè ïåðñîíàæà
 {
 	if (player->get_player().getPosition().x + 37 < win_width / 2)
@@ -87,11 +94,13 @@ void Maps::CheckTheTransitionBetweenMaps(Player*& player)
 			{
 				if (maps[i]->ÑheckPersonLocationOnMap(player->get_player().getPosition().x + 40, player->get_player().getPosition().y + 90))
 				{
-					if (current_map->GetNameOfTheMap() == "Vector") {
+					if (current_map->GetNameOfTheMap() == "Vector")
+					{
 						current_map = maps[i];
 						current_map->RedefinePlayer(player, Vector2f(0,0));
 					}
-					else {
+					else 
+					{
 						current_map = maps[i];
 						current_map->RedefinePlayer(player, player->get_steps());
 					}

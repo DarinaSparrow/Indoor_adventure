@@ -60,7 +60,7 @@ void Engine::input()
 
 			if (event_play.type == Event::MouseButtonPressed) {
 				if (event_play.key.code == Mouse::Left) {
-					if (!my_gun.check_shoot())
+					if (!my_gun.check_shoot() and player->get_fire())
 						my_gun.shoot();
 				}
 			}
@@ -94,7 +94,7 @@ void Engine::update(Time const& delta_time)
 		playgrounds.ChechCollisionWithWalls(*player, game);
 		player->update(delta_time);
 		playgrounds.ChechCollisionWithObstacles(*player);
-		my_gun.update(delta_time);
+		if (player->get_fire())	my_gun.update(delta_time);
 	}
 }
 
@@ -105,7 +105,7 @@ void Engine::draw()
 	window->draw(game);
 	playgrounds.Draw(window);
 	bonuses.Draw(window);
-	my_gun.draw(*window);
+	if (player->get_fire())	my_gun.draw(*window);
 	if (player->get_visible()) {
 		auto draw_player = player->get_player();
 		window->draw(draw_player);
@@ -139,6 +139,7 @@ void Engine::run()
 	Clock clock;
 	playgrounds.InstallTheInitialMap(player);
 	playgrounds.GenerateBonuses(bonuses);
+	playgrounds.GenerateCoordinatesOfPlayer(player);
 	while (window->isOpen()) {
 		Time dt = clock.restart();
 

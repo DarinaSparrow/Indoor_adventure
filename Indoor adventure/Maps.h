@@ -33,7 +33,6 @@ public:
 		GenerateÑoordinatesOfMaps();
 		GenerateLimitsOfMaps();
 		GenerateComplicationsOfMaps();
-		// ãåíåğàöèÿ ïåğñîíàæà
 	}
 
 	string GetNameOfCurrentMap();
@@ -41,8 +40,8 @@ public:
 	void GenerateÑoordinatesOfMaps();
 	void GenerateLimitsOfMaps();
 	void GenerateComplicationsOfMaps();
-	// ãåíåğàöèÿ ïåğñîíàæà
 	void GenerateBonuses(Bonus& bonuses);
+	void GenerateCoordinatesOfPlayer(Player* player);
 
 	void InstallTheInitialMap(Player*& player);
 

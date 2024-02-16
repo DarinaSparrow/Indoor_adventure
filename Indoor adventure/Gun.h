@@ -63,6 +63,7 @@ public:
 	void update_bullet_pos(Sprite player);
 	void update_mouse_pos(Vector2i pos);
 
+	void set_border(RectangleShape rect);
 
 	Sprite& get_bul();
 	void refresh_bul();

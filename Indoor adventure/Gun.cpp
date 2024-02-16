@@ -71,6 +71,11 @@ void Gun::update_mouse_pos(Vector2i pos)
     pos_y = pos.y;
 }
 
+void Gun::set_border(RectangleShape rect)
+{
+	border_zone = rect;
+}
+
 
 Sprite& Gun::get_bul()
 {
