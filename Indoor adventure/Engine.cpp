@@ -96,7 +96,7 @@ void Engine::update(Time const& delta_time)
 		player->set_dead(game.get_end_game());
 
 		game.update(delta_time);
-		playgrounds.CheckTheTransitionBetweenMaps(player);
+		playgrounds.CheckTheTransitionBetweenMaps(player, my_gun);
 		playgrounds.ChechCollisionWithPlayer(my_gun, *player, game);
 		playgrounds.ChechCollisionWithMobs(my_gun);
 		playgrounds.ChechCollisionWithWalls(*player, game);

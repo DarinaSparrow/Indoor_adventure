@@ -41,7 +41,7 @@ public:
 
 	//void InstallTheInitialMap(Player*& player);
 
-	void CheckTheTransitionBetweenMaps(Player*& player);
+	void CheckTheTransitionBetweenMaps(Player*& player, Gun& gun);
 
 	void ChechCollisionWithMobs(Gun& obj);
 	void ChechCollisionWithWalls(Player& player, Game& rules);

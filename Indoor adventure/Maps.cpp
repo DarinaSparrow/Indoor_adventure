@@ -60,7 +60,33 @@ void Maps::GenerateCoordinatesOfPlayer(Player*& player)
 	maps[number]->GenerateCoordinatesOfPlayer(player);
 }
 
-void Maps::CheckTheTransitionBetweenMaps(Player*& player)
+//void Maps :: InstallTheInitialMap(Player*& player) // ïåðåäåëàòü ïîñëå ãåíåðàöèè ïåðñîíàæà
+//{
+//	if (player->get_player().getPosition().x + 37 < win_width / 2)
+//	{
+//		if (player->get_player().getPosition().y + 60 < win_height / 2) {
+//			current_map = maps[0];
+//			current_map->RedefinePlayer(player, Vector2f(0,0));
+//		}
+//		else {
+//			current_map = maps[2];
+//			current_map->RedefinePlayer(player, Vector2f(0, 0));
+//		}
+//	}
+//	else
+//	{
+//		if (player->get_player().getPosition().y + 60 < win_height / 2) {
+//			current_map = maps[1];
+//			current_map->RedefinePlayer(player, Vector2f(0, 0));
+//		}
+//		else {
+//			current_map = maps[3];
+//			current_map->RedefinePlayer(player, Vector2f(0, 0));
+//		}
+//	}
+//}
+
+void Maps::CheckTheTransitionBetweenMaps(Player*& player, Gun& gun)
 {
 	if (!current_map->ÑheckPersonLocationOnMap(player->get_player().getPosition().x + 40, player->get_player().getPosition().y + 90))
 	{
@@ -80,6 +106,15 @@ void Maps::CheckTheTransitionBetweenMaps(Player*& player)
 						current_map = maps[i];
 						current_map->RedefinePlayer(player, player->get_steps());
 					}
+					if (current_map->GetNameOfTheMap() == "Mobs")
+					{
+						double x1 = current_map->GetX1(), x2 = current_map->GetX2(), y1 = current_map->GetY1(), y2 = current_map->GetY2();
+						RectangleShape tmp;
+						tmp.setPosition(Vector2f(x1, y1));
+						tmp.setSize(Vector2f(fabs(x1 - x2), fabs(y1 - y2)));
+						gun.set_border(tmp);
+					}
+
 				}
 			}
 		}
