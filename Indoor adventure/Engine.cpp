@@ -138,7 +138,7 @@ Engine::Engine()
 void Engine::run()
 {
 	Clock clock;
-	playgrounds.InstallTheInitialMap(player);
+	//playgrounds.InstallTheInitialMap(player);
 	playgrounds.GenerateBonuses(bonuses);
 	playgrounds.GenerateCoordinatesOfPlayer(player);
 	while (window->isOpen()) {

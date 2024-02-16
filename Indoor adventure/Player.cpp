@@ -142,6 +142,10 @@ void Player::catch_bonus(Gun& obj, Game& rules, Bonus& coins)
 	}
 }
 
+void Player::set_position(double x, double y)
+{
+	sprite_player.setPosition(Vector2f(x, y));
+}
 
 void Player_static::set_dead(bool fl)
 {
@@ -325,5 +329,6 @@ bool Player_danger_zone::get_fire()
 
 tuple<bool, bool, bool, bool> Player_danger_zone::get_params()
 {
-	return tuple<bool, bool, bool, bool>(dead, visible, slide, fire);
+	return tuple<bool, bool, bool>(dead, visible, slide);
 }
+
