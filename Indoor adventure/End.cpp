@@ -25,7 +25,7 @@ End::End()
 	result_text.setString(L"Bonuses you gained: " + result_string.str());
 	result_text.setPosition(win_width / 2 - result_text.getGlobalBounds().width / 2, end_text.getGlobalBounds().top + end_text.getGlobalBounds().height);
 
-	continue_text.setString("Press to restart");
+	continue_text.setString("Press Enter to restart");
 	continue_text.setPosition(win_width / 2 - continue_text.getGlobalBounds().width / 2, result_text.getGlobalBounds().top + result_text.getGlobalBounds().height);
 }
 

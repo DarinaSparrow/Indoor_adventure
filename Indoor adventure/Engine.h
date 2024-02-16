@@ -36,6 +36,7 @@ private:
 	void input();
 	void update(Time const& delta_time);
 	void draw();
+	void restart();
 
 public:
 	Engine();

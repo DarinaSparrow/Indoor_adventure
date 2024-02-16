@@ -94,6 +94,9 @@ void Game::restart()
 	timer_string << timer;
 	timer_text.setString(L"Time: " + timer_string.str() + " ");
 	timer_text.setPosition(win_width - timer_text.getGlobalBounds().width, score_text.getGlobalBounds().top + score_text.getGlobalBounds().height);
+
+	lives_sprite.setTextureRect(IntRect(0, 0, 3000, lives_sprite.getLocalBounds().height));
+	lives_sprite.setPosition(Vector2f(win_width - lives_sprite.getGlobalBounds().width, timer_text.getGlobalBounds().top + timer_text.getGlobalBounds().height));
 }
 
 bool Game::get_end_game() {
@@ -135,6 +138,7 @@ void Game::update_playground(const string& playground_name) {
 void Game::update_score()
 {
 	score += 1;
+	score_string.str("");
 	score_string << score;
 	score_text.setString(L"Bonuses: " + score_string.str() + " ");
 	score_text.setPosition(win_width - score_text.getGlobalBounds().width, 0);

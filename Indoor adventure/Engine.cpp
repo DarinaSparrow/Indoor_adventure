@@ -11,6 +11,10 @@ void Engine::input()
 			window->close();
 		}
 
+		if (event_play.key.code == Keyboard::Enter) {
+			restart();
+		}
+
 		if (event_play.type == event_play.Closed) {
 			window->close();
 		}
@@ -109,6 +113,15 @@ void Engine::draw()
 	if (game.get_end_game())
 		window->draw(end);
 	window->display();
+}
+
+void Engine::restart()
+{
+	game.restart();
+	//playgrounds.restart();
+	//bonuses.restart();
+	//my_gun.restart();
+	//player.restart();
 }
 
 
