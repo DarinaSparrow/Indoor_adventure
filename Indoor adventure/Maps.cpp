@@ -51,38 +51,40 @@ void Maps::GenerateBonuses(Bonus& bonuses)
 	}
 }
 
-void Maps::GenerateCoordinatesOfPlayer(Player* player)
+void Maps::GenerateCoordinatesOfPlayer(Player*& player)
 {
 	int number = rand() % 4;
 
+	current_map = maps[number];
+	current_map->RedefinePlayer(player, Vector2f(0, 0));
 	maps[number]->GenerateCoordinatesOfPlayer(player);
 }
 
-void Maps :: InstallTheInitialMap(Player*& player) // переделать после генерации персонажа
-{
-	if (player->get_player().getPosition().x + 37 < win_width / 2)
-	{
-		if (player->get_player().getPosition().y + 60 < win_height / 2) {
-			current_map = maps[0];
-			current_map->RedefinePlayer(player, Vector2f(0,0));
-		}
-		else {
-			current_map = maps[2];
-			current_map->RedefinePlayer(player, Vector2f(0, 0));
-		}
-	}
-	else
-	{
-		if (player->get_player().getPosition().y + 60 < win_height / 2) {
-			current_map = maps[1];
-			current_map->RedefinePlayer(player, Vector2f(0, 0));
-		}
-		else {
-			current_map = maps[3];
-			current_map->RedefinePlayer(player, Vector2f(0, 0));
-		}
-	}
-}
+//void Maps :: InstallTheInitialMap(Player*& player) // переделать после генерации персонажа
+//{
+//	if (player->get_player().getPosition().x + 37 < win_width / 2)
+//	{
+//		if (player->get_player().getPosition().y + 60 < win_height / 2) {
+//			current_map = maps[0];
+//			current_map->RedefinePlayer(player, Vector2f(0,0));
+//		}
+//		else {
+//			current_map = maps[2];
+//			current_map->RedefinePlayer(player, Vector2f(0, 0));
+//		}
+//	}
+//	else
+//	{
+//		if (player->get_player().getPosition().y + 60 < win_height / 2) {
+//			current_map = maps[1];
+//			current_map->RedefinePlayer(player, Vector2f(0, 0));
+//		}
+//		else {
+//			current_map = maps[3];
+//			current_map->RedefinePlayer(player, Vector2f(0, 0));
+//		}
+//	}
+//}
 
 void Maps::CheckTheTransitionBetweenMaps(Player*& player)
 {

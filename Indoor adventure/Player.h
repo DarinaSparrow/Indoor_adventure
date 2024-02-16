@@ -118,6 +118,8 @@ public:
 	RectangleShape& get_bords();
 	GameSound& get_sound();
 	string get_cur_anim();
+
+	void set_position(double x, double y);
 };
 
 

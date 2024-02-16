@@ -41,9 +41,9 @@ public:
 	void GenerateLimitsOfMaps();
 	void GenerateComplicationsOfMaps();
 	void GenerateBonuses(Bonus& bonuses);
-	void GenerateCoordinatesOfPlayer(Player* player);
+	void GenerateCoordinatesOfPlayer(Player*& player);
 
-	void InstallTheInitialMap(Player*& player);
+	//void InstallTheInitialMap(Player*& player);
 
 	void CheckTheTransitionBetweenMaps(Player*& player);
 

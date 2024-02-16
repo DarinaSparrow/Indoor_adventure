@@ -74,7 +74,15 @@ void InvisibleMap::GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& firs
 
 void InvisibleMap::GenerateCoordinatesOfPlayer(Player* player)
 {
-	;
+	double x, y, size_x, size_y;
+
+	size_x = 75;
+	size_y = 120;
+
+	x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size_x - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
+	y = (double)rand() / (double)RAND_MAX * ((borders.y2 - size_y - 5) - (borders.y1 + 5)) + (borders.y1 + 5);
+
+	player->set_position(x, y);
 }
 
 void InvisibleMap::RedefinePlayer(Player*& player, Vector2f steps)
@@ -185,9 +193,31 @@ void MapWithMobs::GenerateBonus(Bonus& bonuses, int count_of_bonuses, int& first
 	first_no_generated += count_of_bonuses;
 }
 
-void MapWithMobs::GenerateCoordinatesOfPlayer(Player* player)
+void MapWithMobs::GenerateCoordinatesOfPlayer(Player* player) // дописать
 {
-	;
+	double x, y, size_1, size_2, size_3, size_4;
+	bool fixation;
+
+	size_1 = 75;
+	size_2 = 120;
+	size_3 = 57;
+	size_4 = 80;
+
+	do
+	{
+		x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size_1 - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
+		y = (double)rand() / (double)RAND_MAX * ((borders.y2 - size_2 - 5) - (borders.y1 + 5)) + (borders.y1 + 5);
+
+		int i = 0;
+		fixation = true;
+		while ((i < count_of_enemies) && (fixation))
+		{
+			if ((enemies[i]->x1 > (x - size_3 - 5)) && (enemies[i]->x1 < (x + size_1 + 5)) && (enemies[i]->y1 > (y - size_4 - 5)) && (enemies[i]->y1 < (y + size_2 + 5))) fixation = false;
+			else i++;
+		}
+	} while (!fixation);
+
+	player->set_position(x, y);
 }
 
 void MapWithMobs::RedefinePlayer(Player*& player, Vector2f steps)
@@ -319,7 +349,28 @@ void MapWithStaticMotion::GenerateBonus(Bonus& bonuses, int count_of_bonuses, in
 
 void MapWithStaticMotion::GenerateCoordinatesOfPlayer(Player* player)
 {
-	;
+	double x, y, size_1, size_2, size_3;
+	bool fixation;
+
+	size_1 = 75;
+	size_2 = 120;
+	size_3 = 75;
+
+	do
+	{
+		x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size_1 - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
+		y = (double)rand() / (double)RAND_MAX * ((borders.y2 - size_2 - 5) - (borders.y1 + 5)) + (borders.y1 + 5);
+
+		int i = 0;
+		fixation = true;
+		while ((i < count_of_obstacles) && (fixation))
+		{
+			if ((obstacles[i]->x1 >(x - size_3 - 5)) && (obstacles[i]->x1 < (x + size_1 + 5)) && (obstacles[i]->y1 > (y - size_3 - 5)) && (obstacles[i]->y1 < (y + size_2 + 5))) fixation = false;
+			else i++;
+		}
+	} while (!fixation);
+
+	player->set_position(x, y);
 }
 
 void MapWithStaticMotion::RedefinePlayer(Player*& player, Vector2f steps)
@@ -387,7 +438,15 @@ void MapWithVectorMotion::GenerateBonus(Bonus& bonuses, int count_of_bonuses, in
 
 void MapWithVectorMotion::GenerateCoordinatesOfPlayer(Player* player)
 {
-	;
+	double x, y, size_x, size_y;
+
+	size_x = 75;
+	size_y = 120;
+
+	x = (double)rand() / (double)RAND_MAX * ((borders.x2 - size_x - 5) - (borders.x1 + 5)) + (borders.x1 + 5);
+	y = (double)rand() / (double)RAND_MAX * ((borders.y2 - size_y - 5) - (borders.y1 + 5)) + (borders.y1 + 5);
+
+	player->set_position(x, y);
 }
 
 void MapWithVectorMotion::RedefinePlayer(Player*& player, Vector2f steps)
