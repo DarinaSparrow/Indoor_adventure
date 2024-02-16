@@ -123,11 +123,8 @@ void Game::decrease_lives()
 }
 
 
-void Game::kill()
-{
+void Game::kill() {
 	lives = 0;
-	lives_sprite.setTextureRect(IntRect(0, 0, 0, 0));
-	lives_sprite.setPosition(Vector2f(win_width - lives_sprite.getGlobalBounds().width, timer_text.getGlobalBounds().top + timer_text.getGlobalBounds().height));
 }
 
 void Game::update_playground(const string& playground_name) {
