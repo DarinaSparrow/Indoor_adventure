@@ -12,7 +12,7 @@ private:
 
 public:
 	GameSound() {
-		array<string, num_of_sounds> name_files{  };
+		array<string, num_of_sounds> name_files{ "Sounds/music.wav", "Sounds/footsteps.wav" , "Sounds/coin.wav" , "Sounds/shoot.wav", "Sounds/hit.wav" };
 		for (int i = 0; i < num_of_sounds; ++i) {
 			game_sounds[i].setBuffer(AssetManager::get_sound_buffer(name_files[i]));
 		}
@@ -21,6 +21,7 @@ public:
 	}
 
 	void play(int index);
+	void play_ignore(int index);
 	void stop(int index);
 	void all_stop();
 };

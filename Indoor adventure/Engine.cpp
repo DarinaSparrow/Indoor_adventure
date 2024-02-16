@@ -24,10 +24,10 @@ void Engine::input()
 				if (!player->get_slide()) {
 					switch (event_play.key.code)
 					{
-					case Keyboard::Up: { player->move_up(); break; }
-					case Keyboard::Down: { player->move_down(); break; }
-					case Keyboard::Left: { player->move_left(); break; }
-					case Keyboard::Right: { player->move_right(); break; }
+					case Keyboard::Up: { player->move_up(); mus_and_sound.play(1); break; }
+					case Keyboard::Down: { player->move_down(); mus_and_sound.play(1); break; }
+					case Keyboard::Left: { player->move_left(); mus_and_sound.play(1); break; }
+					case Keyboard::Right: { player->move_right(); mus_and_sound.play(1); break; }
 					default: break;
 					}
 				}
@@ -61,7 +61,10 @@ void Engine::input()
 			if (event_play.type == Event::MouseButtonPressed) {
 				if (event_play.key.code == Mouse::Left) {
 					if (!my_gun.check_shoot() and player->get_fire())
+					{
 						my_gun.shoot();
+						mus_and_sound.play_ignore(3);
+					}
 				}
 			}
 		}
@@ -76,7 +79,9 @@ void Engine::input()
 
 void Engine::update(Time const& delta_time)
 {
-	if (game.get_end_game() && game.get_score() != bonuses.GetTotal())
+	mus_and_sound.play(0);
+
+	if (game.get_end_game())
 		end.result(false, game.get_score());
 	else if (game.get_score() == bonuses.GetTotal())
 	{
@@ -122,10 +127,8 @@ void Engine::draw()
 void Engine::restart()
 {
 	game.restart();
-	//playgrounds.restart();
-	//bonuses.restart();
-	//my_gun.restart();
-	//player.restart();
+	playgrounds.Restart(bonuses, player);
+	bonuses.Restart();
 }
 
 

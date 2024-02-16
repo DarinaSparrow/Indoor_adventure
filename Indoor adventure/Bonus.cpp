@@ -19,8 +19,6 @@ Coins* Bonus::get_coins()
 	return coins;
 }
 
-
-
 void Bonus::SetSpriteCoordinates(int i, double x, double y)
 {
 	coins[i].sprite_coin.setPosition(x, y);
@@ -32,4 +30,11 @@ void Bonus::Draw(unique_ptr<RenderWindow>& window)
 	{
 		window->draw(coins[i].sprite_coin);
 	}
+}
+
+void Bonus::Restart()
+{
+	collected = 0;
+
+	for (int i = 0; i < total; i++)	{ coins[i].caught = false; }
 }
