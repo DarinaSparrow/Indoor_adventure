@@ -81,7 +81,7 @@ void Engine::update(Time const& delta_time)
 {
 	mus_and_sound.play(0);
 
-	if (game.get_end_game())
+	if (game.get_end_game() && game.get_score() != bonuses.GetTotal())
 		end.result(false, game.get_score());
 	else if (game.get_score() == bonuses.GetTotal())
 	{
