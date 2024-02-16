@@ -22,7 +22,7 @@ Game::Game()
 	playground_text.setFont(game_font);
 	playground_text.setCharacterSize(font_size);
 	playground_text.setFillColor(Color::White);
-	playground_text.setString(String::fromUtf32(playground_name.begin(), playground_name.end()));
+	playground_text.setString(playground_name);
 
 	score_text.setFont(game_font);
 	score_text.setCharacterSize(font_size);
@@ -132,7 +132,7 @@ void Game::kill()
 
 void Game::update_playground(const string& playground_name) {
 	this->playground_name = playground_name;
-	playground_text.setString(String::fromUtf8(this->playground_name.begin(), this->playground_name.end()));
+	playground_text.setString(playground_name);
 }
 
 void Game::update_score()

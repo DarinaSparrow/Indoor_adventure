@@ -16,22 +16,12 @@ End::End()
 	continue_text.setFont(AssetManager::get_font("Resourses/weekend.ttf"));
 	continue_text.setCharacterSize(win_height / 14);
 	continue_text.setFillColor(Color::White);
-
-	end_text.setString("Unfortunately, you lost!");
-	end_text.setPosition(win_width / 2 - end_text.getGlobalBounds().width / 2, win_height / 2 - end_text.getGlobalBounds().height * 2);
-
-	ostringstream result_string;
-	result_string << 0;
-	result_text.setString(L"Bonuses you gained: " + result_string.str());
-	result_text.setPosition(win_width / 2 - result_text.getGlobalBounds().width / 2, end_text.getGlobalBounds().top + end_text.getGlobalBounds().height);
-
-	continue_text.setString("Press Enter to restart");
-	continue_text.setPosition(win_width / 2 - continue_text.getGlobalBounds().width / 2, result_text.getGlobalBounds().top + result_text.getGlobalBounds().height);
 }
+	
 
 void End::result(bool victory, int bonuses)
 {
-	if (victory)
+	if (victory == true)
 		end_text.setString("Congratulations, you win!");
 	else
 		end_text.setString("Unfortunately, you lost!");
@@ -41,6 +31,9 @@ void End::result(bool victory, int bonuses)
 	result_string << bonuses;
 	result_text.setString(L"Bonuses you gained: " + result_string.str());
 	result_text.setPosition(win_width / 2 - result_text.getGlobalBounds().width / 2, end_text.getGlobalBounds().top + end_text.getGlobalBounds().height);
+
+	continue_text.setString("Press Enter to restart");
+	continue_text.setPosition(win_width / 2 - continue_text.getGlobalBounds().width / 2, result_text.getGlobalBounds().top + result_text.getGlobalBounds().height);
 }
 
 void End::draw(RenderTarget& target, RenderStates states) const

@@ -77,9 +77,12 @@ void Engine::input()
 void Engine::update(Time const& delta_time)
 {
 	if (game.get_end_game())
-		end.result(0, game.get_score());
+		end.result(false, game.get_score());
 	else if (game.get_score() == bonuses.GetTotal())
-		end.result(1, game.get_score());
+	{
+		game.set_end_game(true);
+		end.result(true, game.get_score());
+	}
 	else
 	{
 		if (playgrounds.GetNameOfCurrentMap() != game.get_playground_name())
