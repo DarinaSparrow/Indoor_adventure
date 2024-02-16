@@ -36,9 +36,9 @@ void Maps::GenerateBonuses(Bonus& bonuses)
 {
 	int invisible_map, map_with_mobs, map_with_static_motion, map_with_vector_motion, first_no_generated;
 
-	map_with_mobs = rand() % (15 - 10 + 1) + 10;
-	map_with_static_motion = rand() % (15 - 10 + 1) + 10;
-	map_with_vector_motion = rand() % (15 - 10 + 1) + 10;
+	map_with_mobs = rand() % (18 - 15 + 1) + 15;
+	map_with_static_motion = rand() % (18 - 15 + 1) + 15;
+	map_with_vector_motion = rand() % (18 - 15 + 1) + 15;
 	invisible_map = bonuses.GetTotal() - map_with_mobs - map_with_static_motion - map_with_vector_motion;
 	first_no_generated = 0;
 

@@ -22,7 +22,7 @@ public:
 
 	Bonus()
 	{
-		total = 60;
+		total = 75;
 		collected = 0;
 
 		bonus_texture.loadFromFile("Resourses/111.png");
